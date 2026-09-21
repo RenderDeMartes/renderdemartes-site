@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Facial Rigging Study — Layered Face Rig in Maya | Render de Martes</title>
+<meta name="description" content="How a layered facial rig is built: skull locals, eyelids on the real eye pivot, orbicularis wires, lips around the teeth, brows, cheeks and correctives.">
+<link rel="canonical" href="https://renderdemartes.com/face-rig-study/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Facial Rigging Study — Layered Face Rig in Maya | Render de Martes">
+<meta property="og:description" content="How a layered facial rig is built: skull locals, eyelids on the real eye pivot, orbicularis wires, lips around the teeth, brows, cheeks and correctives.">
+<meta property="og:url" content="https://renderdemartes.com/face-rig-study/">
+<meta property="og:image" content="https://renderdemartes.com/assets/img/still/gears-e-day.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/space-grotesk-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/jetbrains-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/", "jobTitle": "Technical Artist — Rigging & Python", "description": "Character rigger and rigging tools developer. Maya, Unreal, Unity. Creator of Mutant Tools.", "address": {"@type": "PostalAddress", "addressLocality": "Vancouver", "addressRegion": "BC", "addressCountry": "CA"}, "sameAs": ["https://www.linkedin.com/in/esteban-rodriguez-488a68147/", "https://www.youtube.com/@renderdemartes6049", "https://mutanttools.com/"], "knowsAbout": ["Character rigging", "Autodesk Maya", "Unreal Engine", "Python", "Facial rigging", "Pipeline tools"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Face rig study — a layered facial system", "description": "How a layered facial rig is built: skull locals, eyelids on the real eye pivot, orbicularis wires, lips around the teeth, brows, cheeks and correctives.", "url": "https://renderdemartes.com/face-rig-study/", "author": {"@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/"}, "step": [{"@type": "HowToStep", "name": "01Blendshapes"}, {"@type": "HowToStep", "name": "02Done 🙂"}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="nav__mark" href="/">
+    <img class="nav__logo" src="/assets/img/logo-mark.webp" srcset="/assets/img/logo-mark@2x.webp 2x" width="66" height="96" alt="" decoding="async">
+    <span class="hide-sm">RENDER&nbsp;&nbsp;DE&nbsp;&nbsp;MARTES</span><span class="only-sm">RDM</span>
+  </a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="/">CV</a>
+    <a href="/academic/">ACADEMIC</a>
+    <a href="https://mutanttools.com/" target="_blank" rel="noopener"><span class="hide-sm">MUTANT </span>TOOLS <span aria-hidden="true">↗</span></a>
+  </nav>
+</header>
+<main id="main">
+  <article class="wf">
+    <header class="wf__head">
+      <p class="section__kicker">W O R K F L O W &nbsp; · &nbsp; 02 &nbsp; O F &nbsp; 06</p>
+      <h1 class="wf__h1">Face rig study — a layered facial system</h1>
+      <p class="wf__lede">The face rigged in layers — skull locals, eyelids, orbicularis, lips, brows, cheeks — each its own system, combined at the end so a note on the mouth never means rebuilding the eyes.</p>
+      <ul class="chips"><li>MAYA</li><li>MUTANT TOOLS</li><li>NGSKINTOOLS</li><li>SHAPES</li></ul>
+    </header>
+
+    <div class="wf__body">
+      <p class="wf-p">Model: Boonie by Makar Malicki</p>
+      <p class="wf-p">The rig will be made using my scripts: Mutant Tools</p>
+      <p class="wf-p">Skinning Tools: ngSkinTools</p>
+      <p class="wf-p">Blendshapes Tools: SHAPES</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/done-1.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h3 class="wf-h3">Understanding the logic!</h3>
+      <p class="wf-p">Is pretty simple, we rig the face in layers so we can have a lot of custom systems that work together. The face rig is done independently from the body and later combined for an easy and clean setup. We divide the main head into 2 parts: The lower and Upper Skull, these 2 are in a local system together and then each system has a local rig attached to the skull system. Each part depending on where is located will get parented to either the upper or lower part of the skull.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/logic.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">Always keep in mind the muscles, where do they start? where do they finish? They are links so if you move one which one is going to move with? THEY HAVE VOLUME! So keep the volume! Also, remember that the Skull is a solid object, you can’t move the skin through it but around it!</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/image-from-rawpixel-id-9975429-original.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/image-from-rawpixel-id-12058925-png.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h3 class="wf-h3">Placing the guides</h3>
+      <p class="wf-p">We will be using the Human Template that will import us a set of ready to use blocks! Ill explain the blocks, one by one.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/Blocks.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/template.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">BaseA</h4>
+      <p class="wf-p">Will create the base ctrl, and the rigs grouping system. Nothing to edit in this one.</p>
+      <h4 class="wf-h4">Vis Attrs</h4>
+      <p class="wf-p">Will create a ctrl so we can store the visibility attributes for all the face rig</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/vis.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Phonemes UI</h4>
+      <p class="wf-p">We don’t use this one much but will just create a UI so we can save the phonemes blend shapes when used.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/Pho.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Skull Locals</h4>
+      <p class="wf-p">In this one we need to set the main head geometry name, just click the geo and set selection on the UI</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/skullLocal.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Locals</h4>
+      <p class="wf-p">Wil generate as manny local systems as we want. Preset have the basic ones already set but if you need to add another layer just write in the new names field.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/locals.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Skull</h4>
+      <p class="wf-p">Will create 2 simple FK controllers and should be palced on the middle of the head.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/sull.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Eyelids</h4>
+      <p class="wf-p">We need to place the pivot of the eye in the middle of the sphere so it can rotate around the eye. Select upper and lower eye edges and set them in the UI field.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/eyePivot.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/eyeupr.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/eyelwr.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Orbicularis</h4>
+      <p class="wf-p">This is a wire system connected to the eyes local geo, We need to place it around the eyes, the idea is to be able to move the external part of the eyelids without affecting the eyes nor the brows.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/orbi.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Lips</h4>
+      <p class="wf-p">The lips need to have an Upper and Lower edge selected and 2 guide placements. The Center guide is meant to be to be able to rotate the whole mouth around the teeth so have that in mind when placing it. The corner-orient guide is meant to be placed linearly going around the teeth. (Curvature of teeth is set in the commissures block.)</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/mouthcenter.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/mouthCorner.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/liptsUpr.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/liptsLwr.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Brows</h4>
+      <p class="wf-p">This one should be placed over the geometry and can be pushed inside a bit if needed to conserve a bit more of the ‘meat’. Always keep in mind the surface is normal and if you need a better following of the shape you can try the Borws advance block at your own risk but this seems to work fine 90% of the time.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/brows.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Cheecks</h4>
+      <p class="wf-p">Cheeks is 3 guides. Nasolabial, Main Cheecks, and Cheeck Bone. You can play around with these after building and touching skin to make smiles and general expressions super fleshy and realistic. Try to place them at the topology level and then push them a bit inside so the movement comes from the muscles and not from the skin.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/cheecks.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Jaw</h4>
+      <p class="wf-p">The jaw has a colition System so try to put lower and upper lip joints close enough for it to feel like it’s touching. With the rebuildable workflow that Mutant Tools allows we don’t need to worry much about being perfect with the jaw at the beginning. We can place, try, replace, and retry as much as we need until the final pose is working. Only rule is to not rotate anything, only move.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/jaw.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Commisures</h4>
+      <p class="wf-p">This block is the one I consider more important since is the one that fakes the roundness of the mouth. Place it in a good range! Don’t be afraid of going too back and around the face. Rules: Every curve starts at the same pos as the orient lip guide, all guides start at the same point, no funny business (if it moves down only in the Y axis, doesn’t mix up the axis.)</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/coms2.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/coms1.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Tongue</h4>
+      <p class="wf-p">Nothing fancy… just a tongue… The tongue is not a local rig but a global one.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/tongue.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Teeth</h4>
+      <p class="wf-p">Same as tongue… nothing fancy.. just ctrls with global rig.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/teeth.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Nose</h4>
+      <p class="wf-p">The nose is not that fancy is just FK chains so we just place it wherever we think is better again don’t worry too much since we can rebuild as many times as we need without losing data.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/nose.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Null Joint</h4>
+      <p class="wf-p">Will create a null joint for skinning the locals rigs.</p>
+      <pre class="wf-code"><code>from maya import cmds
+cmds.select(cl=True)
+cmds.joint(n='Null_Local_Bnd')
+cmds.parent('Null_Local_Bnd', 'Bind_Joints_Grp')</code></pre>
+      <h4 class="wf-h4">Correctives</h4>
+      <p class="wf-p">Will create some base correctives nodes. We dont really use them but they are in the preset</p>
+      <h4 class="wf-h4">Reorder</h4>
+      <p class="wf-p">Will update the input orther to make work the correctives and the locals together</p>
+      <pre class="wf-code"><code>cmds.reorderDeformers('Correctives_BSP', 'Locals_BSP', 'BodySkull')</code></pre>
+      <h4 class="wf-h4">Skin Nodes</h4>
+      <p class="wf-p">All these skin nodes will select the local geo, the null and the specific system bind joints to create the base skinning so we know which bones are in which systems faster without the need of looking in the outliner. Skinning helpers will come in handy later.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/skinBlocks.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Load Ctrls</h4>
+      <p class="wf-p">Will load the ctrls preset. If you want to start with the base ones and update to your own just delete this block</p>
+      <h4 class="wf-h4">Guides Complete</h4>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/guides.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h3 class="wf-h3">Building and understanding the setup.</h3>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/face-rig-study/faceBuild.poster.webp" width="1100" height="680" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/face-rig-study/faceBuild.mp4" type="video/mp4"></video></figure>
+      <h4 class="wf-h4">Outliner Groups</h4>
+      <p class="wf-p">geo &gt; Geommetry</p>
+      <p class="wf-p">Mutant Build &gt; Template Guides</p>
+      <p class="wf-p">Mutant Tools Grp &gt; Main rig setup, dont change anything pls.</p>
+      <p class="wf-p">Skull Parent Loc &gt; Moves the ctrls around only since it ment to be a local system, we connect this to main head crtl on body on the face install stage, using face install tools.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/outliner1.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">On the Rig Grp we have everything… don’t touch anything… You just need to know what geometries we need. We need the BodySkull and the BodyEyes, BodyLips, etc… You can find them here but it’s easy to use the Helpers UI</p>
+      <p class="wf-p">You also get some set where you can find which bones to skin to each geo in case you need to add some extra geos. Again wait for the UI, it’s just easier</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/outliner3.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/outliner2.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h3 class="wf-h3">Helpers UI</h3>
+      <pre class="wf-code"><code>import sys
+import os
+from maya import cmds
+mutant_path = 'C://Users//Esteban//Documents//maya//2022//scripts//rigging' #your folder math
+if mutant_path not in sys.path:
+    sys.path.append(mutant_path)
+
+import Mutant_Tools.UI
+
+try:
+    import importlib;from importlib import reload
+except:
+    import imp;from imp import reload
+
+import Mutant_Tools
+from Mutant_Tools.UI.Helpers import load_helpers
+reload(load_helpers)
+
+try:cHelperUI.close()
+except:pass
+cHelperUI = load_helpers.HelperUI()
+cHelperUI.show()</code></pre>
+      <p class="wf-p">These tools came with the main Mutant Tools license and are the day-to-day on the riggers. You can open it either with this code or in the rigging menu. Go to the Face tab and make your life easy by following the next tip.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/helpers1.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/hlpers2.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h3 class="wf-h3">Skinning</h3>
+      <p class="wf-p">For this part I’ll try and show the tips and tricks we have found for easy skinning of each part. Some are more automated than others. On the helpers Ui you can choose which part to work on for easy access to the geos, joints, and controllers.</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/face-rig-study/parts.poster.webp" width="762" height="673" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/face-rig-study/parts.mp4" type="video/mp4"></video></figure>
+      <h4 class="wf-h4">Save and load Skinning</h4>
+      <p class="wf-p">At any point you can save and load custom skins using the main UI</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/saveloadskin.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Skull Skin</h4>
+      <p class="wf-p">Null joint controls the body and neck. Up Skull controls nose and up. Down controls mouth Down. Nothing Fancy here but I’ll show the basics of ng to use in the next parts.</p>
+      <p class="wf-p">First start assigning everything to the skull joint, then create a new layer select the body parts you need, and assign from the closest influence. Adjust the skin a bit to be hard and then smooth a couple of times. Test the controllers to look something like the images.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/Skin1.webp" alt="Skin1" loading="lazy" decoding="async"><figcaption>Skin1</figcaption></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/Skin2.webp" alt="Skin2" loading="lazy" decoding="async"><figcaption>Skin2</figcaption></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/Skin3.webp" alt="Skin3" loading="lazy" decoding="async"><figcaption>Skin3</figcaption></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/Skin4.webp" alt="Skin4" loading="lazy" decoding="async"><figcaption>Skin4</figcaption></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/skull1.webp" alt="skull1" loading="lazy" decoding="async"><figcaption>skull1</figcaption></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/skull2.webp" alt="skull2" loading="lazy" decoding="async"><figcaption>skull2</figcaption></figure>
+      <h4 class="wf-h4">Eyes Skin</h4>
+      <p class="wf-p">For the eyes, we have an auto skinning that helps a lot. It was developed with the help of Cesar Gallo and Luis Motta.</p>
+      <p class="wf-p">Set the range from the loop to the end of the eye area and click auto skin eyes, in this case, 6 works. Then smooth only the edges and test how the eyes close.</p>
+      <p class="wf-p">Skin cluster most likely needs to be Dual Quaternion to be able to wrap around the eyeball</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/rangeEyes.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/EyesRange.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/face-rig-study/smoothEyes.poster.webp" width="1073" height="666" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/face-rig-study/smoothEyes.mp4" type="video/mp4"></video></figure>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/face-rig-study/eyesClose.poster.webp" width="792" height="593" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/face-rig-study/eyesClose.mp4" type="video/mp4"></video></figure>
+      <h4 class="wf-h4">Eyes Wires</h4>
+      <p class="wf-p">We have some wires in the eyes, so don’t forget to paint those. The wires work when the Eyelids Up Slide is off. When on will use the skin for the secondary controllers, in this rig ill use slide-on.</p>
+      <p class="wf-p">Also, the orbicularis have wires for additional movement. Also needs painting.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/wires.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/paintWires.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Lips Skin</h4>
+      <p class="wf-p">Same as the eyes: set range, auto skin, smooth done!</p>
+      <p class="wf-p">the Mouth controlelrs we skin are the secundary ones, main corners ones are skinned in the comisures step + some custom shapes later on the pipe.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/lipsrange.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/skinLips.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/face-rig-study/mouth.poster.webp" width="1010" height="536" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/face-rig-study/mouth.mp4" type="video/mp4"></video></figure>
+      <h4 class="wf-h4">Brows Skin</h4>
+      <p class="wf-p">Skin Hard, grab all the front, and then extend to the lower upper skin part of the eyelids to grab more meat. We want this kind of movement as a base and later add correctives to make it more linear and perfect.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/Browsskin2.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/BrowsSkin.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/face-rig-study/brows.poster.webp" width="459" height="387" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/face-rig-study/brows.mp4" type="video/mp4"></video></figure>
+      <h4 class="wf-h4">Cheecks Skin</h4>
+      <p class="wf-p">I like to start heavy and end super soft since I mostly use them as flesh add-ons and not really to make any specific shapes.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/cheeck2.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/cheeck1.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/face-rig-study/cheecks.poster.webp" width="519" height="438" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/face-rig-study/cheecks.mp4" type="video/mp4"></video></figure>
+      <h4 class="wf-h4">Jaw Skin</h4>
+      <p class="wf-p">Select vertex in the middle of lip and then grow selection, Then bind to 1 in the specific joint and then smooth like crazy until you get the ball shape for when the mout is open</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/face-rig-study/UprLip.poster.webp" width="659" height="438" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/face-rig-study/UprLip.mp4" type="video/mp4"></video></figure>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/face-rig-study/LwrLip.poster.webp" width="659" height="438" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/face-rig-study/LwrLip.mp4" type="video/mp4"></video></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/jawSkin.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/face-rig-study/Jaw.poster.webp" width="809" height="606" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/face-rig-study/Jaw.mp4" type="video/mp4"></video></figure>
+      <h4 class="wf-h4">Nose Skin</h4>
+      <p class="wf-p">Just Hard FK with smooth… Nothing fancy here.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/noseSkin.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Mouth Up, Dw, Wide Narrow Skin</h4>
+      <p class="wf-p">We can do one and copy-paste the skinning using either Ng or Maya native tools to the other heads.</p>
+      <p class="wf-p">Select the corner vertex with soft selection on adjust the radius and then assign the skin with ng to bind it. Make you you have a great base so the blendshapes are going to be easier to create.</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/face-rig-study/comm.poster.webp" width="764" height="591" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/face-rig-study/comm.mp4" type="video/mp4"></video></figure>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/face-rig-study/WideSkin.poster.webp" width="1200" height="805" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/face-rig-study/WideSkin.mp4" type="video/mp4"></video></figure>
+      <h3 class="wf-h3">Fixing Some Guides Mistakes</h3>
+      <h4 class="wf-h4">Rebuilding the eyes</h4>
+      <p class="wf-p">I Built the eyes while the preview mesh was on (3 on the keyboard) and it makes more vertex, so I just need to turn it off (press 1) and rebuild. The rebuild will save the ctrl shapes and the skinning, then delete everything, build again, and load all the components back. The eyes idea is to have one joint per vertex for the autoskin to work.</p>
+      <p class="wf-p">In this case, since geometry is changing loading skins doesn’t work so manually saving them and then loading them works for the rest of the already finished skins.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/eyesFix.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/eyesFix2.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Rebuilding the Nose</h4>
+      <p class="wf-p">I found this issue at the end and so what I did was. Delete vis attributes, delete build data, select nose block, and build selected. Just rebuild that node with the guides well placed.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/deletebuilddata.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/deleteAttrs.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/buildselected.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/justrebuild.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">01</span>Blendshapes</h2>
+      <p class="wf-p">Sculpt your blend shapes as well as you can, and try to get references from the real world or animated films if they are stylized. Now we will create the connections using Brave Rabbit Shapes.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/bsp.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h3 class="wf-h3">Create from posed target</h3>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/shapes01.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/shapes02.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/shapes03.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/shapes04.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h3 class="wf-h3">Mirror</h3>
+      <p class="wf-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/shapes05.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h3 class="wf-h3">Split</h3>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/shapes06.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/shapes07.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h3 class="wf-h3">Connect to Rig</h3>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/shapes08.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h3 class="wf-h3">Mirror Connections</h3>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/shapes09.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/shapes10.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">02</span>Done 🙂</h2>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/smile.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/sad.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/face-rig-study/serius.webp" alt="" loading="lazy" decoding="async"></figure>
+    </div>
+
+    <section class="found found--wf">
+      <p class="found__kicker">B U I L T &nbsp; T H I S &nbsp; W A Y &nbsp; F O R &nbsp; Y O U ?</p>
+      <h2 class="found__title">I do this on shows, not just on my own time.</h2>
+      <p class="found__note">Every workflow on this site is the one I use in production. If you want it applied to your characters instead of read about, that is the job.</p>
+      <p class="found__row">
+        <button class="btn btn--mail" type="button" data-mail data-u="info" data-d="renderdemartes.com" data-s="Face rig study — a layered facial system">EMAIL ME <span aria-hidden="true">↗</span></button>
+        <a class="btn btn--ghost" href="/hire-a-freelance-character-rigger/">RIGGING SERVICES →</a>
+      </p>
+    </section>
+
+    <nav class="wf-more" aria-label="More workflows">
+      <p class="section__kicker">M O R E &nbsp; W O R K F L O W S</p>
+      <div class="wf-more__grid"><a class="wf-card" href="/creature-rigging/"><span class="wf-card__title">Creature rigging</span><span class="wf-card__note">Quadruped template, wings, split-geo skinning</span><span class="wf-card__go">OPEN →</span></a><a class="wf-card" href="/how-to-rig-a-car/"><span class="wf-card__title">How to rig a car</span><span class="wf-card__note">Chassis, wheels, doors, a drivable rig</span><span class="wf-card__go">OPEN →</span></a><a class="wf-card" href="/prop-rig/"><span class="wf-card__title">Simple prop rig</span><span class="wf-card__note">Base, COG, bind, squash and stretch</span><span class="wf-card__go">OPEN →</span></a></div>
+    </nav>
+  </article>
+</main>
+
+  <a class="outbound" href="https://mutanttools.com/" target="_blank" rel="noopener">
+    <span class="outbound__left">
+      <span class="outbound__title">MUTANT TOOLS</span>
+      <span class="outbound__note">Modular autorigger for Maya — body, face, quadrupeds, props.</span>
+    </span>
+    <span class="outbound__go">MUTANTTOOLS.COM <span aria-hidden="true">↗</span></span>
+  </a>
+
+<footer class="foot" id="contact">
+  <div class="foot__contact">
+    <p class="section__kicker">C O N T A C T</p>
+    <h2 class="foot__title">Need a rigger?</h2>
+    <p class="foot__lead">Freelance, contract, or a tool that should have existed last week.</p>
+    <p class="foot__btns">
+      <a class="btn btn--cyan" href="https://www.linkedin.com/in/esteban-rodriguez-488a68147/" target="_blank" rel="noopener">LINKEDIN PROFILE <span aria-hidden="true">↗</span></a>
+      <button class="btn btn--ghost" type="button" data-mail data-u="info" data-d="renderdemartes.com" data-s="Hello from renderdemartes.com">EMAIL ME <span aria-hidden="true">↗</span></button>
+    </p>
+  </div>
+  <nav class="foot__services" aria-label="Services">
+    <p class="foot__colhead">SERVICES</p>
+    <a href="/hire-a-freelance-character-rigger/">HIRE A FREELANCE RIGGER</a>
+    <a href="/maya-rigging-services/">MAYA RIGGING</a>
+    <a href="/unreal-engine-character-rigging/">UNREAL RIGGING</a>
+    <a href="/facial-rigging-services/">FACIAL RIGGING</a>
+    <a href="/rigging-outsourcing-for-studios/">RIGGING FOR STUDIOS</a>
+  </nav>
+  <nav class="foot__links" aria-label="Elsewhere">
+    <a href="https://www.linkedin.com/in/esteban-rodriguez-488a68147/" target="_blank" rel="noopener">LINKEDIN ↗</a>
+    <a href="https://www.youtube.com/@renderdemartes6049/videos" target="_blank" rel="noopener">YOUTUBE ↗</a>
+    <a href="https://mutanttools.com/" target="_blank" rel="noopener">MUTANTTOOLS.COM ↗</a>
+    <a href="/academic/">ACADEMIC</a>
+    <a href="/creature-rigging/">WORKFLOWS</a>
+  </nav>
+  <p class="foot__fine">© 2026 Esteban Rodriguez · Costa Rica, working remotely worldwide · built with Claude — who has time to build a website while building rigs?</p>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>

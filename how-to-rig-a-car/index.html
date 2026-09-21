@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Rig a Car in Maya — Chassis, Wheels, Doors | Render de Martes</title>
+<meta name="description" content="Rigging a car in Maya block by block: COG placement, chassis, trunks, doors, mirrors, wheels with auto-roll and the cluster trick for fast guide placement.">
+<link rel="canonical" href="https://renderdemartes.com/how-to-rig-a-car/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="How to Rig a Car in Maya — Chassis, Wheels, Doors | Render de Martes">
+<meta property="og:description" content="Rigging a car in Maya block by block: COG placement, chassis, trunks, doors, mirrors, wheels with auto-roll and the cluster trick for fast guide placement.">
+<meta property="og:url" content="https://renderdemartes.com/how-to-rig-a-car/">
+<meta property="og:image" content="https://renderdemartes.com/assets/img/still/gears-e-day.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/space-grotesk-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/jetbrains-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/", "jobTitle": "Technical Artist — Rigging & Python", "description": "Character rigger and rigging tools developer. Maya, Unreal, Unity. Creator of Mutant Tools.", "address": {"@type": "PostalAddress", "addressLocality": "Vancouver", "addressRegion": "BC", "addressCountry": "CA"}, "sameAs": ["https://www.linkedin.com/in/esteban-rodriguez-488a68147/", "https://www.youtube.com/@renderdemartes6049", "https://mutanttools.com/"], "knowsAbout": ["Character rigging", "Autodesk Maya", "Unreal Engine", "Python", "Facial rigging", "Pipeline tools"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "How to rig a car", "description": "Rigging a car in Maya block by block: COG placement, chassis, trunks, doors, mirrors, wheels with auto-roll and the cluster trick for fast guide placement.", "url": "https://renderdemartes.com/how-to-rig-a-car/", "author": {"@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/"}, "step": [{"@type": "HowToStep", "name": "01Model Prep"}, {"@type": "HowToStep", "name": "02Guide Setup"}, {"@type": "HowToStep", "name": "03Build"}, {"@type": "HowToStep", "name": "04Skinning"}, {"@type": "HowToStep", "name": "05Complete"}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="nav__mark" href="/">
+    <img class="nav__logo" src="/assets/img/logo-mark.webp" srcset="/assets/img/logo-mark@2x.webp 2x" width="66" height="96" alt="" decoding="async">
+    <span class="hide-sm">RENDER&nbsp;&nbsp;DE&nbsp;&nbsp;MARTES</span><span class="only-sm">RDM</span>
+  </a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="/">CV</a>
+    <a href="/academic/">ACADEMIC</a>
+    <a href="https://mutanttools.com/" target="_blank" rel="noopener"><span class="hide-sm">MUTANT </span>TOOLS <span aria-hidden="true">↗</span></a>
+  </nav>
+</header>
+<main id="main">
+  <article class="wf">
+    <header class="wf__head">
+      <p class="section__kicker">W O R K F L O W &nbsp; · &nbsp; 03 &nbsp; O F &nbsp; 06</p>
+      <h1 class="wf__h1">How to rig a car</h1>
+      <p class="wf__lede">A simple but complete vehicle rig an animator will actually enjoy: chassis, trunks, doors, mirrors and wheels that roll on their own.</p>
+      <ul class="chips"><li>MAYA</li><li>MUTANT TOOLS</li><li>VEHICLE</li></ul>
+    </header>
+
+    <div class="wf__body">
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/how-to-rig-a-car/CarRig-3.poster.webp" width="1200" height="687" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/how-to-rig-a-car/CarRig-3.mp4" type="video/mp4"></video></figure>
+      <p class="wf-p">On this page, we are going to be learning how to rig a car in Maya. Is a simple but complete rig that the animator would love!</p>
+      <p class="wf-p">Model: https://artstn.co/m/grBDO</p>
+      <p class="wf-p">Rig Tools: Mutant Tools</p>
+      <h2 class="wf-h2"><span class="wf-h2__n">01</span>Model Prep</h2>
+      <p class="wf-p">Just put the whole model in a group named: ‘geo’, make it look into the Z+ axis</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/cargeogrp.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">We need to have the 4 wheels as its own geo and not merged together.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/separatedWheels.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">02</span>Guide Setup</h2>
+      <h3 class="wf-h3">Car Template</h3>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/catTemplate.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/carguides.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">We are going to be using the car template, ill explain block by block so it’s easy to follow. Don’t worry if this seems intimidating, there is a bunch of info that you need before rig.</p>
+      <h3 class="wf-h3">Blocks</h3>
+      <h4 class="wf-h4">Cluster Trick</h4>
+      <p class="wf-p">For easy placement, we can use the cluster trick! Just select vertices, edges, or whatever is in the pivot we want, create a cluster, and then match transformation only! Easy placement!</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/how-to-rig-a-car/clusterTrik.poster.webp" width="1100" height="665" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/how-to-rig-a-car/clusterTrik.mp4" type="video/mp4"></video></figure>
+      <h4 class="wf-h4">BaseA</h4>
+      <p class="wf-p">Will Create a Global, Mover Ctrls and the rig groups for us. Nothing to do here except maybe the scale that can be modified later…</p>
+      <h4 class="wf-h4">Root</h4>
+      <p class="wf-p">Will create a joint at 0, 0, 0. Useful? Maybe? We don’t really use it but is there in case we do.</p>
+      <h4 class="wf-h4">Import MT</h4>
+      <p class="wf-p">This code is the code we need to import mt commands, which are the commands we use in the Mutant Tools API, you can copy and paste it to make your custom rig code.</p>
+      <h4 class="wf-h4">COG</h4>
+      <p class="wf-p">We place the locator in the middle of the car. The car can have a lot of visual chaos so we need to make sure we clean the curves later and the middle of the car is a great option to compensate for the drift and more complex movement.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/carcog.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Chasis</h4>
+      <p class="wf-p">For the chassis and for most of the guides we use the cluster trick to easily place them, Just create a cluster and match the translation to the guide, and that is it. The main Chais goes in the middle of the car and the Front and Back go where the wheels turn, this is important since this works for parents for other blocks, so should be as perfect as possible.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/chasisGuide.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Front and Back Trunk</h4>
+      <p class="wf-p">The front trunk is where the engine lives and in this case ill use the back one for the extra wheel on the back but should be where the back trunk is!</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/trunks.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Doors</h4>
+      <p class="wf-p">This car doesnt have doors but the guide is simple, I’ll probably just delete the block but to make the example I just place them where the doors should be.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/carDoors.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Windows</h4>
+      <p class="wf-p">Again a bad example but same thing.. just place them at the pivot point</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/CarWindos.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Mirrors</h4>
+      <p class="wf-p">Where the mirror pivots are… Make the axis aim at the child so it’s easy for the animator and keep the end one oriented to the world if possible.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/Car-Mirror.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Front and Back Wheel</h4>
+      <p class="wf-p">Same Trick, Cluster &gt; Place Guide</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/wheelsGuide.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">WheelPush</h4>
+      <p class="wf-p">On this one is where it gets a bit more complex. We need to set the wheel go for it to work… Nothing hard just to keep it in mind.</p>
+      <p class="wf-p">Select Faces &gt; Rig UI &gt; Set Selection</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/wheelsColors.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/how-to-rig-a-car/setWheelGeo.poster.webp" width="1100" height="665" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/how-to-rig-a-car/setWheelGeo.mp4" type="video/mp4"></video></figure>
+      <h4 class="wf-h4">Seats</h4>
+      <p class="wf-p">Seats Fk Controllers… Nothing Fancy again.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/seats.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Steering Wheel</h4>
+      <p class="wf-p">The important part here is to make sure that the Wheel is oriented correctly since if is not animation department will hate you!</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/steeringwheels.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Auto Wheel</h4>
+      <p class="wf-p">The template is already set up for you. Will make the desire Ctrl an auto rotation for the wheels, so when moving on the Z axis the wheels will rotate automatically.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/autoWheel.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Drift</h4>
+      <p class="wf-p">Drift will create Dynamic Pivots on the Front and Back Chasis controllers, so animators can move the cars from where they need to. Nothing to change here.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/Drift.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Load Blocks</h4>
+      <p class="wf-p">I don’t use them but they are in the template…</p>
+      <h4 class="wf-h4">Unselectable</h4>
+      <p class="wf-p">Will make the ‘geo’ group unselectable and create some attributes to overwrite it.</p>
+      <h4 class="wf-h4">Dinamic Scales</h4>
+      <p class="wf-p">Will create 7 scale Controllers in case you need them</p>
+      <h4 class="wf-h4">Code Block</h4>
+      <p class="wf-p">If you feel like a hacker you can use them to add custom scripts. This rig is going to be empty.</p>
+      <p class="wf-p">You can code with Mel or python and can be as hardcoded as needed…</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/custom.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h4 class="wf-h4">Change Colors</h4>
+      <p class="wf-p">Will update some colors to match the desired look of some animator friends.</p>
+      <p class="wf-p">The format is: ctrl:colorNot all colors are available, Just try the basic ones in case you feel artistic.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/colors.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">03</span>Build</h2>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/how-to-rig-a-car/carBuild.poster.webp" width="1100" height="654" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/how-to-rig-a-car/carBuild.mp4" type="video/mp4"></video></figure>
+      <h3 class="wf-h3">Mirror Shapes</h3>
+      <p class="wf-p">FOr updating the shapes just do it manually but only for the Left side, then you can just go to File &gt; Mirror Ctrls and will mirror them for you</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/carMirrorShapes.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/CtrlShapesCar.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h3 class="wf-h3">Update Shapes</h3>
+      <p class="wf-p">Feel free to change any colors or shapes using the Tools UI.</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/how-to-rig-a-car/carShapes.poster.webp" width="1100" height="633" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/how-to-rig-a-car/carShapes.mp4" type="video/mp4"></video></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">04</span>Skinning</h2>
+      <p class="wf-p">Skinning is super easy since it’s hard parts only.</p>
+      <p class="wf-p">You can find all the bind joints using the ending ‘*_Bnd’ or going to the Bind_Joints_Grp. If you feel overwhelmed by the amount just go from top to bottom on the outliner, always baby steps are the best way to finish something boring.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/how-to-rig-a-car/BndjointsCar.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h3 class="wf-h3">Wheel Input Order</h3>
+      <p class="wf-p">For the wheel push to work, we may need to update the input orders to make the skinning compute first and then the lattice.</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/how-to-rig-a-car/PushWheel.poster.webp" width="1100" height="690" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/how-to-rig-a-car/PushWheel.mp4" type="video/mp4"></video></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">05</span>Complete</h2>
+      <p class="wf-p">Go to helpers UI an hit Complete so its cleaner and ready to use!</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/how-to-rig-a-car/CompleteCar.poster.webp" width="1015" height="687" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/how-to-rig-a-car/CompleteCar.mp4" type="video/mp4"></video></figure>
+    </div>
+
+    <section class="found found--wf">
+      <p class="found__kicker">B U I L T &nbsp; T H I S &nbsp; W A Y &nbsp; F O R &nbsp; Y O U ?</p>
+      <h2 class="found__title">I do this on shows, not just on my own time.</h2>
+      <p class="found__note">Every workflow on this site is the one I use in production. If you want it applied to your characters instead of read about, that is the job.</p>
+      <p class="found__row">
+        <button class="btn btn--mail" type="button" data-mail data-u="info" data-d="renderdemartes.com" data-s="How to rig a car">EMAIL ME <span aria-hidden="true">↗</span></button>
+        <a class="btn btn--ghost" href="/hire-a-freelance-character-rigger/">RIGGING SERVICES →</a>
+      </p>
+    </section>
+
+    <nav class="wf-more" aria-label="More workflows">
+      <p class="section__kicker">M O R E &nbsp; W O R K F L O W S</p>
+      <div class="wf-more__grid"><a class="wf-card" href="/creature-rigging/"><span class="wf-card__title">Creature rigging</span><span class="wf-card__note">Quadruped template, wings, split-geo skinning</span><span class="wf-card__go">OPEN →</span></a><a class="wf-card" href="/face-rig-study/"><span class="wf-card__title">Face rig study</span><span class="wf-card__note">Layered facial systems, region by region</span><span class="wf-card__go">OPEN →</span></a><a class="wf-card" href="/prop-rig/"><span class="wf-card__title">Simple prop rig</span><span class="wf-card__note">Base, COG, bind, squash and stretch</span><span class="wf-card__go">OPEN →</span></a></div>
+    </nav>
+  </article>
+</main>
+
+  <a class="outbound" href="https://mutanttools.com/" target="_blank" rel="noopener">
+    <span class="outbound__left">
+      <span class="outbound__title">MUTANT TOOLS</span>
+      <span class="outbound__note">Modular autorigger for Maya — body, face, quadrupeds, props.</span>
+    </span>
+    <span class="outbound__go">MUTANTTOOLS.COM <span aria-hidden="true">↗</span></span>
+  </a>
+
+<footer class="foot" id="contact">
+  <div class="foot__contact">
+    <p class="section__kicker">C O N T A C T</p>
+    <h2 class="foot__title">Need a rigger?</h2>
+    <p class="foot__lead">Freelance, contract, or a tool that should have existed last week.</p>
+    <p class="foot__btns">
+      <a class="btn btn--cyan" href="https://www.linkedin.com/in/esteban-rodriguez-488a68147/" target="_blank" rel="noopener">LINKEDIN PROFILE <span aria-hidden="true">↗</span></a>
+      <button class="btn btn--ghost" type="button" data-mail data-u="info" data-d="renderdemartes.com" data-s="Hello from renderdemartes.com">EMAIL ME <span aria-hidden="true">↗</span></button>
+    </p>
+  </div>
+  <nav class="foot__services" aria-label="Services">
+    <p class="foot__colhead">SERVICES</p>
+    <a href="/hire-a-freelance-character-rigger/">HIRE A FREELANCE RIGGER</a>
+    <a href="/maya-rigging-services/">MAYA RIGGING</a>
+    <a href="/unreal-engine-character-rigging/">UNREAL RIGGING</a>
+    <a href="/facial-rigging-services/">FACIAL RIGGING</a>
+    <a href="/rigging-outsourcing-for-studios/">RIGGING FOR STUDIOS</a>
+  </nav>
+  <nav class="foot__links" aria-label="Elsewhere">
+    <a href="https://www.linkedin.com/in/esteban-rodriguez-488a68147/" target="_blank" rel="noopener">LINKEDIN ↗</a>
+    <a href="https://www.youtube.com/@renderdemartes6049/videos" target="_blank" rel="noopener">YOUTUBE ↗</a>
+    <a href="https://mutanttools.com/" target="_blank" rel="noopener">MUTANTTOOLS.COM ↗</a>
+    <a href="/academic/">ACADEMIC</a>
+    <a href="/creature-rigging/">WORKFLOWS</a>
+  </nav>
+  <p class="foot__fine">© 2026 Esteban Rodriguez · Costa Rica, working remotely worldwide · built with Claude — who has time to build a website while building rigs?</p>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>

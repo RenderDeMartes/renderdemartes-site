@@ -1,0 +1,101 @@
+# Render de Martes — static site on cPanel / Apache.
+
+Options -Indexes
+DirectoryIndex index.html index.php
+
+ErrorDocument 404 /404.html
+
+# --- force https + non-www (adjust if you prefer www) ---------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+  # old WordPress URLs that no longer exist -> home, so links and rankings survive
+  # Legacy WordPress URLs -> new pages.
+  # These MUST be host-scoped mod_rewrite, not mod_alias Redirect: a parent
+  # .htaccess applies to subdirectories too, and mutanttools.com lives in
+  # public_html/mutanttools.com. A bare RedirectMatch here hijacks that site.
+  RewriteCond %{HTTP_HOST} ^(www\.)?renderdemartes\.com$ [NC]
+  RewriteRule ^wp-content/uploads/2024/12/mutantbot\.zip$ /downloads/mutantbot.zip [R=301,L]
+  RewriteCond %{HTTP_HOST} ^(www\.)?renderdemartes\.com$ [NC]
+  RewriteRule ^wp-content/uploads/2023/12/ui_tutorial\.zip$ /downloads/ui_tutorial.zip [R=301,L]
+  RewriteCond %{HTTP_HOST} ^(www\.)?renderdemartes\.com$ [NC]
+  RewriteRule ^wp-content/uploads/.*$ / [R=301,L]
+  RewriteCond %{HTTP_HOST} ^(www\.)?renderdemartes\.com$ [NC]
+  RewriteRule ^the-king(/.*)?$ /creature-rigging/ [R=301,L]
+  RewriteCond %{HTTP_HOST} ^(www\.)?renderdemartes\.com$ [NC]
+  RewriteRule ^(blog|hire|workflows|contact)(/.*)?$ / [R=301,L]
+  RewriteCond %{HTTP_HOST} ^(www\.)?renderdemartes\.com$ [NC]
+  RewriteRule ^cv/?$ / [R=301,L]
+
+  # trailing slash on directory URLs, so /cv and /cv/ do not split ranking
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{2,5}|/)$
+  RewriteRule ^(.*)$ /$1/ [R=301,L]
+</IfModule>
+
+# --- compression ----------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml \
+    application/javascript text/javascript application/json image/svg+xml
+</IfModule>
+
+# --- caching --------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css                "access plus 1 year"
+  ExpiresByType text/javascript         "access plus 1 year"
+  ExpiresByType application/javascript  "access plus 1 year"
+  ExpiresByType image/svg+xml           "access plus 1 year"
+  ExpiresByType image/webp              "access plus 1 year"
+  ExpiresByType image/jpeg              "access plus 1 year"
+  ExpiresByType image/png               "access plus 1 year"
+  ExpiresByType text/html               "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|svg|webp|jpg|jpeg|png|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+AddDefaultCharset UTF-8
+
+# --- modern asset types + immutable caching ------------------------------
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType video/mp4 .mp4
+  AddType font/woff2 .woff2
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresByType image/webp  "access plus 1 year"
+  ExpiresByType video/mp4   "access plus 1 year"
+  ExpiresByType font/woff2  "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(webp|mp4|woff2|css|js|jpg|png|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# --- brotli when the host has it ------------------------------------------
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/plain text/xml     application/javascript text/javascript application/json image/svg+xml
+</IfModule>

@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qt Designer for Maya — Build a Python Tool UI | Render de Martes</title>
+<meta name="description" content="Build a Maya tool UI with Qt Designer and PySide: widget setup, loading the .ui in Maya, wiring buttons to Python commands, and keeping the window docked and sane.">
+<link rel="canonical" href="https://renderdemartes.com/qt-designer-basics/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Qt Designer for Maya — Build a Python Tool UI | Render de Martes">
+<meta property="og:description" content="Build a Maya tool UI with Qt Designer and PySide: widget setup, loading the .ui in Maya, wiring buttons to Python commands, and keeping the window docked and sane.">
+<meta property="og:url" content="https://renderdemartes.com/qt-designer-basics/">
+<meta property="og:image" content="https://renderdemartes.com/assets/img/still/gears-e-day.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/space-grotesk-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/jetbrains-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/", "jobTitle": "Technical Artist — Rigging & Python", "description": "Character rigger and rigging tools developer. Maya, Unreal, Unity. Creator of Mutant Tools.", "address": {"@type": "PostalAddress", "addressLocality": "Vancouver", "addressRegion": "BC", "addressCountry": "CA"}, "sameAs": ["https://www.linkedin.com/in/esteban-rodriguez-488a68147/", "https://www.youtube.com/@renderdemartes6049", "https://mutanttools.com/"], "knowsAbout": ["Character rigging", "Autodesk Maya", "Unreal Engine", "Python", "Facial rigging", "Pipeline tools"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Qt Designer basics for Maya tools", "description": "Build a Maya tool UI with Qt Designer and PySide: widget setup, loading the .ui in Maya, wiring buttons to Python commands, and keeping the window docked and sane.", "url": "https://renderdemartes.com/qt-designer-basics/", "author": {"@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/"}, "step": [{"@type": "HowToStep", "name": "01Qt Designer Widget"}, {"@type": "HowToStep", "name": "02Loading the UI in Maya"}, {"@type": "HowToStep", "name": "03Loading the UI to Maya!"}, {"@type": "HowToStep", "name": "04Testing the Window..."}, {"@type": "HowToStep", "name": "05Creating the layout"}, {"@type": "HowToStep", "name": "06Making the create cube function"}, {"@type": "HowToStep", "name": "07Conecting the button"}, {"@type": "HowToStep", "name": "08Done!"}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="nav__mark" href="/">
+    <img class="nav__logo" src="/assets/img/logo-mark.webp" srcset="/assets/img/logo-mark@2x.webp 2x" width="66" height="96" alt="" decoding="async">
+    <span class="hide-sm">RENDER&nbsp;&nbsp;DE&nbsp;&nbsp;MARTES</span><span class="only-sm">RDM</span>
+  </a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="/">CV</a>
+    <a href="/academic/">ACADEMIC</a>
+    <a href="https://mutanttools.com/" target="_blank" rel="noopener"><span class="hide-sm">MUTANT </span>TOOLS <span aria-hidden="true">↗</span></a>
+  </nav>
+</header>
+<main id="main">
+  <article class="wf">
+    <header class="wf__head">
+      <p class="section__kicker">W O R K F L O W &nbsp; · &nbsp; 06 &nbsp; O F &nbsp; 06</p>
+      <h1 class="wf__h1">Qt Designer basics for Maya tools</h1>
+      <p class="wf__lede">Build a Maya tool UI that does not look like 2004: a widget in Qt Designer, loaded into Maya with PySide, wired to Python commands you can actually maintain.</p>
+      <ul class="chips"><li>QT DESIGNER</li><li>PYSIDE</li><li>PYTHON</li><li>MAYA</li></ul>
+    </header>
+
+    <div class="wf__body">
+      <h3 class="wf-h3">Qt Designer Tutorial</h3>
+      <p class="wf-p">In this tutorial, we are going to be creating a tool that creates cubes with custom names… how exciting!!</p>
+      <p class="wf-p">While there are various approaches to accomplishing the same task, I would like to share my preferred method – the one I typically employ in production work. It’s important to note that this isn’t the sole option available, and I encourage you to explore different techniques and enhance your skills throughout your journey. This approach has proven effective for me, but there’s always room for learning and improvement.</p>
+      <p class="wf-p">Maya used to be shipped with a standalone version of qt designer but now it doesn’t anymore… I found this one online that seems to work.</p>
+      <h3 class="wf-h3">Disclaimer</h3>
+      <p class="wf-p">Some times the indentations in the Python code get fucked up by the website so keep that in mind when copy-pasting the code. At the end, you should be able to download the full code.</p>
+      <p class="wf-p">Create a folder in your scripts path: C:\Users\NAME\Documents\maya\202X\scripts</p>
+      <p class="wf-p">And then create a file called __init__.py so we can import that folder into Maya. The file can be empty so don’t worry about it. Just test the import code if you are worried about it.</p>
+      <pre class="wf-code"><code># Find the scripts folder.
+cmds.internalVar(usd=True)
+# Result: 'C:/Users/Esteban/Documents/maya/2022/scripts/' #</code></pre>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/init.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">01</span>Qt Designer Widget</h2>
+      <p class="wf-p">Create a Widget and save it into the same folder. In this tutorial, I’m going to be using the name main_widget but try to be more descriptive with your names in the actual tool you do.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/CreateWidget.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/MainWidget.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">First, create a layout by dragging it into the UI, then click the main widget and lay it out in a grid so it frames and scales with the UI.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/01layout.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/02frame.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">Then we add the line edit and the button.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/03line.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/04button.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">Something pretty boring with complex UI but really important is: naming the widgets. It’s critical since that’s the name we are going to be using to connect to the custom commands. You can also make the buttons a bit bigger since we are getting old and hitting those small tiny little buttons is harder every day.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/05names.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/06morenames.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">Resize it like a normal window and you are ready to go to Maya now! Feel free to add, remove, or change this UI at any time… just remember the names.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/07reshape.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">02</span>Loading the UI in Maya</h2>
+      <p class="wf-p">This part may be confusing for some beginners, but I’ll do my best to explain it as simply as possible… My goal is that my mother should be able to create her first UI with this tutorial… so if you don’t understand something just feel free to copy-paste the code of each section and ask chat gpt…</p>
+      <p class="wf-p">Understanding the logic before creating something… I have this preset that I use that I want to explain part by part before adding anything crazy to it.</p>
+      <p class="wf-p">The imports that we need explained by google and chat gpt.</p>
+      <p class="wf-p">PySide 2 is a set of Python bindings for Qt, a popular cross-platform application development framework. Qt is widely used for developing graphical user interfaces (GUIs) and applications that are intended to be run on multiple platforms, such as Windows, Linux, and macOS. PySide 2 allows Python developers to utilize the features and capabilities of the Qt framework while writing their code in Python.</p>
+      <p class="wf-p">Shiboken2 is a Python module that provides tools for working with the C++ library of Qt. It is part of the PySide2 package and is used to create Python bindings for Qt.</p>
+      <p class="wf-p">The os module provides a way of interacting with the operating system, allowing you to perform tasks such as file and directory manipulation, environment variable access, and more.</p>
+      <p class="wf-p">OpenMayaUI allows us to interact with native Maya API. Allowing us to use Maya as the parent for the UI Widget.</p>
+      <p class="wf-p">cmds. is just maya cmds…</p>
+      <pre class="wf-code"><code>from PySide2 import QtUiTools, QtWidgets, QtGui, QtCore
+from shiboken2 import wrapInstance
+import os
+
+import maya.OpenMayaUI as omui
+from maya import cmds</code></pre>
+      <p class="wf-p">We establish these constants at the beginning of the file so we can point to the UI path and set a title for the UI.</p>
+      <p class="wf-p">FULL_PATH is just your scripts folder + folder name + ui name but in a good way… please don’t make my mistake and hardcode your paths when you are starting working with code…</p>
+      <pre class="wf-code"><code>TITLE = 'Tutorial'
+UI_FILE = 'main_widget.ui'
+FULL_PATH = os.path.join(cmds.internalVar(usd=True), 'ui_tutorial', UI_FILE)</code></pre>
+      <p class="wf-p">Remember that I mentioned we will use Maya native UI as the parent for our widget? This is the way to get it… We just need to have this function so that when we set a parent for the UI we have one…</p>
+      <pre class="wf-code"><code>def maya_main_window():
+main_window_ptr = omui.MQtUtil.mainWindow()
+return wrapInstance(int(main_window_ptr), QtWidgets.QWidget)</code></pre>
+      <p class="wf-p">Using classes may seem hard at the beginning and I think learning them while creating UIs is the simpler way… for now just now a Class is like a function that can hold functions and they all are connected with ‘self’, whatever you see that have self. at the beginning is calling whatever have (self) in the function (class functions are called methods so I’ll continue using the work method for them.)</p>
+      <p class="wf-p">The class Tutorial_UI has the QtWidgets.QMainWindow as their inheritance. What that means is that it can do whatever the other one can… for now, just now it’s a necessary step for making the UI work.</p>
+      <p class="wf-p">The init will have the parent=maya_main_window() function that we mentioned before</p>
+      <p class="wf-p">We will set the title</p>
+      <p class="wf-p">For the ones who don’t understand classes: Whenever you run a class it will run whatever is in the init. So in this case it will run init_ui, create_layout, and create_connections which are functions that need to exist. We can create them empty for now.</p>
+      <pre class="wf-code"><code>class Tutorial_UI(QtWidgets.QMainWindow)
+def __init__(self, parent=maya_main_window()):
+    super(Tutorial_UI, self).__init__(parent)
+
+    self.setWindowTitle(TITLE)
+
+    self.init_ui()
+    self.create_layout()
+    self.create_connections()</code></pre>
+      <pre class="wf-code"><code>def init_ui(self):
+''</code></pre>
+      <pre class="wf-code"><code>def create_layout(self):
+''</code></pre>
+      <pre class="wf-code"><code>def create_connections(self):
+''</code></pre>
+      <h2 class="wf-h2"><span class="wf-h2__n">03</span>Loading the UI to Maya!</h2>
+      <p class="wf-p">This is how we load the UI file that we created in Designer into Maya.</p>
+      <p class="wf-p">We need to create a loader object based on QUiLoader, and Then we need to create a Qt File… is something you need to get used to but it can only work with qt objects so you need to create them for whatever you need, in this case, is a file but it also happens with icons or anything external.</p>
+      <p class="wf-p">Then we qt read the file and we create the self.ui widget with the file data.</p>
+      <p class="wf-p">Then we close the file.</p>
+      <p class="wf-p">self.ui is the thing we needed! It will allow us to use anything by just typing self.ui.name_line for example. That is why renaming everything was super important in QT design.</p>
+      <p class="wf-p">we can say self is the main window and self.ui is the designer widget.</p>
+      <pre class="wf-code"><code>def init_ui(self):
+# Load UI file
+loader = QtUiTools.QUiLoader()
+file = QtCore.QFile(FULL_PATH)
+file.open(QtCore.QFile.ReadOnly)
+self.ui = loader.load(file, parentWidget=self)
+file.close()</code></pre>
+      <h2 class="wf-h2"><span class="wf-h2__n">04</span>Testing the Window...</h2>
+      <p class="wf-p">With the init_ui method created and running we should be able to see the UI in Maya, if you are using the script editor you can just run everything with this code at the end to create the UI.</p>
+      <p class="wf-p">The Ui is a class, so we need to create an object for it. The object is just the same thing but with a custom name instead of self. So object = Class(), then just object.show(), object.close(), etc.</p>
+      <pre class="wf-code"><code>if __name__ == "__main__":
+try:
+  cTutorial_UI.close()
+  cTutorial_UI.deleteLater()
+except Exception as e:
+    print("An error occurred: {}".format(e))
+
+   cTutorial_UI = Tutorial_UI()
+   cTutorial_UI.show()</code></pre>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/windowappears.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">05</span>Creating the layout</h2>
+      <p class="wf-p">For this UI ill probably won’t add anything to the create layout but to give an example we will add a tooltip and a placeholder text.</p>
+      <p class="wf-p">This part will run before creating the connections and I usually use it mostly to add icons and make it more beautiful but feel free to use it for whatever you need!</p>
+      <h3 class="wf-h3">Possibilities</h3>
+      <p class="wf-p">To be able to know what you can do just google pyqt + widget name, the first link will be the documentation for that specific widget… there is a lot but everything is pretty explicit and you will understand it fast enough</p>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/pyqtsearch.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">Keeping up with technologies you can also use chat gpt and to be fare i don’t really recommend it for beginners but i use it a lot for the stuff i tent to forget like this examples:</p>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/chatgpt1.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/chatgpt2.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h3 class="wf-h3">Tooltip and Placeholder text</h3>
+      <p class="wf-p">We can see that the chat gave us a lot of crap code that we don’t need and thats why I don’t recommend it for beginners. We only need the cirle parts of the code.</p>
+      <p class="wf-p">We will just use self.ui to create the desire result instead of finding the widgets.</p>
+      <p class="wf-p">self.ui.name_line.setPlaceholderText(‘Cube Name’) will work for the line edit and self.ui.create_cube_button.setToolTip(‘Will create a cube’) for the button.</p>
+      <pre class="wf-code"><code>def create_layout(self):
+self.ui.name_line.setPlaceholderText('Cube Name')
+self.ui.create_cube_button.setToolTip('Will create a cube')</code></pre>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/placeholdertooltip.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">06</span>Making the create cube function</h2>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/createMethod.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">We will create a new method on the class, again just like creating a function inside but with self so we can use it as part of the UI.</p>
+      <pre class="wf-code"><code>def create_cube(self):
+name_text = self.ui.name_line.text()
+cube = cmds.polyCube(name=name_text)
+return cube</code></pre>
+      <p class="wf-p">Pretty simple… we just need to grab the name and this is the way. we just call the self.ui &gt; name_line &gt; text().. We are just asking for the text on it and that is it!</p>
+      <figure class="wf-media"><img src="/assets/img/tut/qt-designer-basics/lineEditDocs.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">07</span>Conecting the button</h2>
+      <pre class="wf-code"><code>def create_connections(self):
+self.ui.create_cube_button.clicked.connect(self.create_cube)</code></pre>
+      <p class="wf-p">Connecting the button is pretty straightforward also.</p>
+      <p class="wf-p">self.ui &gt; create_cube_button &gt; clicked &gt; connect &gt; (self.create_cube)We grab the ui, we find the button, and we tell the button that whenever get clicks it does something, in this case, create the cube.</p>
+      <h2 class="wf-h2"><span class="wf-h2__n">08</span>Done!</h2>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/qt-designer-basics/createCube.poster.webp" width="1100" height="548" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/qt-designer-basics/createCube.mp4" type="video/mp4"></video></figure>
+    </div>
+
+    <section class="found found--wf">
+      <p class="found__kicker">B U I L T &nbsp; T H I S &nbsp; W A Y &nbsp; F O R &nbsp; Y O U ?</p>
+      <h2 class="found__title">I do this on shows, not just on my own time.</h2>
+      <p class="found__note">Every workflow on this site is the one I use in production. If you want it applied to your characters instead of read about, that is the job.</p>
+      <p class="found__row">
+        <button class="btn btn--mail" type="button" data-mail data-u="info" data-d="renderdemartes.com" data-s="Qt Designer basics for Maya tools">EMAIL ME <span aria-hidden="true">↗</span></button>
+        <a class="btn btn--ghost" href="/hire-a-freelance-character-rigger/">RIGGING SERVICES →</a>
+      </p>
+    </section>
+
+    <nav class="wf-more" aria-label="More workflows">
+      <p class="section__kicker">M O R E &nbsp; W O R K F L O W S</p>
+      <div class="wf-more__grid"><a class="wf-card" href="/creature-rigging/"><span class="wf-card__title">Creature rigging</span><span class="wf-card__note">Quadruped template, wings, split-geo skinning</span><span class="wf-card__go">OPEN →</span></a><a class="wf-card" href="/face-rig-study/"><span class="wf-card__title">Face rig study</span><span class="wf-card__note">Layered facial systems, region by region</span><span class="wf-card__go">OPEN →</span></a><a class="wf-card" href="/how-to-rig-a-car/"><span class="wf-card__title">How to rig a car</span><span class="wf-card__note">Chassis, wheels, doors, a drivable rig</span><span class="wf-card__go">OPEN →</span></a></div>
+    </nav>
+  </article>
+</main>
+
+  <a class="outbound" href="https://mutanttools.com/" target="_blank" rel="noopener">
+    <span class="outbound__left">
+      <span class="outbound__title">MUTANT TOOLS</span>
+      <span class="outbound__note">Modular autorigger for Maya — body, face, quadrupeds, props.</span>
+    </span>
+    <span class="outbound__go">MUTANTTOOLS.COM <span aria-hidden="true">↗</span></span>
+  </a>
+
+<footer class="foot" id="contact">
+  <div class="foot__contact">
+    <p class="section__kicker">C O N T A C T</p>
+    <h2 class="foot__title">Need a rigger?</h2>
+    <p class="foot__lead">Freelance, contract, or a tool that should have existed last week.</p>
+    <p class="foot__btns">
+      <a class="btn btn--cyan" href="https://www.linkedin.com/in/esteban-rodriguez-488a68147/" target="_blank" rel="noopener">LINKEDIN PROFILE <span aria-hidden="true">↗</span></a>
+      <button class="btn btn--ghost" type="button" data-mail data-u="info" data-d="renderdemartes.com" data-s="Hello from renderdemartes.com">EMAIL ME <span aria-hidden="true">↗</span></button>
+    </p>
+  </div>
+  <nav class="foot__services" aria-label="Services">
+    <p class="foot__colhead">SERVICES</p>
+    <a href="/hire-a-freelance-character-rigger/">HIRE A FREELANCE RIGGER</a>
+    <a href="/maya-rigging-services/">MAYA RIGGING</a>
+    <a href="/unreal-engine-character-rigging/">UNREAL RIGGING</a>
+    <a href="/facial-rigging-services/">FACIAL RIGGING</a>
+    <a href="/rigging-outsourcing-for-studios/">RIGGING FOR STUDIOS</a>
+  </nav>
+  <nav class="foot__links" aria-label="Elsewhere">
+    <a href="https://www.linkedin.com/in/esteban-rodriguez-488a68147/" target="_blank" rel="noopener">LINKEDIN ↗</a>
+    <a href="https://www.youtube.com/@renderdemartes6049/videos" target="_blank" rel="noopener">YOUTUBE ↗</a>
+    <a href="https://mutanttools.com/" target="_blank" rel="noopener">MUTANTTOOLS.COM ↗</a>
+    <a href="/academic/">ACADEMIC</a>
+    <a href="/creature-rigging/">WORKFLOWS</a>
+  </nav>
+  <p class="foot__fine">© 2026 Esteban Rodriguez · Costa Rica, working remotely worldwide · built with Claude — who has time to build a website while building rigs?</p>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unreal Engine Character Rigging — Control Rig &amp; Game-Ready Skinning | Render de Martes</title>
+<meta name="description" content="Game-ready character rigging for Unreal Engine: joint budgets, twist chains, Control Rig, IK Retargeter, Animation Blueprints and rod dynamics. AAA credits including Gears of War: E-Day.">
+<link rel="canonical" href="https://renderdemartes.com/unreal-engine-character-rigging/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Unreal Engine Character Rigging — Control Rig &amp; Game-Ready Skinning | Render de Martes">
+<meta property="og:description" content="Game-ready character rigging for Unreal Engine: joint budgets, twist chains, Control Rig, IK Retargeter, Animation Blueprints and rod dynamics. AAA credits including Gears of War: E-Day.">
+<meta property="og:url" content="https://renderdemartes.com/unreal-engine-character-rigging/">
+<meta property="og:image" content="https://renderdemartes.com/assets/img/still/gears-e-day.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/space-grotesk-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/jetbrains-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/", "jobTitle": "Technical Artist — Rigging & Python", "description": "Character rigger and rigging tools developer. Maya, Unreal, Unity. Creator of Mutant Tools.", "address": {"@type": "PostalAddress", "addressLocality": "Vancouver", "addressRegion": "BC", "addressCountry": "CA"}, "sameAs": ["https://www.linkedin.com/in/esteban-rodriguez-488a68147/", "https://www.youtube.com/@renderdemartes6049", "https://mutanttools.com/"], "knowsAbout": ["Character rigging", "Autodesk Maya", "Unreal Engine", "Python", "Facial rigging", "Pipeline tools"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "Unreal Engine Character Rigging", "serviceType": "Character rigging", "provider": {"@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/", "sameAs": ["https://www.linkedin.com/in/esteban-rodriguez-488a68147/"]}, "areaServed": "Worldwide", "url": "https://renderdemartes.com/unreal-engine-character-rigging/", "description": "Game-ready character rigging for Unreal Engine: joint budgets, twist chains, Control Rig, IK Retargeter, Animation Blueprints and rod dynamics. AAA credits including Gears of War: E-Day."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can you work to the Epic skeleton, or a custom one?", "acceptedAnswer": {"@type": "Answer", "text": "Either. Epic’s skeleton buys you the Marketplace and the retargeter; a custom one buys you anatomy. If you are early enough to choose, that is a conversation worth twenty minutes before anyone rigs anything."}}, {"@type": "Question", "name": "What influence limit do you build to?", "acceptedAnswer": {"@type": "Answer", "text": "Whatever your project sets — commonly four or eight. The limit is not the hard part; keeping the silhouette readable at the limit is, and that is what the layered skinning workflow is for."}}, {"@type": "Question", "name": "Do you handle Unity as well?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Game-ready rigs at Fair Play Labs shipped to Unity for Nicktoons and SpeedRunners 2, so the same constraints apply with different button names."}}, {"@type": "Question", "name": "Can you rig for mocap and cleanup?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — HumanIK setups, retargeting from Mixamo or Rokoko for tests, and rigs that keep an FK fallback so an animator can fix what the capture got wrong."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Render de Martes", "item": "https://renderdemartes.com/"}, {"@type": "ListItem", "position": 2, "name": "Unreal Engine Character Rigging", "item": "https://renderdemartes.com/unreal-engine-character-rigging/"}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="nav__mark" href="/">
+    <img class="nav__logo" src="/assets/img/logo-mark.webp" srcset="/assets/img/logo-mark@2x.webp 2x" width="66" height="96" alt="" decoding="async">
+    <span class="hide-sm">RENDER&nbsp;&nbsp;DE&nbsp;&nbsp;MARTES</span><span class="only-sm">RDM</span>
+  </a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="/">CV</a>
+    <a href="/academic/">ACADEMIC</a>
+    <a href="https://mutanttools.com/" target="_blank" rel="noopener"><span class="hide-sm">MUTANT </span>TOOLS <span aria-hidden="true">↗</span></a>
+  </nav>
+</header>
+<main id="main">
+  <article class="seo">
+    <header class="seo__head">
+      <p class="section__kicker">U N R E A L &nbsp; E N G I N E</p>
+      <h1 class="seo__h1">Rigs that survive<br>the engine.</h1>
+      <p class="seo__lede">Maya-to-Unreal character work with the constraints in mind from the first joint: influence limits, LODs, twist chains that do not collapse, Control Rig setups animators can actually pose, and dynamics that behave at runtime.</p>
+      <p class="seo__cta">
+        <button class="btn btn--mail" type="button" data-mail data-u="info" data-d="renderdemartes.com" data-s="Unreal Engine Character Rigging">EMAIL ME <span aria-hidden="true">↗</span></button>
+        <a class="btn btn--ghost" href="https://www.linkedin.com/in/esteban-rodriguez-488a68147/" target="_blank" rel="noopener">LINKEDIN <span aria-hidden="true">↗</span></a>
+      </p>
+    </header>
+
+    <div class="prose"><p>A film rig fails in the engine for boring reasons. Too many influences per vertex. A skeleton hierarchy the retargeter cannot read. Dynamics that look perfect at 24fps and explode when the player sprints. Game rigging is the discipline of deciding what to give up, and where.</p><p>Most recently that was Gears of War: E-Day at The Coalition — body and prop rigs for AAA characters and skins, rod dynamics, Control Rig and Animation Blueprints, plus the wrapping tools and Confluence docs so the next rigger did not start from zero.</p></div>
+
+    <div class="cols"><div class="col"><h3 class="col__title">GAME-READY SKINNING</h3><p class="col__note">Single bind hierarchy, influence caps that match the engine setting rather than the wishlist, LOD-aware weighting, and twist joints that keep the forearm readable.</p></div><div class="col"><h3 class="col__title">CONTROL RIG</h3><p class="col__note">In-engine rigs for animators and cinematics: pose-friendly controls, IK setups, and forward solves that do not fight the imported skeleton.</p></div><div class="col"><h3 class="col__title">DYNAMICS &amp; BLUEPRINTS</h3><p class="col__note">Rod dynamics for hair, cloth, straps and antennae; Animation Blueprint hookups; the parts where the rig stops being a Maya problem.</p></div></div>
+
+    <section class="steps-wrap">
+      <p class="section__kicker">H O W &nbsp; I T &nbsp; W O R K S</p>
+      <ol class="steps"><li class="step"><span class="step__n">01</span><div class="step__body"><h3 class="step__title">Target first</h3><p class="step__note">Engine version, skeleton standard, influence limit, LOD plan. Everything downstream is decided here, and getting it in writing saves the reskin.</p></div></li><li class="step"><span class="step__n">02</span><div class="step__body"><h3 class="step__title">Maya build</h3><p class="step__note">Rig built on a game preset — one clean joint chain for the engine, the animation rig layered above it, never the other way around.</p></div></li><li class="step"><span class="step__n">03</span><div class="step__body"><h3 class="step__title">Export and verify</h3><p class="step__note">FBX out, skeleton in, retargeting checked against real locomotion, not an idle. Dynamics tuned at the frame rate the game actually runs.</p></div></li><li class="step"><span class="step__n">04</span><div class="step__body"><h3 class="step__title">In-engine polish</h3><p class="step__note">Control Rig, Anim BP wiring, and documentation in whatever your team reads — Confluence, Notion, or a video if nobody reads anything.</p></div></li></ol>
+    </section>
+
+    <section class="proof" aria-label="Selected credits">
+      <div><b>GEARS OF WAR: E-DAY</b><span>The Coalition · Microsoft</span></div>
+      <div><b>WHAT IF…? S2 · S3</b><span>Marvel · Stellar Creative Lab</span></div>
+      <div><b>THE BATMAN · ANDOR</b><span>Scanline VFX</span></div>
+      <div><b>WIMPY KID · GEN:LOCK</b><span>Bardel Entertainment</span></div>
+    </section>
+
+    <section class="faq">
+      <p class="section__kicker">F A Q</p>
+      <div class="q"><h3 class="q__q">Can you work to the Epic skeleton, or a custom one?</h3><p class="q__a">Either. Epic’s skeleton buys you the Marketplace and the retargeter; a custom one buys you anatomy. If you are early enough to choose, that is a conversation worth twenty minutes before anyone rigs anything.</p></div><div class="q"><h3 class="q__q">What influence limit do you build to?</h3><p class="q__a">Whatever your project sets — commonly four or eight. The limit is not the hard part; keeping the silhouette readable at the limit is, and that is what the layered skinning workflow is for.</p></div><div class="q"><h3 class="q__q">Do you handle Unity as well?</h3><p class="q__a">Yes. Game-ready rigs at Fair Play Labs shipped to Unity for Nicktoons and SpeedRunners 2, so the same constraints apply with different button names.</p></div><div class="q"><h3 class="q__q">Can you rig for mocap and cleanup?</h3><p class="q__a">Yes — HumanIK setups, retargeting from Mixamo or Rokoko for tests, and rigs that keep an FK fallback so an animator can fix what the capture got wrong.</p></div>
+    </section>
+
+      <section class="found">
+        <p class="found__kicker">S O &nbsp; T H E &nbsp; S E O &nbsp; W O R K E D</p>
+        <h2 class="found__title">You searched, you landed here. That was the whole plan.</h2>
+        <p class="found__note">This page was written and built with AI, by a rigger, in an afternoon between rigs — which is roughly the point: I use the tools that shorten the boring part, on websites and on pipelines. If that instinct is useful on your show, or you are about to post a rigging job, skip the posting and email me.</p>
+        <p class="found__row">
+          <button class="btn btn--mail" type="button" data-mail data-u="info" data-d="renderdemartes.com" data-s="Unreal Engine Character Rigging">EMAIL ME <span aria-hidden="true">↗</span></button>
+          <span class="found__aside">or send me the job post — I will tell you straight if I am the wrong rigger for it.</span>
+        </p>
+      </section>
+
+      <nav class="related" aria-label="Related services">
+        <p class="related__note">Related services:</p>
+        <div class="related__links"><a href="/hire-a-freelance-character-rigger/">HIRE A FREELANCE CHARACTER RIGGER →</a><a href="/maya-rigging-services/">MAYA RIGGING SERVICES →</a><a href="/facial-rigging-services/">FACIAL RIGGING SERVICES →</a><a href="/rigging-outsourcing-for-studios/">RIGGING OUTSOURCING FOR STUDIOS →</a></div>
+      </nav>
+  </article>
+</main>
+
+  <a class="outbound" href="https://mutanttools.com/" target="_blank" rel="noopener">
+    <span class="outbound__left">
+      <span class="outbound__title">MUTANT TOOLS</span>
+      <span class="outbound__note">Modular autorigger for Maya — body, face, quadrupeds, props.</span>
+    </span>
+    <span class="outbound__go">MUTANTTOOLS.COM <span aria-hidden="true">↗</span></span>
+  </a>
+
+<footer class="foot" id="contact">
+  <div class="foot__contact">
+    <p class="section__kicker">C O N T A C T</p>
+    <h2 class="foot__title">Need a rigger?</h2>
+    <p class="foot__lead">Freelance, contract, or a tool that should have existed last week.</p>
+    <p class="foot__btns">
+      <a class="btn btn--cyan" href="https://www.linkedin.com/in/esteban-rodriguez-488a68147/" target="_blank" rel="noopener">LINKEDIN PROFILE <span aria-hidden="true">↗</span></a>
+      <button class="btn btn--ghost" type="button" data-mail data-u="info" data-d="renderdemartes.com" data-s="Hello from renderdemartes.com">EMAIL ME <span aria-hidden="true">↗</span></button>
+    </p>
+  </div>
+  <nav class="foot__services" aria-label="Services">
+    <p class="foot__colhead">SERVICES</p>
+    <a href="/hire-a-freelance-character-rigger/">HIRE A FREELANCE RIGGER</a>
+    <a href="/maya-rigging-services/">MAYA RIGGING</a>
+    <a href="/unreal-engine-character-rigging/">UNREAL RIGGING</a>
+    <a href="/facial-rigging-services/">FACIAL RIGGING</a>
+    <a href="/rigging-outsourcing-for-studios/">RIGGING FOR STUDIOS</a>
+  </nav>
+  <nav class="foot__links" aria-label="Elsewhere">
+    <a href="https://www.linkedin.com/in/esteban-rodriguez-488a68147/" target="_blank" rel="noopener">LINKEDIN ↗</a>
+    <a href="https://www.youtube.com/@renderdemartes6049/videos" target="_blank" rel="noopener">YOUTUBE ↗</a>
+    <a href="https://mutanttools.com/" target="_blank" rel="noopener">MUTANTTOOLS.COM ↗</a>
+    <a href="/academic/">ACADEMIC</a>
+    <a href="/creature-rigging/">WORKFLOWS</a>
+  </nav>
+  <p class="foot__fine">© 2026 Esteban Rodriguez · Costa Rica, working remotely worldwide · built with Claude — who has time to build a website while building rigs?</p>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>

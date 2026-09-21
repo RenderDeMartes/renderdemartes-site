@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simple Prop Rig in Maya — Base, COG, Bind, Squash | Render de Martes</title>
+<meta name="description" content="The short one: a prop rig in Maya from template to bind joint, plus a squash and stretch block for the bounce.">
+<link rel="canonical" href="https://renderdemartes.com/prop-rig/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simple Prop Rig in Maya — Base, COG, Bind, Squash | Render de Martes">
+<meta property="og:description" content="The short one: a prop rig in Maya from template to bind joint, plus a squash and stretch block for the bounce.">
+<meta property="og:url" content="https://renderdemartes.com/prop-rig/">
+<meta property="og:image" content="https://renderdemartes.com/assets/img/still/gears-e-day.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/space-grotesk-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/jetbrains-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/", "jobTitle": "Technical Artist — Rigging & Python", "description": "Character rigger and rigging tools developer. Maya, Unreal, Unity. Creator of Mutant Tools.", "address": {"@type": "PostalAddress", "addressLocality": "Vancouver", "addressRegion": "BC", "addressCountry": "CA"}, "sameAs": ["https://www.linkedin.com/in/esteban-rodriguez-488a68147/", "https://www.youtube.com/@renderdemartes6049", "https://mutanttools.com/"], "knowsAbout": ["Character rigging", "Autodesk Maya", "Unreal Engine", "Python", "Facial rigging", "Pipeline tools"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Simple prop rig", "description": "The short one: a prop rig in Maya from template to bind joint, plus a squash and stretch block for the bounce.", "url": "https://renderdemartes.com/prop-rig/", "author": {"@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/"}, "step": [{"@type": "HowToStep", "name": "01Prop Template"}, {"@type": "HowToStep", "name": "02Blocks Explanations"}, {"@type": "HowToStep", "name": "03Build"}, {"@type": "HowToStep", "name": "04Bind"}, {"@type": "HowToStep", "name": "05Complete"}, {"@type": "HowToStep", "name": "06Bonus: Squash and Stretch"}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="nav__mark" href="/">
+    <img class="nav__logo" src="/assets/img/logo-mark.webp" srcset="/assets/img/logo-mark@2x.webp 2x" width="66" height="96" alt="" decoding="async">
+    <span class="hide-sm">RENDER&nbsp;&nbsp;DE&nbsp;&nbsp;MARTES</span><span class="only-sm">RDM</span>
+  </a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="/">CV</a>
+    <a href="/academic/">ACADEMIC</a>
+    <a href="https://mutanttools.com/" target="_blank" rel="noopener"><span class="hide-sm">MUTANT </span>TOOLS <span aria-hidden="true">↗</span></a>
+  </nav>
+</header>
+<main id="main">
+  <article class="wf">
+    <header class="wf__head">
+      <p class="section__kicker">W O R K F L O W &nbsp; · &nbsp; 04 &nbsp; O F &nbsp; 06</p>
+      <h1 class="wf__h1">Simple prop rig</h1>
+      <p class="wf__lede">The short one. Template, global and mover controls, a bind joint, a cleanup pass for the animation department, and a squash block for the bounce.</p>
+      <ul class="chips"><li>MAYA</li><li>MUTANT TOOLS</li><li>PROPS</li></ul>
+    </header>
+
+    <div class="wf__body">
+      <p class="wf-p">You can find the Model here</p>
+      <p class="wf-p">We are going to be using my tools but it’s a simple rig so you can try and replicate it with your knowledge. Mutant Tools</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/prop-rig/snsProp.poster.webp" width="794" height="615" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/prop-rig/snsProp.mp4" type="video/mp4"></video></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">01</span>Prop Template</h2>
+      <figure class="wf-media"><img src="/assets/img/tut/prop-rig/propTemplate.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">We need to use the poop template since we can rig any shit with it… its a joke and it’s funny…</p>
+      <h2 class="wf-h2"><span class="wf-h2__n">02</span>Blocks Explanations</h2>
+      <p class="wf-p">Base A: Will create the Global, Mover controllers</p>
+      <p class="wf-p">Root: Will create a joint at 0, 0, 0</p>
+      <p class="wf-p">COG: Is the Center of Gravity Block, put it where the center of the object is, not always on the center of the object, can also be where the assets interact.</p>
+      <p class="wf-p">ImportMt: doesnt do anything but it’s the import codes of Mutant so you can easily copy and paste them.</p>
+      <p class="wf-p">Load BLocks, we don’t really use them since its easier from the UI</p>
+      <p class="wf-p">Unselectable: The geo needs to be in a group called geo for it to work. Will make geo not selectable and give you a couple of attributes to set it selectable again.</p>
+      <p class="wf-p">Code Block is just there in case you feel like a hacker.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/prop-rig/propBlocks.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">03</span>Build</h2>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/prop-rig/propBuild.poster.webp" width="1100" height="485" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/prop-rig/propBuild.mp4" type="video/mp4"></video></figure>
+      <p class="wf-p">With building, we just need to worry about the scale of the COG and Global but just scale the CV in case you forget.</p>
+      <h2 class="wf-h2"><span class="wf-h2__n">04</span>Bind</h2>
+      <p class="wf-p">COG_Bnd will be our bind joint!</p>
+      <figure class="wf-media"><img src="/assets/img/tut/prop-rig/skinProp.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">05</span>Complete</h2>
+      <p class="wf-p">Go to the Helpers UI and click complete! It will make the outliner and some attrs cleaner for the animation department.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/prop-rig/completePorp.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">06</span>Bonus: Squash and Stretch</h2>
+      <p class="wf-p">Let’s add a squash block and fill the UI, parent is ginbal COG ctrl and geo is the apple!</p>
+      <figure class="wf-media"><img src="/assets/img/tut/prop-rig/quash.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/prop-rig/buildSelectedProp.poster.webp" width="1100" height="624" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/prop-rig/buildSelectedProp.mp4" type="video/mp4"></video></figure>
+      <p class="wf-p">Move the Squash_Rig_Grp to match better the shape and you are done!</p>
+      <figure class="wf-media"><img src="/assets/img/tut/prop-rig/Squash_Rig_Grp.webp" alt="" loading="lazy" decoding="async"></figure>
+    </div>
+
+    <section class="found found--wf">
+      <p class="found__kicker">B U I L T &nbsp; T H I S &nbsp; W A Y &nbsp; F O R &nbsp; Y O U ?</p>
+      <h2 class="found__title">I do this on shows, not just on my own time.</h2>
+      <p class="found__note">Every workflow on this site is the one I use in production. If you want it applied to your characters instead of read about, that is the job.</p>
+      <p class="found__row">
+        <button class="btn btn--mail" type="button" data-mail data-u="info" data-d="renderdemartes.com" data-s="Simple prop rig">EMAIL ME <span aria-hidden="true">↗</span></button>
+        <a class="btn btn--ghost" href="/hire-a-freelance-character-rigger/">RIGGING SERVICES →</a>
+      </p>
+    </section>
+
+    <nav class="wf-more" aria-label="More workflows">
+      <p class="section__kicker">M O R E &nbsp; W O R K F L O W S</p>
+      <div class="wf-more__grid"><a class="wf-card" href="/creature-rigging/"><span class="wf-card__title">Creature rigging</span><span class="wf-card__note">Quadruped template, wings, split-geo skinning</span><span class="wf-card__go">OPEN →</span></a><a class="wf-card" href="/face-rig-study/"><span class="wf-card__title">Face rig study</span><span class="wf-card__note">Layered facial systems, region by region</span><span class="wf-card__go">OPEN →</span></a><a class="wf-card" href="/how-to-rig-a-car/"><span class="wf-card__title">How to rig a car</span><span class="wf-card__note">Chassis, wheels, doors, a drivable rig</span><span class="wf-card__go">OPEN →</span></a></div>
+    </nav>
+  </article>
+</main>
+
+  <a class="outbound" href="https://mutanttools.com/" target="_blank" rel="noopener">
+    <span class="outbound__left">
+      <span class="outbound__title">MUTANT TOOLS</span>
+      <span class="outbound__note">Modular autorigger for Maya — body, face, quadrupeds, props.</span>
+    </span>
+    <span class="outbound__go">MUTANTTOOLS.COM <span aria-hidden="true">↗</span></span>
+  </a>
+
+<footer class="foot" id="contact">
+  <div class="foot__contact">
+    <p class="section__kicker">C O N T A C T</p>
+    <h2 class="foot__title">Need a rigger?</h2>
+    <p class="foot__lead">Freelance, contract, or a tool that should have existed last week.</p>
+    <p class="foot__btns">
+      <a class="btn btn--cyan" href="https://www.linkedin.com/in/esteban-rodriguez-488a68147/" target="_blank" rel="noopener">LINKEDIN PROFILE <span aria-hidden="true">↗</span></a>
+      <button class="btn btn--ghost" type="button" data-mail data-u="info" data-d="renderdemartes.com" data-s="Hello from renderdemartes.com">EMAIL ME <span aria-hidden="true">↗</span></button>
+    </p>
+  </div>
+  <nav class="foot__services" aria-label="Services">
+    <p class="foot__colhead">SERVICES</p>
+    <a href="/hire-a-freelance-character-rigger/">HIRE A FREELANCE RIGGER</a>
+    <a href="/maya-rigging-services/">MAYA RIGGING</a>
+    <a href="/unreal-engine-character-rigging/">UNREAL RIGGING</a>
+    <a href="/facial-rigging-services/">FACIAL RIGGING</a>
+    <a href="/rigging-outsourcing-for-studios/">RIGGING FOR STUDIOS</a>
+  </nav>
+  <nav class="foot__links" aria-label="Elsewhere">
+    <a href="https://www.linkedin.com/in/esteban-rodriguez-488a68147/" target="_blank" rel="noopener">LINKEDIN ↗</a>
+    <a href="https://www.youtube.com/@renderdemartes6049/videos" target="_blank" rel="noopener">YOUTUBE ↗</a>
+    <a href="https://mutanttools.com/" target="_blank" rel="noopener">MUTANTTOOLS.COM ↗</a>
+    <a href="/academic/">ACADEMIC</a>
+    <a href="/creature-rigging/">WORKFLOWS</a>
+  </nav>
+  <p class="foot__fine">© 2026 Esteban Rodriguez · Costa Rica, working remotely worldwide · built with Claude — who has time to build a website while building rigs?</p>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>

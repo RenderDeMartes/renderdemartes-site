@@ -1,0 +1,5 @@
+_upload/
+.claude/
+*.zip
+Thumbs.db
+.DS_Store

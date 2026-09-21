@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game-Ready Rigging with Mocap Packs — HumanIK &amp; Mixamo | Render de Martes</title>
+<meta name="description" content="Build a game-ready rig in Maya and drive it with mocap: single joint chain skinning, HumanIK custom mapping, Mixamo retargeting, and fixing feet and hands after the bake.">
+<link rel="canonical" href="https://renderdemartes.com/rig-with-mocap-packs/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Game-Ready Rigging with Mocap Packs — HumanIK &amp; Mixamo | Render de Martes">
+<meta property="og:description" content="Build a game-ready rig in Maya and drive it with mocap: single joint chain skinning, HumanIK custom mapping, Mixamo retargeting, and fixing feet and hands after the bake.">
+<meta property="og:url" content="https://renderdemartes.com/rig-with-mocap-packs/">
+<meta property="og:image" content="https://renderdemartes.com/assets/img/still/gears-e-day.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/space-grotesk-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/jetbrains-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/", "jobTitle": "Technical Artist — Rigging & Python", "description": "Character rigger and rigging tools developer. Maya, Unreal, Unity. Creator of Mutant Tools.", "address": {"@type": "PostalAddress", "addressLocality": "Vancouver", "addressRegion": "BC", "addressCountry": "CA"}, "sameAs": ["https://www.linkedin.com/in/esteban-rodriguez-488a68147/", "https://www.youtube.com/@renderdemartes6049", "https://mutanttools.com/"], "knowsAbout": ["Character rigging", "Autodesk Maya", "Unreal Engine", "Python", "Facial rigging", "Pipeline tools"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Rig with mocap packs", "description": "Build a game-ready rig in Maya and drive it with mocap: single joint chain skinning, HumanIK custom mapping, Mixamo retargeting, and fixing feet and hands after the bake.", "url": "https://renderdemartes.com/rig-with-mocap-packs/", "author": {"@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/"}, "step": [{"@type": "HowToStep", "name": "01Game Ready Rigging"}, {"@type": "HowToStep", "name": "02Model"}, {"@type": "HowToStep", "name": "03Rig"}, {"@type": "HowToStep", "name": "04Skin"}, {"@type": "HowToStep", "name": "05Human IK - Custom Mocap Setup"}, {"@type": "HowToStep", "name": "06Downloading Mixamo Animations"}, {"@type": "HowToStep", "name": "07Create Mixamo HIK Definition"}, {"@type": "HowToStep", "name": "08Mixamo Mocap &gt; Custom Rig"}, {"@type": "HowToStep", "name": "09Bake Animation"}, {"@type": "HowToStep", "name": "10Export FBX"}, {"@type": "HowToStep", "name": "11Import to Unreal"}, {"@type": "HowToStep", "name": "12Quick Anim Fix"}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="nav__mark" href="/">
+    <img class="nav__logo" src="/assets/img/logo-mark.webp" srcset="/assets/img/logo-mark@2x.webp 2x" width="66" height="96" alt="" decoding="async">
+    <span class="hide-sm">RENDER&nbsp;&nbsp;DE&nbsp;&nbsp;MARTES</span><span class="only-sm">RDM</span>
+  </a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="/">CV</a>
+    <a href="/academic/">ACADEMIC</a>
+    <a href="https://mutanttools.com/" target="_blank" rel="noopener"><span class="hide-sm">MUTANT </span>TOOLS <span aria-hidden="true">↗</span></a>
+  </nav>
+</header>
+<main id="main">
+  <article class="wf">
+    <header class="wf__head">
+      <p class="section__kicker">W O R K F L O W &nbsp; · &nbsp; 05 &nbsp; O F &nbsp; 06</p>
+      <h1 class="wf__h1">Rig with mocap packs</h1>
+      <p class="wf__lede">A game-ready rig, then mocap on top of it: single-chain skinning, HumanIK custom mapping, retargeting from Mixamo, and the cleanup every capture needs afterwards.</p>
+      <ul class="chips"><li>MAYA</li><li>HUMANIK</li><li>MIXAMO</li><li>GAME READY</li></ul>
+    </header>
+
+    <div class="wf__body">
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/LogoWhite2.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">We are going to be rigging with Mutant Tools since I developed it and know how easy it is but is the same basics to do it either manually or with other software.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/kisspng-mixamo-animation-reallusion-3d-computer-graphics-3-5bf9f2493ed4c1.1587865215431071452574.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">All the mocap, in this case, will be downloaded from Mixamo, as I understand the license is that we can use this mocap data when applied and modified for commercial projects, we can’t redistribute raw material… If this is not true please let me know and if you are a lawyer from Adobe: It was an accident, sorry, don’t sue me!</p>
+      <h2 class="wf-h2"><span class="wf-h2__n">01</span>Game Ready Rigging</h2>
+      <h2 class="wf-h2"><span class="wf-h2__n">02</span>Model</h2>
+      <p class="wf-p">I found this model online with a CC License so let’s use it! It’s a blend file but just download the software and export it as a .obj to use inside Maya. I know Blender is free, yada yada yada… Maya is just easier for me. Thanks….</p>
+      <p class="wf-p">“Long Body Cartoon Base” (https://skfb.ly/o6XsS) by IgorSan is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</p>
+      <p class="wf-p">Long Body Cartoon Base by IgorSan on Sketchfab</p>
+      <h2 class="wf-h2"><span class="wf-h2__n">03</span>Rig</h2>
+      <p class="wf-p">If you want to learn how to rig using Mutant Tools is pretty simple but for this tutorial, I’ll just show all the processes in a rig since is not the main idea of the tutorial. For a tutorial please visit: MutantTools</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/rig-with-mocap-packs/riggingSpeed.poster.webp" width="800" height="450" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/rig-with-mocap-packs/riggingSpeed.mp4" type="video/mp4"></video></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">04</span>Skin</h2>
+      <p class="wf-p">On the skinning part what we need to focus is in having only one chain to make it game ready, if you use the Mutant Game preset you will be using the *_Skl hierarchy joints instead of the ones in the bind grp.</p>
+      <p class="wf-p">Just remember to check the maximum influence allowed on the engine of your choose.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/skl.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h3 class="wf-h3">Skinning Tips</h3>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/AssingClosest.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">Use Ng Skin Tools and start by clicking the assign from the closest joint. The idea is to paint hard first, then layer and smooth.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/HardSkin.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/PressS.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">Press S with the Ng UI open and move the mouse over the desire influence to paint, this allows us to be able to paint the next joint without the need to select it on the main window. #SaveTime</p>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/RandomizeColors.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">Use randomized colors when painting near colors like yellow of light ones. is just easier to use the more contrast ones.</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/rig-with-mocap-packs/NgSmooth.poster.webp" width="1100" height="650" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/rig-with-mocap-packs/NgSmooth.mp4" type="video/mp4"></video></figure>
+      <p class="wf-p">When this kind of crashing happens the easy solution is to go and select the vertex with soft selection and add 0.1 to the desired joint until the volume is restored and then, just again with soft selection, smooth a bit and it’s going to look way better super fast!</p>
+      <h2 class="wf-h2"><span class="wf-h2__n">05</span>Human IK - Custom Mocap Setup</h2>
+      <p class="wf-p">Requirements:</p>
+      <p class="wf-li">Perfect T Pose, A Pose is not allowed and if your character is in an A pose just create a group above FK SHoulder controllers and rotate it to be a T pose.</p>
+      <p class="wf-li">FK Mode in Arms and legs. The mocap reads rotations and the Ik is mostly translations.</p>
+      <p class="wf-li">Space switches in Arms, Legs, and Head in world rotation make it sometimes easy but not required. (This is Mutant Default so if you build don’t worry about it)</p>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/HIK.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/createMap-1.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h3 class="wf-h3">Rename the character</h3>
+      <p class="wf-p">ALWAYS! RENAME! YOUR! STUFF!</p>
+      <p class="wf-p">In this case, I’m going to have 2 definitions so we will need the Mutant and the Mixamo one to be able to differentiate them.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/Rename.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/newname.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h3 class="wf-h3">Create Custom Rig Definition</h3>
+      <p class="wf-p">This is pretty simple, just use the *_Skl Joints and go one by one assigning them in the UI, it right-clicks and left-clicks sometimes so just get to use it and notice that some joints are hidden in menus.</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/rig-with-mocap-packs/CustomMaping.poster.webp" width="1200" height="649" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/rig-with-mocap-packs/CustomMaping.mp4" type="video/mp4"></video></figure>
+      <h3 class="wf-h3">Create Custom Rig Mapping</h3>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/mapping.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">Let’s create a custom rig mapping, this is just telling Human Ik that we have already some custom controls for the joints. Again is super simple, just click ctrl, and click assign. This step and the previews one can be saved for later, so you can just do it once and load.</p>
+      <p class="wf-p">This step is the part where we need everything in FK, including the spine. There are no hands or ball controllers so they need to be animated by hand. If you are having trouble see this video multiple times and grab the correct ctrl.</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/rig-with-mocap-packs/ControlCustomMaping.poster.webp" width="1200" height="649" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/rig-with-mocap-packs/ControlCustomMaping.mp4" type="video/mp4"></video></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">06</span>Downloading Mixamo Animations</h2>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/mixamowalk.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/donwloadwalk.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">Just look at what animation you want and download it, i usually use these settings but check with your animation department first.</p>
+      <h2 class="wf-h2"><span class="wf-h2__n">07</span>Create Mixamo HIK Definition</h2>
+      <h3 class="wf-h3">T Pose Mixamo Skeleton</h3>
+      <p class="wf-p">Just import the FBX and go to frame -1, key all the skeletons to rotation to 0 and you are done!</p>
+      <p class="wf-p">(I just realized I recorded this gif on the wrong character, I don’t do these tutorials on one sit and I forgot this was not the one hehe, sorry but is the same thing. )</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/rig-with-mocap-packs/TPoseMixamo.poster.webp" width="1100" height="472" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/rig-with-mocap-packs/TPoseMixamo.mp4" type="video/mp4"></video></figure>
+      <h3 class="wf-h3">Create Mixamo HIK Character</h3>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/mixDefinition.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/renameAgain.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">Go to Character None, create a new Custom Rig Mapping and create a new one, rename it and we should have both on the same scene.</p>
+      <h3 class="wf-h3">Create Custom Rig Definition</h3>
+      <p class="wf-p">Mixamo is pretty simple to setup since names matches pretty cool… Just select Any joint and load the HIK Preset</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/rig-with-mocap-packs/mixamoHIK.poster.webp" width="1100" height="579" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/rig-with-mocap-packs/mixamoHIK.mp4" type="video/mp4"></video></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">08</span>Mixamo Mocap &gt; Custom Rig</h2>
+      <p class="wf-p">Select the Custom Rig Character in this case called Mutant, and select the desired source, in this case, Mixamo. And Done! We still need to do a clean-up pass in the anim curves, and in case you need to debug an orientation you can adjust each ctrl rotation at the bottom of the UI.</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/rig-with-mocap-packs/ApplyMocap.poster.webp" width="1100" height="579" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/rig-with-mocap-packs/ApplyMocap.mp4" type="video/mp4"></video></figure>
+      <h3 class="wf-h3">Debug HIK</h3>
+      <p class="wf-p">If the orient is not working or you need to only apply rotations and not translations. For Mutant Rigs this mostly works on default but I had some issues with other systems where rotations are pretty bad, and trust me is a pain to debug. Select each ctrl and tweak it, have fun!</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/rig-with-mocap-packs/HandRotationFix.poster.webp" width="1127" height="778" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/rig-with-mocap-packs/HandRotationFix.mp4" type="video/mp4"></video></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">09</span>Bake Animation</h2>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/Bake.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/TimeSlider.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">Bake the ANimation to the custom Rig, just make sure the time slider is with the correct frames.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/Delete.webp" alt="" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">Now you should be able to delete all the definitions and the rig should be moving correctly. I recommend saving 2 versions, one with and one without the bake so you can drag a drom the .fbx and it will automatically update so it is faster to do multiples</p>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/EmptyHIK.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">10</span>Export FBX</h2>
+      <p class="wf-p">YOu can safely delete the mixamo animations, what we need to do now is to bake the skeleton joints, delete the constraints, and delete the rig, then export as fbx.</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/rig-with-mocap-packs/BakeAndDelete.poster.webp" width="1200" height="590" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/rig-with-mocap-packs/BakeAndDelete.mp4" type="video/mp4"></video></figure>
+      <p class="wf-p">File &gt; Export Selection and export the geo with the joints, just remember to include the animation with the correct frame numbers.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/rig-with-mocap-packs/exportfbx.webp" alt="" loading="lazy" decoding="async"></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">11</span>Import to Unreal</h2>
+      <p class="wf-p">Just drag and drop to the viewport and test everything is working!</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/rig-with-mocap-packs/walking.poster.webp" width="1200" height="607" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/rig-with-mocap-packs/walking.mp4" type="video/mp4"></video></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">12</span>Quick Anim Fix</h2>
+      <p class="wf-p">To be honest, I was hurrying to finish this and I didn’t check the anim and the feet are not touching the floor, this should have been fixed when the ctrls were still on but I’ll show you how to fix it pretty fast, and easy.</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/rig-with-mocap-packs/FixFootIssue.poster.webp" width="1200" height="607" muted loop playsinline preload="none" data-autoplay aria-label="Rigging clip"><source src="/assets/img/tut/rig-with-mocap-packs/FixFootIssue.mp4" type="video/mp4"></video></figure>
+    </div>
+
+    <section class="found found--wf">
+      <p class="found__kicker">B U I L T &nbsp; T H I S &nbsp; W A Y &nbsp; F O R &nbsp; Y O U ?</p>
+      <h2 class="found__title">I do this on shows, not just on my own time.</h2>
+      <p class="found__note">Every workflow on this site is the one I use in production. If you want it applied to your characters instead of read about, that is the job.</p>
+      <p class="found__row">
+        <button class="btn btn--mail" type="button" data-mail data-u="info" data-d="renderdemartes.com" data-s="Rig with mocap packs">EMAIL ME <span aria-hidden="true">↗</span></button>
+        <a class="btn btn--ghost" href="/hire-a-freelance-character-rigger/">RIGGING SERVICES →</a>
+      </p>
+    </section>
+
+    <nav class="wf-more" aria-label="More workflows">
+      <p class="section__kicker">M O R E &nbsp; W O R K F L O W S</p>
+      <div class="wf-more__grid"><a class="wf-card" href="/creature-rigging/"><span class="wf-card__title">Creature rigging</span><span class="wf-card__note">Quadruped template, wings, split-geo skinning</span><span class="wf-card__go">OPEN →</span></a><a class="wf-card" href="/face-rig-study/"><span class="wf-card__title">Face rig study</span><span class="wf-card__note">Layered facial systems, region by region</span><span class="wf-card__go">OPEN →</span></a><a class="wf-card" href="/how-to-rig-a-car/"><span class="wf-card__title">How to rig a car</span><span class="wf-card__note">Chassis, wheels, doors, a drivable rig</span><span class="wf-card__go">OPEN →</span></a></div>
+    </nav>
+  </article>
+</main>
+
+  <a class="outbound" href="https://mutanttools.com/" target="_blank" rel="noopener">
+    <span class="outbound__left">
+      <span class="outbound__title">MUTANT TOOLS</span>
+      <span class="outbound__note">Modular autorigger for Maya — body, face, quadrupeds, props.</span>
+    </span>
+    <span class="outbound__go">MUTANTTOOLS.COM <span aria-hidden="true">↗</span></span>
+  </a>
+
+<footer class="foot" id="contact">
+  <div class="foot__contact">
+    <p class="section__kicker">C O N T A C T</p>
+    <h2 class="foot__title">Need a rigger?</h2>
+    <p class="foot__lead">Freelance, contract, or a tool that should have existed last week.</p>
+    <p class="foot__btns">
+      <a class="btn btn--cyan" href="https://www.linkedin.com/in/esteban-rodriguez-488a68147/" target="_blank" rel="noopener">LINKEDIN PROFILE <span aria-hidden="true">↗</span></a>
+      <button class="btn btn--ghost" type="button" data-mail data-u="info" data-d="renderdemartes.com" data-s="Hello from renderdemartes.com">EMAIL ME <span aria-hidden="true">↗</span></button>
+    </p>
+  </div>
+  <nav class="foot__services" aria-label="Services">
+    <p class="foot__colhead">SERVICES</p>
+    <a href="/hire-a-freelance-character-rigger/">HIRE A FREELANCE RIGGER</a>
+    <a href="/maya-rigging-services/">MAYA RIGGING</a>
+    <a href="/unreal-engine-character-rigging/">UNREAL RIGGING</a>
+    <a href="/facial-rigging-services/">FACIAL RIGGING</a>
+    <a href="/rigging-outsourcing-for-studios/">RIGGING FOR STUDIOS</a>
+  </nav>
+  <nav class="foot__links" aria-label="Elsewhere">
+    <a href="https://www.linkedin.com/in/esteban-rodriguez-488a68147/" target="_blank" rel="noopener">LINKEDIN ↗</a>
+    <a href="https://www.youtube.com/@renderdemartes6049/videos" target="_blank" rel="noopener">YOUTUBE ↗</a>
+    <a href="https://mutanttools.com/" target="_blank" rel="noopener">MUTANTTOOLS.COM ↗</a>
+    <a href="/academic/">ACADEMIC</a>
+    <a href="/creature-rigging/">WORKFLOWS</a>
+  </nav>
+  <p class="foot__fine">© 2026 Esteban Rodriguez · Costa Rica, working remotely worldwide · built with Claude — who has time to build a website while building rigs?</p>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>
