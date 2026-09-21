@@ -1,0 +1,2820 @@
+{
+ "the-king": [
+  {
+   "t": "h2",
+   "text": "The King - Unreal Engine"
+  },
+  {
+   "t": "p",
+   "text": "Case study for a unreal Engine Character with Dynamics and Mocap Animations."
+  },
+  {
+   "t": "p",
+   "text": "Rig is going to be created using my customs tools: Mutant Tools"
+  },
+  {
+   "t": "h3",
+   "text": "Model Prep"
+  },
+  {
+   "t": "p",
+   "text": "Got the model from ArtStation: https://artstn.co/m/oBz22it was a Zrbush Project so I exported it and set it up in Maya to start the fun part!"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/the-king/King.png",
+   "alt": "",
+   "bytes": 69849
+  },
+  {
+   "t": "h3",
+   "text": "Rigging The Asset"
+  },
+  {
+   "t": "h4",
+   "text": "Rig Prep using Zombinator"
+  },
+  {
+   "t": "p",
+   "text": "With Mutant Tools we can use zombinator to rig biped characters. Will give us a good starting point to only focus on the deformations and make it look amazing in the long run. Zombinator is a tool that helps us automate workflows with the same topology geometry, we just need to export the base mesh and on Faceform Wrap copy our desired topology before starting."
+  },
+  {
+   "t": "p",
+   "text": "For more info about zombinator, you can visit: mutanttools.com"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/the-king/zombinatorUI.jpg",
+   "alt": "",
+   "bytes": 39956
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/the-king/Wrapbase.jpg",
+   "alt": "",
+   "bytes": 53056
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/the-king/wrap3d.gif",
+   "alt": "",
+   "bytes": 247816
+  },
+  {
+   "t": "h4",
+   "text": "Guides Placements"
+  },
+  {
+   "t": "p",
+   "text": "With help of Zombinator-Skeletor, we can make the guide’s placement job super easy. Both Body and Face Guides will work, i won’t lie and say that is perfect but is 90% good! We can save as many base meshes in the tool so if a client uses X or Y or Z we can choose from all of them, in this case is Wraps Basemesh."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/the-king/placeGuides.gif",
+   "alt": "",
+   "bytes": 155269
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/the-king/faceGuides.jpg",
+   "alt": "",
+   "bytes": 91458
+  },
+  {
+   "t": "h4",
+   "text": "Building the Rig"
+  },
+  {
+   "t": "p",
+   "text": "Just hit Build and paint the skins… Nothing much to see here."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/the-king/Build.gif",
+   "alt": "",
+   "bytes": 438959
+  },
+  {
+   "t": "h4",
+   "text": "Skinning"
+  },
+  {
+   "t": "p",
+   "text": "Skinning is boring to watch so i wont show much but mostly we i did it using Ng Skin Tools"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/the-king/NgSkin.jpg",
+   "alt": "",
+   "bytes": 90660
+  },
+  {
+   "t": "h4",
+   "text": "Anim Tests"
+  },
+  {
+   "t": "p",
+   "text": "For testing the skinning we need to animate, but since i dont really have the animation skills i tento to use pre-animated files or mocaps with HIK."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/the-king/Walk.gif",
+   "alt": "",
+   "bytes": 296805
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/the-king/Run.gif",
+   "alt": "",
+   "bytes": 284062
+  },
+  {
+   "t": "h4",
+   "text": "HIK Mocap"
+  },
+  {
+   "t": "p",
+   "text": "For test Mocaps i tent to visist Mixamo or Rokoko Motion Library inside Maya."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/the-king/Mocap.gif",
+   "alt": "",
+   "bytes": 4296996
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/the-king/motionlibrary.gif",
+   "alt": "",
+   "bytes": 2813535
+  },
+  {
+   "t": "h3",
+   "text": "Import to Unreal Engine"
+  },
+  {
+   "t": "h4",
+   "text": "Bake and Import"
+  },
+  {
+   "t": "p",
+   "text": "Export asset, and bake a couple of animations so we can test the rig system on the engine."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/the-king/engine.jpg",
+   "alt": "",
+   "bytes": 64988
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/the-king/idle.gif",
+   "alt": "",
+   "bytes": 8784648
+  }
+ ],
+ "creature-rigging": [
+  {
+   "t": "h1",
+   "text": "Creature Rigging"
+  },
+  {
+   "t": "p",
+   "text": "First, thanks to Luis Cadavid for developing the personal groom project."
+  },
+  {
+   "t": "p",
+   "text": "We will use my main scripts: Mutant Tools. We updated some code so feel free to install the latest to follow the tutorial."
+  },
+  {
+   "t": "p",
+   "text": "Model by: Pete Flint"
+  },
+  {
+   "t": "h2",
+   "text": "Guide Placement"
+  },
+  {
+   "t": "h3",
+   "text": "Template"
+  },
+  {
+   "t": "p",
+   "text": "We start by selecting the quadruped template and then ill explain each block and how to place it."
+  },
+  {
+   "t": "h4",
+   "text": "BaseA_Block and Root_Block"
+  },
+  {
+   "t": "p",
+   "text": "We don’t need to do anything with them."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/tempalte.jpg",
+   "alt": "",
+   "bytes": 58581
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/CogSpine.jpg",
+   "alt": "",
+   "bytes": 87420
+  },
+  {
+   "t": "h4",
+   "text": "COG_Block and Spine_Block"
+  },
+  {
+   "t": "p",
+   "text": "COG goes where the center of gravity is, usually in the middle of the spine or if you want like a human near the hips. The Spine I like to have a straight line if the model allows me to do so, but feel free to give it a bit of curvature if needed."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/NeckHaed.jpg",
+   "alt": "",
+   "bytes": 37765
+  },
+  {
+   "t": "h4",
+   "text": "L_Eyes_Block"
+  },
+  {
+   "t": "p",
+   "text": "Eyes: Position the first joint in the middle of the eye, you can use the cluster trick to find it and then the second where the animator may want to have the visor ctrl"
+  },
+  {
+   "t": "h4",
+   "text": "Neck_Head_Block"
+  },
+  {
+   "t": "p",
+   "text": "Neck and Head are where the neck and the head start, try to remember the skull bone since placing it there will give you better skinning results."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/Tail.jpg",
+   "alt": "",
+   "bytes": 63652
+  },
+  {
+   "t": "h4",
+   "text": "Tail Block"
+  },
+  {
+   "t": "p",
+   "text": "This one is a NURBS shape, feel free to delete the one in the preset, create a new one, and add the number of divisions required, you can also update the number of joints in the builder UI to have more ctrl."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/Scaupla.jpg",
+   "alt": "",
+   "bytes": 53325
+  },
+  {
+   "t": "h4",
+   "text": "L_Clavicle_Block and L_Pelvis_Block"
+  },
+  {
+   "t": "p",
+   "text": "For this one i don’t consider myself an expert placer, so if you have feedback please let me know, but I tend to place it near the center of the spine so the leg can rotate across the body like a slide effect and give that animal scapular shape when translated."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/legs.jpg",
+   "alt": "",
+   "bytes": 84254
+  },
+  {
+   "t": "h4",
+   "text": "L_FrHip_Block and L_BkHip_Block​"
+  },
+  {
+   "t": "p",
+   "text": "On the legs we have 2 ways, dog back and dog front. Look at your animal and see if the template matches, if not you need to switch direction and switch the mode in the UI, also the PV position is super important so play a bit with it and keep in mind to have it coplanar with the legs."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/foot.jpg",
+   "alt": "",
+   "bytes": 12522
+  },
+  {
+   "t": "h4",
+   "text": "L_FrFoot_Block"
+  },
+  {
+   "t": "p",
+   "text": "This is just a foot roll, keep the ankles together, and the rolls guides on the floor and you will be fine!"
+  },
+  {
+   "t": "h4",
+   "text": "FrSmart_RFL_Block"
+  },
+  {
+   "t": "p",
+   "text": "This will make a ctrl to have a fancier way to control the foot roll. No edits need to be done."
+  },
+  {
+   "t": "h4",
+   "text": "Wings"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/WingBG.png",
+   "alt": "",
+   "bytes": 76224
+  },
+  {
+   "t": "p",
+   "text": "Rigging Wings is not easy. For this ill be using and old script that i implemented inside Mutant Tools. Is pretty hardcoded so ill do a explanation on whats the best way of using it."
+  },
+  {
+   "t": "p",
+   "text": "First, we need to understand wing anatomy, at least the basics of how the system works. in the main system, we have Scapulars, Secondaries, and Primaries Feathers, we don’t have anything for coverts and that kinda stuff so don’t worry about it. If you look at the model this one has another set, the Tertiaries that would be instead of the scapulars… sadly the system doesn’t support them so what I’m doing is creating a new block for the module of Feather and we will just put it at the end as Primaries Extra… Names are probably super bad Anatomy wise but Rigging wise works for me at this point."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/Feathers-Block.png",
+   "alt": "",
+   "bytes": 87161
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/WingsGuides.png",
+   "alt": "",
+   "bytes": 9657
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/WingsGeo.png",
+   "alt": "",
+   "bytes": 52179
+  },
+  {
+   "t": "p",
+   "text": "I’m sorry I didn’t have this steps on the placements but it’s just FK chains so just take care of position and good orients and done!"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/Wing-Skeleton.png",
+   "alt": "",
+   "bytes": 32932
+  },
+  {
+   "t": "h4",
+   "text": "Spaces, Attrs, Data, Extras"
+  },
+  {
+   "t": "p",
+   "text": "Nothing to be done here, if you want to add a Spaces group open a new Maya and check the human template, build the rig, and then create the blocks… I’m not showing this so you can explore a bit but if you have questions let me know and ill be happy to help!"
+  },
+  {
+   "t": "h2",
+   "text": "Building"
+  },
+  {
+   "t": "p",
+   "text": "Just hit build and remember that in case you need to update a guide just do it and the build will save the controllers and skins for you so no need to save and load them manually."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/GriffinBuild.gif",
+   "alt": "",
+   "bytes": 428956
+  },
+  {
+   "t": "h2",
+   "text": "Skinning"
+  },
+  {
+   "t": "h3",
+   "text": "Split Geo"
+  },
+  {
+   "t": "p",
+   "text": "Skinning Quadrupets can be challenging if is the first time. For this I’m going to be using ng skin tools and the split/merge technique for easy and mentally stable skinning."
+  },
+  {
+   "t": "p",
+   "text": "The first step is going to be separating each part, just duplicate the geo several times and delete faces until desired part is alone."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/BodyParts.gif",
+   "alt": "",
+   "bytes": 149686
+  },
+  {
+   "t": "h3",
+   "text": "Hard to Soft Skinning"
+  },
+  {
+   "t": "p",
+   "text": "Select desired joints, desired part and skin selected joints to it. Keep it simple, For example, the clavicle is a hard part to add so I don’t add it at this stage but at the end in another layer."
+  },
+  {
+   "t": "p",
+   "text": "The first step is going to be separating each part, just duplicate the geo several times and delete faces until the desired part is alone."
+  },
+  {
+   "t": "p",
+   "text": "Initialize ng skin, tools, assign from closest then smooth and you are done! Repeat for all the rest of the parts and check joint by joint in legs to check if working before the smooth."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/SkinTorso.gif",
+   "alt": "",
+   "bytes": 5785294
+  },
+  {
+   "t": "h3",
+   "text": "Feather Skinning"
+  },
+  {
+   "t": "p",
+   "text": "This will depend on how the feather geo is built, in this case, we have groups that determine what is what so I just follow it."
+  },
+  {
+   "t": "p",
+   "text": "The bone goes to the bone and the feather only to the feather, we don’t fix them to have cleaner skin."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/SkinFeathers.png",
+   "alt": "",
+   "bytes": 15298
+  },
+  {
+   "t": "h3",
+   "text": "Combine and Transfer"
+  },
+  {
+   "t": "p",
+   "text": "Once all parts are skinned, we just need to combine them with the skinning option set to True and transfer the skinning to the real geo."
+  },
+  {
+   "t": "p",
+   "text": "Then just work the intersections and that is how complex skins are done simply."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/CombineGeos.png",
+   "alt": "",
+   "bytes": 31866
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/creature-rigging/CopySkins.png",
+   "alt": "",
+   "bytes": 36879
+  }
+ ],
+ "face-rig-study": [
+  {
+   "t": "h2",
+   "text": "Face Rig"
+  },
+  {
+   "t": "p",
+   "text": "Model: Boonie by Makar Malicki"
+  },
+  {
+   "t": "p",
+   "text": "The rig will be made using my scripts: Mutant Tools"
+  },
+  {
+   "t": "p",
+   "text": "Skinning Tools: ngSkinTools"
+  },
+  {
+   "t": "p",
+   "text": "Blendshapes Tools: SHAPES"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/done-1.jpg",
+   "alt": "",
+   "bytes": 31200
+  },
+  {
+   "t": "h3",
+   "text": "Understanding the logic!"
+  },
+  {
+   "t": "p",
+   "text": "Is pretty simple, we rig the face in layers so we can have a lot of custom systems that work together. The face rig is done independently from the body and later combined for an easy and clean setup. We divide the main head into 2 parts: The lower and Upper Skull, these 2 are in a local system together and then each system has a local rig attached to the skull system. Each part depending on where is located will get parented to either the upper or lower part of the skull."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/logic.png",
+   "alt": "",
+   "bytes": 4206
+  },
+  {
+   "t": "p",
+   "text": "Always keep in mind the muscles, where do they start? where do they finish? They are links so if you move one which one is going to move with? THEY HAVE VOLUME! So keep the volume! Also, remember that the Skull is a solid object, you can’t move the skin through it but around it!"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/image-from-rawpixel-id-9975429-original.jpg",
+   "alt": "",
+   "bytes": 813186
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/image-from-rawpixel-id-12058925-png.png",
+   "alt": "",
+   "bytes": 482346
+  },
+  {
+   "t": "h3",
+   "text": "Placing the guides"
+  },
+  {
+   "t": "p",
+   "text": "We will be using the Human Template that will import us a set of ready to use blocks! Ill explain the blocks, one by one."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/Blocks.jpg",
+   "alt": "",
+   "bytes": 22581
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/template.jpg",
+   "alt": "",
+   "bytes": 38234
+  },
+  {
+   "t": "h4",
+   "text": "BaseA"
+  },
+  {
+   "t": "p",
+   "text": "Will create the base ctrl, and the rigs grouping system. Nothing to edit in this one."
+  },
+  {
+   "t": "h4",
+   "text": "Vis Attrs"
+  },
+  {
+   "t": "p",
+   "text": "Will create a ctrl so we can store the visibility attributes for all the face rig"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/vis.jpg",
+   "alt": "",
+   "bytes": 34605
+  },
+  {
+   "t": "h4",
+   "text": "Phonemes UI"
+  },
+  {
+   "t": "p",
+   "text": "We don’t use this one much but will just create a UI so we can save the phonemes blend shapes when used."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/Pho.jpg",
+   "alt": "",
+   "bytes": 50519
+  },
+  {
+   "t": "h4",
+   "text": "Skull Locals"
+  },
+  {
+   "t": "p",
+   "text": "In this one we need to set the main head geometry name, just click the geo and set selection on the UI"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/skullLocal.jpg",
+   "alt": "",
+   "bytes": 74936
+  },
+  {
+   "t": "h4",
+   "text": "Locals"
+  },
+  {
+   "t": "p",
+   "text": "Wil generate as manny local systems as we want. Preset have the basic ones already set but if you need to add another layer just write in the new names field."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/locals.jpg",
+   "alt": "",
+   "bytes": 19866
+  },
+  {
+   "t": "h4",
+   "text": "Skull"
+  },
+  {
+   "t": "p",
+   "text": "Will create 2 simple FK controllers and should be palced on the middle of the head."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/sull.jpg",
+   "alt": "",
+   "bytes": 24583
+  },
+  {
+   "t": "h4",
+   "text": "Eyelids"
+  },
+  {
+   "t": "p",
+   "text": "We need to place the pivot of the eye in the middle of the sphere so it can rotate around the eye. Select upper and lower eye edges and set them in the UI field."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/eyePivot.jpg",
+   "alt": "",
+   "bytes": 6786
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/eyeupr.jpg",
+   "alt": "",
+   "bytes": 3706
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/eyelwr.jpg",
+   "alt": "",
+   "bytes": 3358
+  },
+  {
+   "t": "h4",
+   "text": "Orbicularis"
+  },
+  {
+   "t": "p",
+   "text": "This is a wire system connected to the eyes local geo, We need to place it around the eyes, the idea is to be able to move the external part of the eyelids without affecting the eyes nor the brows."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/orbi.jpg",
+   "alt": "",
+   "bytes": 30934
+  },
+  {
+   "t": "h4",
+   "text": "Lips"
+  },
+  {
+   "t": "p",
+   "text": "The lips need to have an Upper and Lower edge selected and 2 guide placements. The Center guide is meant to be to be able to rotate the whole mouth around the teeth so have that in mind when placing it. The corner-orient guide is meant to be placed linearly going around the teeth. (Curvature of teeth is set in the commissures block.)"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/mouthcenter.jpg",
+   "alt": "",
+   "bytes": 17417
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/mouthCorner.jpg",
+   "alt": "",
+   "bytes": 13361
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/liptsUpr.jpg",
+   "alt": "",
+   "bytes": 3192
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/liptsLwr.jpg",
+   "alt": "",
+   "bytes": 2963
+  },
+  {
+   "t": "h4",
+   "text": "Brows"
+  },
+  {
+   "t": "p",
+   "text": "This one should be placed over the geometry and can be pushed inside a bit if needed to conserve a bit more of the ‘meat’. Always keep in mind the surface is normal and if you need a better following of the shape you can try the Borws advance block at your own risk but this seems to work fine 90% of the time."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/brows.jpg",
+   "alt": "",
+   "bytes": 46032
+  },
+  {
+   "t": "h4",
+   "text": "Cheecks"
+  },
+  {
+   "t": "p",
+   "text": "Cheeks is 3 guides. Nasolabial, Main Cheecks, and Cheeck Bone. You can play around with these after building and touching skin to make smiles and general expressions super fleshy and realistic. Try to place them at the topology level and then push them a bit inside so the movement comes from the muscles and not from the skin."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/cheecks.jpg",
+   "alt": "",
+   "bytes": 127683
+  },
+  {
+   "t": "h4",
+   "text": "Jaw"
+  },
+  {
+   "t": "p",
+   "text": "The jaw has a colition System so try to put lower and upper lip joints close enough for it to feel like it’s touching. With the rebuildable workflow that Mutant Tools allows we don’t need to worry much about being perfect with the jaw at the beginning. We can place, try, replace, and retry as much as we need until the final pose is working. Only rule is to not rotate anything, only move."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/jaw.jpg",
+   "alt": "",
+   "bytes": 12168
+  },
+  {
+   "t": "h4",
+   "text": "Commisures"
+  },
+  {
+   "t": "p",
+   "text": "This block is the one I consider more important since is the one that fakes the roundness of the mouth. Place it in a good range! Don’t be afraid of going too back and around the face. Rules: Every curve starts at the same pos as the orient lip guide, all guides start at the same point, no funny business (if it moves down only in the Y axis, doesn’t mix up the axis.)"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/coms2.jpg",
+   "alt": "",
+   "bytes": 41686
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/coms1.jpg",
+   "alt": "",
+   "bytes": 67768
+  },
+  {
+   "t": "h4",
+   "text": "Tongue"
+  },
+  {
+   "t": "p",
+   "text": "Nothing fancy… just a tongue… The tongue is not a local rig but a global one."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/tongue.jpg",
+   "alt": "",
+   "bytes": 18169
+  },
+  {
+   "t": "h4",
+   "text": "Teeth"
+  },
+  {
+   "t": "p",
+   "text": "Same as tongue… nothing fancy.. just ctrls with global rig."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/teeth.jpg",
+   "alt": "",
+   "bytes": 21255
+  },
+  {
+   "t": "h4",
+   "text": "Nose"
+  },
+  {
+   "t": "p",
+   "text": "The nose is not that fancy is just FK chains so we just place it wherever we think is better again don’t worry too much since we can rebuild as many times as we need without losing data."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/nose.jpg",
+   "alt": "",
+   "bytes": 97761
+  },
+  {
+   "t": "h4",
+   "text": "Null Joint"
+  },
+  {
+   "t": "p",
+   "text": "Will create a null joint for skinning the locals rigs."
+  },
+  {
+   "t": "code",
+   "text": "\t\t\t\t\tfrom maya import cmds\ncmds.select(cl=True)\ncmds.joint(n='Null_Local_Bnd')\ncmds.parent('Null_Local_Bnd', 'Bind_Joints_Grp')"
+  },
+  {
+   "t": "h4",
+   "text": "Correctives"
+  },
+  {
+   "t": "p",
+   "text": "Will create some base correctives nodes. We dont really use them but they are in the preset"
+  },
+  {
+   "t": "h4",
+   "text": "Reorder"
+  },
+  {
+   "t": "p",
+   "text": "Will update the input orther to make work the correctives and the locals together"
+  },
+  {
+   "t": "code",
+   "text": "\t\t\t\t\tcmds.reorderDeformers('Correctives_BSP', 'Locals_BSP', 'BodySkull')"
+  },
+  {
+   "t": "h4",
+   "text": "Skin Nodes"
+  },
+  {
+   "t": "p",
+   "text": "All these skin nodes will select the local geo, the null and the specific system bind joints to create the base skinning so we know which bones are in which systems faster without the need of looking in the outliner. Skinning helpers will come in handy later."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/skinBlocks.jpg",
+   "alt": "",
+   "bytes": 73831
+  },
+  {
+   "t": "h4",
+   "text": "Load Ctrls"
+  },
+  {
+   "t": "p",
+   "text": "Will load the ctrls preset. If you want to start with the base ones and update to your own just delete this block"
+  },
+  {
+   "t": "h4",
+   "text": "Guides Complete"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/guides.jpg",
+   "alt": "",
+   "bytes": 24960
+  },
+  {
+   "t": "h3",
+   "text": "Building and understanding the setup."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/faceBuild.gif",
+   "alt": "",
+   "bytes": 136349
+  },
+  {
+   "t": "h4",
+   "text": "Outliner Groups"
+  },
+  {
+   "t": "p",
+   "text": "geo > Geommetry"
+  },
+  {
+   "t": "p",
+   "text": "Mutant Build > Template Guides"
+  },
+  {
+   "t": "p",
+   "text": "Mutant Tools Grp > Main rig setup, dont change anything pls."
+  },
+  {
+   "t": "p",
+   "text": "Skull Parent Loc > Moves the ctrls around only since it ment to be a local system, we connect this to main head crtl on body on the face install stage, using face install tools."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/outliner1.jpg",
+   "alt": "",
+   "bytes": 3188
+  },
+  {
+   "t": "p",
+   "text": "On the Rig Grp we have everything… don’t touch anything… You just need to know what geometries we need. We need the BodySkull and the BodyEyes, BodyLips, etc… You can find them here but it’s easy to use the Helpers UI"
+  },
+  {
+   "t": "p",
+   "text": "You also get some set where you can find which bones to skin to each geo in case you need to add some extra geos. Again wait for the UI, it’s just easier"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/outliner3.jpg",
+   "alt": "",
+   "bytes": 8601
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/outliner2.jpg",
+   "alt": "",
+   "bytes": 28597
+  },
+  {
+   "t": "h3",
+   "text": "Helpers UI"
+  },
+  {
+   "t": "code",
+   "text": "\t\t\t\t\timport sys\nimport os\nfrom maya import cmds\nmutant_path = 'C://Users//Esteban//Documents//maya//2022//scripts//rigging' #your folder math\nif mutant_path not in sys.path:\n    sys.path.append(mutant_path)\n\nimport Mutant_Tools.UI\n\ntry:\n    import importlib;from importlib import reload\nexcept:\n    import imp;from imp import reload\n\nimport Mutant_Tools\nfrom Mutant_Tools.UI.Helpers import load_helpers\nreload(load_helpers)\n\ntry:cHelperUI.close()\nexcept:pass\ncHelperUI = load_helpers.HelperUI()\ncHelperUI.show()"
+  },
+  {
+   "t": "p",
+   "text": "These tools came with the main Mutant Tools license and are the day-to-day on the riggers. You can open it either with this code or in the rigging menu. Go to the Face tab and make your life easy by following the next tip."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/helpers1.jpg",
+   "alt": "",
+   "bytes": 26026
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/hlpers2.jpg",
+   "alt": "",
+   "bytes": 28928
+  },
+  {
+   "t": "h3",
+   "text": "Skinning"
+  },
+  {
+   "t": "p",
+   "text": "For this part I’ll try and show the tips and tricks we have found for easy skinning of each part. Some are more automated than others. On the helpers Ui you can choose which part to work on for easy access to the geos, joints, and controllers."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/parts.gif",
+   "alt": "",
+   "bytes": 350271
+  },
+  {
+   "t": "h4",
+   "text": "Save and load Skinning"
+  },
+  {
+   "t": "p",
+   "text": "At any point you can save and load custom skins using the main UI"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/saveloadskin.jpg",
+   "alt": "",
+   "bytes": 19550
+  },
+  {
+   "t": "h4",
+   "text": "Skull Skin"
+  },
+  {
+   "t": "p",
+   "text": "Null joint controls the body and neck. Up Skull controls nose and up. Down controls mouth Down. Nothing Fancy here but I’ll show the basics of ng to use in the next parts."
+  },
+  {
+   "t": "p",
+   "text": "First start assigning everything to the skull joint, then create a new layer select the body parts you need, and assign from the closest influence. Adjust the skin a bit to be hard and then smooth a couple of times. Test the controllers to look something like the images."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/Skin1.jpg",
+   "alt": "Skin1",
+   "bytes": 86628
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/Skin2.jpg",
+   "alt": "Skin2",
+   "bytes": 47375
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/Skin3.jpg",
+   "alt": "Skin3",
+   "bytes": 58570
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/Skin4.jpg",
+   "alt": "Skin4",
+   "bytes": 137503
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/skull1.jpg",
+   "alt": "skull1",
+   "bytes": 80714
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/skull2.jpg",
+   "alt": "skull2",
+   "bytes": 90619
+  },
+  {
+   "t": "h4",
+   "text": "Eyes Skin"
+  },
+  {
+   "t": "p",
+   "text": "For the eyes, we have an auto skinning that helps a lot. It was developed with the help of Cesar Gallo and Luis Motta."
+  },
+  {
+   "t": "p",
+   "text": "Set the range from the loop to the end of the eye area and click auto skin eyes, in this case, 6 works. Then smooth only the edges and test how the eyes close."
+  },
+  {
+   "t": "p",
+   "text": "Skin cluster most likely needs to be Dual Quaternion to be able to wrap around the eyeball"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/rangeEyes.jpg",
+   "alt": "",
+   "bytes": 42789
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/EyesRange.jpg",
+   "alt": "",
+   "bytes": 134989
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/smoothEyes.gif",
+   "alt": "",
+   "bytes": 454211
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/eyesClose.gif",
+   "alt": "",
+   "bytes": 831699
+  },
+  {
+   "t": "h4",
+   "text": "Eyes Wires"
+  },
+  {
+   "t": "p",
+   "text": "We have some wires in the eyes, so don’t forget to paint those. The wires work when the Eyelids Up Slide is off. When on will use the skin for the secondary controllers, in this rig ill use slide-on."
+  },
+  {
+   "t": "p",
+   "text": "Also, the orbicularis have wires for additional movement. Also needs painting."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/wires.jpg",
+   "alt": "",
+   "bytes": 9635
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/paintWires.jpg",
+   "alt": "",
+   "bytes": 147886
+  },
+  {
+   "t": "h4",
+   "text": "Lips Skin"
+  },
+  {
+   "t": "p",
+   "text": "Same as the eyes: set range, auto skin, smooth done!"
+  },
+  {
+   "t": "p",
+   "text": "the Mouth controlelrs we skin are the secundary ones, main corners ones are skinned in the comisures step + some custom shapes later on the pipe."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/lipsrange.jpg",
+   "alt": "",
+   "bytes": 58012
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/skinLips.jpg",
+   "alt": "",
+   "bytes": 201676
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/mouth.gif",
+   "alt": "",
+   "bytes": 2410096
+  },
+  {
+   "t": "h4",
+   "text": "Brows Skin"
+  },
+  {
+   "t": "p",
+   "text": "Skin Hard, grab all the front, and then extend to the lower upper skin part of the eyelids to grab more meat. We want this kind of movement as a base and later add correctives to make it more linear and perfect."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/Browsskin2.jpg",
+   "alt": "",
+   "bytes": 43686
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/BrowsSkin.jpg",
+   "alt": "",
+   "bytes": 31937
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/brows.gif",
+   "alt": "",
+   "bytes": 499042
+  },
+  {
+   "t": "h4",
+   "text": "Cheecks Skin"
+  },
+  {
+   "t": "p",
+   "text": "I like to start heavy and end super soft since I mostly use them as flesh add-ons and not really to make any specific shapes."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/cheeck2.jpg",
+   "alt": "",
+   "bytes": 86600
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/cheeck1.jpg",
+   "alt": "",
+   "bytes": 89243
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/cheecks.gif",
+   "alt": "",
+   "bytes": 1329462
+  },
+  {
+   "t": "h4",
+   "text": "Jaw Skin"
+  },
+  {
+   "t": "p",
+   "text": "Select vertex in the middle of lip and then grow selection, Then bind to 1 in the specific joint and then smooth like crazy until you get the ball shape for when the mout is open"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/UprLip.gif",
+   "alt": "",
+   "bytes": 84639
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/LwrLip.gif",
+   "alt": "",
+   "bytes": 83220
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/jawSkin.jpg",
+   "alt": "",
+   "bytes": 89294
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/Jaw.gif",
+   "alt": "",
+   "bytes": 6018241
+  },
+  {
+   "t": "h4",
+   "text": "Nose Skin"
+  },
+  {
+   "t": "p",
+   "text": "Just Hard FK with smooth… Nothing fancy here."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/noseSkin.jpg",
+   "alt": "",
+   "bytes": 162123
+  },
+  {
+   "t": "h4",
+   "text": "Mouth Up, Dw, Wide Narrow Skin"
+  },
+  {
+   "t": "p",
+   "text": "We can do one and copy-paste the skinning using either Ng or Maya native tools to the other heads."
+  },
+  {
+   "t": "p",
+   "text": "Select the corner vertex with soft selection on adjust the radius and then assign the skin with ng to bind it. Make you you have a great base so the blendshapes are going to be easier to create."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/comm.gif",
+   "alt": "",
+   "bytes": 1771673
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/WideSkin.gif",
+   "alt": "",
+   "bytes": 2639426
+  },
+  {
+   "t": "h3",
+   "text": "Fixing Some Guides Mistakes"
+  },
+  {
+   "t": "h4",
+   "text": "Rebuilding the eyes"
+  },
+  {
+   "t": "p",
+   "text": "I Built the eyes while the preview mesh was on (3 on the keyboard) and it makes more vertex, so I just need to turn it off (press 1) and rebuild. The rebuild will save the ctrl shapes and the skinning, then delete everything, build again, and load all the components back. The eyes idea is to have one joint per vertex for the autoskin to work."
+  },
+  {
+   "t": "p",
+   "text": "In this case, since geometry is changing loading skins doesn’t work so manually saving them and then loading them works for the rest of the already finished skins."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/eyesFix.jpg",
+   "alt": "",
+   "bytes": 107712
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/eyesFix2.jpg",
+   "alt": "",
+   "bytes": 37735
+  },
+  {
+   "t": "h4",
+   "text": "Rebuilding the Nose"
+  },
+  {
+   "t": "p",
+   "text": "I found this issue at the end and so what I did was. Delete vis attributes, delete build data, select nose block, and build selected. Just rebuild that node with the guides well placed."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/deletebuilddata.jpg",
+   "alt": "",
+   "bytes": 17985
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/deleteAttrs.jpg",
+   "alt": "",
+   "bytes": 34437
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/buildselected.jpg",
+   "alt": "",
+   "bytes": 61454
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/justrebuild.jpg",
+   "alt": "",
+   "bytes": 42658
+  },
+  {
+   "t": "h2",
+   "text": "Blendshapes"
+  },
+  {
+   "t": "p",
+   "text": "Sculpt your blend shapes as well as you can, and try to get references from the real world or animated films if they are stylized. Now we will create the connections using Brave Rabbit Shapes."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/bsp.jpg",
+   "alt": "",
+   "bytes": 30892
+  },
+  {
+   "t": "h3",
+   "text": "Create from posed target"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/shapes01.jpg",
+   "alt": "",
+   "bytes": 85552
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/shapes02.jpg",
+   "alt": "",
+   "bytes": 49008
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/shapes03.jpg",
+   "alt": "",
+   "bytes": 58339
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/shapes04.jpg",
+   "alt": "",
+   "bytes": 90911
+  },
+  {
+   "t": "h3",
+   "text": "Mirror"
+  },
+  {
+   "t": "p",
+   "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/shapes05.jpg",
+   "alt": "",
+   "bytes": 22404
+  },
+  {
+   "t": "h3",
+   "text": "Split"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/shapes06.jpg",
+   "alt": "",
+   "bytes": 20005
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/shapes07.jpg",
+   "alt": "",
+   "bytes": 18948
+  },
+  {
+   "t": "h3",
+   "text": "Connect to Rig"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/shapes08.jpg",
+   "alt": "",
+   "bytes": 85922
+  },
+  {
+   "t": "h3",
+   "text": "Mirror Connections"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/shapes09.jpg",
+   "alt": "",
+   "bytes": 16291
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/shapes10.jpg",
+   "alt": "",
+   "bytes": 27061
+  },
+  {
+   "t": "h2",
+   "text": "Done 🙂"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/smile.jpg",
+   "alt": "",
+   "bytes": 23932
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/sad.jpg",
+   "alt": "",
+   "bytes": 23919
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/face-rig-study/serius.jpg",
+   "alt": "",
+   "bytes": 23890
+  }
+ ],
+ "how-to-rig-a-car": [
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/CarRig-3.gif",
+   "alt": "",
+   "bytes": 3821755
+  },
+  {
+   "t": "h2",
+   "text": "How to rig a Car"
+  },
+  {
+   "t": "p",
+   "text": "On this page, we are going to be learning how to rig a car in Maya. Is a simple but complete rig that the animator would love!"
+  },
+  {
+   "t": "p",
+   "text": "Model: https://artstn.co/m/grBDO"
+  },
+  {
+   "t": "p",
+   "text": "Rig Tools: Mutant Tools"
+  },
+  {
+   "t": "h2",
+   "text": "Model Prep"
+  },
+  {
+   "t": "p",
+   "text": "Just put the whole model in a group named: ‘geo’, make it look into the Z+ axis"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/cargeogrp.jpg",
+   "alt": "",
+   "bytes": 58559
+  },
+  {
+   "t": "p",
+   "text": "We need to have the 4 wheels as its own geo and not merged together."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/separatedWheels.jpg",
+   "alt": "",
+   "bytes": 37431
+  },
+  {
+   "t": "h2",
+   "text": "Guide Setup"
+  },
+  {
+   "t": "h3",
+   "text": "Car Template"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/catTemplate.jpg",
+   "alt": "",
+   "bytes": 41590
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/carguides.jpg",
+   "alt": "",
+   "bytes": 21405
+  },
+  {
+   "t": "p",
+   "text": "We are going to be using the car template, ill explain block by block so it’s easy to follow. Don’t worry if this seems intimidating, there is a bunch of info that you need before rig."
+  },
+  {
+   "t": "h3",
+   "text": "Blocks"
+  },
+  {
+   "t": "h4",
+   "text": "Cluster Trick"
+  },
+  {
+   "t": "p",
+   "text": "For easy placement, we can use the cluster trick! Just select vertices, edges, or whatever is in the pivot we want, create a cluster, and then match transformation only! Easy placement!"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/clusterTrik.gif",
+   "alt": "",
+   "bytes": 260739
+  },
+  {
+   "t": "h4",
+   "text": "BaseA"
+  },
+  {
+   "t": "p",
+   "text": "Will Create a Global, Mover Ctrls and the rig groups for us. Nothing to do here except maybe the scale that can be modified later…"
+  },
+  {
+   "t": "h4",
+   "text": "Root"
+  },
+  {
+   "t": "p",
+   "text": "Will create a joint at 0, 0, 0. Useful? Maybe? We don’t really use it but is there in case we do."
+  },
+  {
+   "t": "h4",
+   "text": "Import MT"
+  },
+  {
+   "t": "p",
+   "text": "This code is the code we need to import mt commands, which are the commands we use in the Mutant Tools API, you can copy and paste it to make your custom rig code."
+  },
+  {
+   "t": "h4",
+   "text": "COG"
+  },
+  {
+   "t": "p",
+   "text": "We place the locator in the middle of the car. The car can have a lot of visual chaos so we need to make sure we clean the curves later and the middle of the car is a great option to compensate for the drift and more complex movement."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/carcog.jpg",
+   "alt": "",
+   "bytes": 47901
+  },
+  {
+   "t": "h4",
+   "text": "Chasis"
+  },
+  {
+   "t": "p",
+   "text": "For the chassis and for most of the guides we use the cluster trick to easily place them, Just create a cluster and match the translation to the guide, and that is it. The main Chais goes in the middle of the car and the Front and Back go where the wheels turn, this is important since this works for parents for other blocks, so should be as perfect as possible."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/chasisGuide.jpg",
+   "alt": "",
+   "bytes": 51783
+  },
+  {
+   "t": "h4",
+   "text": "Front and Back Trunk"
+  },
+  {
+   "t": "p",
+   "text": "The front trunk is where the engine lives and in this case ill use the back one for the extra wheel on the back but should be where the back trunk is!"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/trunks.jpg",
+   "alt": "",
+   "bytes": 11326
+  },
+  {
+   "t": "h4",
+   "text": "Doors"
+  },
+  {
+   "t": "p",
+   "text": "This car doesnt have doors but the guide is simple, I’ll probably just delete the block but to make the example I just place them where the doors should be."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/carDoors.jpg",
+   "alt": "",
+   "bytes": 24813
+  },
+  {
+   "t": "h4",
+   "text": "Windows"
+  },
+  {
+   "t": "p",
+   "text": "Again a bad example but same thing.. just place them at the pivot point"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/CarWindos.jpg",
+   "alt": "",
+   "bytes": 26436
+  },
+  {
+   "t": "h4",
+   "text": "Mirrors"
+  },
+  {
+   "t": "p",
+   "text": "Where the mirror pivots are… Make the axis aim at the child so it’s easy for the animator and keep the end one oriented to the world if possible."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/Car-Mirror.jpg",
+   "alt": "",
+   "bytes": 14783
+  },
+  {
+   "t": "h4",
+   "text": "Front and Back Wheel"
+  },
+  {
+   "t": "p",
+   "text": "Same Trick, Cluster > Place Guide"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/wheelsGuide.jpg",
+   "alt": "",
+   "bytes": 27598
+  },
+  {
+   "t": "h4",
+   "text": "WheelPush"
+  },
+  {
+   "t": "p",
+   "text": "On this one is where it gets a bit more complex. We need to set the wheel go for it to work… Nothing hard just to keep it in mind."
+  },
+  {
+   "t": "p",
+   "text": "Select Faces > Rig UI > Set Selection"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/wheelsColors.jpg",
+   "alt": "",
+   "bytes": 63586
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/setWheelGeo.gif",
+   "alt": "",
+   "bytes": 126927
+  },
+  {
+   "t": "h4",
+   "text": "Seats"
+  },
+  {
+   "t": "p",
+   "text": "Seats Fk Controllers… Nothing Fancy again."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/seats.jpg",
+   "alt": "",
+   "bytes": 34989
+  },
+  {
+   "t": "h4",
+   "text": "Steering Wheel"
+  },
+  {
+   "t": "p",
+   "text": "The important part here is to make sure that the Wheel is oriented correctly since if is not animation department will hate you!"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/steeringwheels.jpg",
+   "alt": "",
+   "bytes": 15204
+  },
+  {
+   "t": "h4",
+   "text": "Auto Wheel"
+  },
+  {
+   "t": "p",
+   "text": "The template is already set up for you. Will make the desire Ctrl an auto rotation for the wheels, so when moving on the Z axis the wheels will rotate automatically."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/autoWheel.jpg",
+   "alt": "",
+   "bytes": 46686
+  },
+  {
+   "t": "h4",
+   "text": "Drift"
+  },
+  {
+   "t": "p",
+   "text": "Drift will create Dynamic Pivots on the Front and Back Chasis controllers, so animators can move the cars from where they need to. Nothing to change here."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/Drift.jpg",
+   "alt": "",
+   "bytes": 49123
+  },
+  {
+   "t": "h4",
+   "text": "Load Blocks"
+  },
+  {
+   "t": "p",
+   "text": "I don’t use them but they are in the template…"
+  },
+  {
+   "t": "h4",
+   "text": "Unselectable"
+  },
+  {
+   "t": "p",
+   "text": "Will make the ‘geo’ group unselectable and create some attributes to overwrite it."
+  },
+  {
+   "t": "h4",
+   "text": "Dinamic Scales"
+  },
+  {
+   "t": "p",
+   "text": "Will create 7 scale Controllers in case you need them"
+  },
+  {
+   "t": "h4",
+   "text": "Code Block"
+  },
+  {
+   "t": "p",
+   "text": "If you feel like a hacker you can use them to add custom scripts. This rig is going to be empty."
+  },
+  {
+   "t": "p",
+   "text": "You can code with Mel or python and can be as hardcoded as needed…"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/custom.jpg",
+   "alt": "",
+   "bytes": 39384
+  },
+  {
+   "t": "h4",
+   "text": "Change Colors"
+  },
+  {
+   "t": "p",
+   "text": "Will update some colors to match the desired look of some animator friends."
+  },
+  {
+   "t": "p",
+   "text": "The format is: ctrl:colorNot all colors are available, Just try the basic ones in case you feel artistic."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/colors.jpg",
+   "alt": "",
+   "bytes": 46680
+  },
+  {
+   "t": "h2",
+   "text": "Build"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/carBuild.gif",
+   "alt": "",
+   "bytes": 134773
+  },
+  {
+   "t": "h3",
+   "text": "Mirror Shapes"
+  },
+  {
+   "t": "p",
+   "text": "FOr updating the shapes just do it manually but only for the Left side, then you can just go to File > Mirror Ctrls and will mirror them for you"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/carMirrorShapes.jpg",
+   "alt": "",
+   "bytes": 89811
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/CtrlShapesCar.jpg",
+   "alt": "",
+   "bytes": 52828
+  },
+  {
+   "t": "h3",
+   "text": "Update Shapes"
+  },
+  {
+   "t": "p",
+   "text": "Feel free to change any colors or shapes using the Tools UI."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/carShapes.gif",
+   "alt": "",
+   "bytes": 175728
+  },
+  {
+   "t": "h2",
+   "text": "Skinning"
+  },
+  {
+   "t": "p",
+   "text": "Skinning is super easy since it’s hard parts only."
+  },
+  {
+   "t": "p",
+   "text": "You can find all the bind joints using the ending ‘*_Bnd’ or going to the Bind_Joints_Grp. If you feel overwhelmed by the amount just go from top to bottom on the outliner, always baby steps are the best way to finish something boring."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/BndjointsCar.jpg",
+   "alt": "",
+   "bytes": 21275
+  },
+  {
+   "t": "h3",
+   "text": "Wheel Input Order"
+  },
+  {
+   "t": "p",
+   "text": "For the wheel push to work, we may need to update the input orders to make the skinning compute first and then the lattice."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/PushWheel.gif",
+   "alt": "",
+   "bytes": 977106
+  },
+  {
+   "t": "h2",
+   "text": "Complete"
+  },
+  {
+   "t": "p",
+   "text": "Go to helpers UI an hit Complete so its cleaner and ready to use!"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/how-to-rig-a-car/CompleteCar.gif",
+   "alt": "",
+   "bytes": 105348
+  }
+ ],
+ "prop-rig": [
+  {
+   "t": "h2",
+   "text": "Simple Prop Rig"
+  },
+  {
+   "t": "p",
+   "text": "You can find the Model here"
+  },
+  {
+   "t": "p",
+   "text": "We are going to be using my tools but it’s a simple rig so you can try and replicate it with your knowledge. Mutant Tools"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/prop-rig/snsProp.gif",
+   "alt": "",
+   "bytes": 1813108
+  },
+  {
+   "t": "h2",
+   "text": "Prop Template"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/prop-rig/propTemplate.jpg",
+   "alt": "",
+   "bytes": 58683
+  },
+  {
+   "t": "p",
+   "text": "We need to use the poop template since we can rig any shit with it… its a joke and it’s funny…"
+  },
+  {
+   "t": "h2",
+   "text": "Blocks Explanations"
+  },
+  {
+   "t": "p",
+   "text": "Base A: Will create the Global, Mover controllers"
+  },
+  {
+   "t": "p",
+   "text": "Root: Will create a joint at 0, 0, 0"
+  },
+  {
+   "t": "p",
+   "text": "COG: Is the Center of Gravity Block, put it where the center of the object is, not always on the center of the object, can also be where the assets interact."
+  },
+  {
+   "t": "p",
+   "text": "ImportMt: doesnt do anything but it’s the import codes of Mutant so you can easily copy and paste them."
+  },
+  {
+   "t": "p",
+   "text": "Load BLocks, we don’t really use them since its easier from the UI"
+  },
+  {
+   "t": "p",
+   "text": "Unselectable: The geo needs to be in a group called geo for it to work. Will make geo not selectable and give you a couple of attributes to set it selectable again."
+  },
+  {
+   "t": "p",
+   "text": "Code Block is just there in case you feel like a hacker."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/prop-rig/propBlocks.jpg",
+   "alt": "",
+   "bytes": 39157
+  },
+  {
+   "t": "h2",
+   "text": "Build"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/prop-rig/propBuild.gif",
+   "alt": "",
+   "bytes": 100631
+  },
+  {
+   "t": "p",
+   "text": "With building, we just need to worry about the scale of the COG and Global but just scale the CV in case you forget."
+  },
+  {
+   "t": "h2",
+   "text": "Bind"
+  },
+  {
+   "t": "p",
+   "text": "COG_Bnd will be our bind joint!"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/prop-rig/skinProp.jpg",
+   "alt": "",
+   "bytes": 127738
+  },
+  {
+   "t": "h2",
+   "text": "Complete"
+  },
+  {
+   "t": "p",
+   "text": "Go to the Helpers UI and click complete! It will make the outliner and some attrs cleaner for the animation department."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/prop-rig/completePorp.jpg",
+   "alt": "",
+   "bytes": 28452
+  },
+  {
+   "t": "h2",
+   "text": "Bonus: Squash and Stretch"
+  },
+  {
+   "t": "p",
+   "text": "Let’s add a squash block and fill the UI, parent is ginbal COG ctrl and geo is the apple!"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/prop-rig/quash.jpg",
+   "alt": "",
+   "bytes": 86337
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/prop-rig/buildSelectedProp.gif",
+   "alt": "",
+   "bytes": 183534
+  },
+  {
+   "t": "p",
+   "text": "Move the Squash_Rig_Grp to match better the shape and you are done!"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/prop-rig/Squash_Rig_Grp.jpg",
+   "alt": "",
+   "bytes": 64793
+  }
+ ],
+ "rig-with-mocap-packs": [
+  {
+   "t": "h1",
+   "text": "How to Rig and add a Mocap pack!"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/LogoWhite2.png",
+   "alt": "",
+   "bytes": 43532
+  },
+  {
+   "t": "p",
+   "text": "We are going to be rigging with Mutant Tools since I developed it and know how easy it is but is the same basics to do it either manually or with other software."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/kisspng-mixamo-animation-reallusion-3d-computer-graphics-3-5bf9f2493ed4c1.1587865215431071452574.png",
+   "alt": "",
+   "bytes": 94930
+  },
+  {
+   "t": "p",
+   "text": "All the mocap, in this case, will be downloaded from Mixamo, as I understand the license is that we can use this mocap data when applied and modified for commercial projects, we can’t redistribute raw material… If this is not true please let me know and if you are a lawyer from Adobe: It was an accident, sorry, don’t sue me!"
+  },
+  {
+   "t": "h1",
+   "text": "Game Ready Rigging"
+  },
+  {
+   "t": "h2",
+   "text": "Model"
+  },
+  {
+   "t": "p",
+   "text": "I found this model online with a CC License so let’s use it! It’s a blend file but just download the software and export it as a .obj to use inside Maya. I know Blender is free, yada yada yada… Maya is just easier for me. Thanks…."
+  },
+  {
+   "t": "p",
+   "text": "“Long Body Cartoon Base” (https://skfb.ly/o6XsS) by IgorSan is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/)."
+  },
+  {
+   "t": "p",
+   "text": "Long Body Cartoon Base by IgorSan on Sketchfab"
+  },
+  {
+   "t": "h2",
+   "text": "Rig"
+  },
+  {
+   "t": "p",
+   "text": "If you want to learn how to rig using Mutant Tools is pretty simple but for this tutorial, I’ll just show all the processes in a rig since is not the main idea of the tutorial. For a tutorial please visit: MutantTools"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/riggingSpeed.gif",
+   "alt": "",
+   "bytes": 9014796
+  },
+  {
+   "t": "h2",
+   "text": "Skin"
+  },
+  {
+   "t": "p",
+   "text": "On the skinning part what we need to focus is in having only one chain to make it game ready, if you use the Mutant Game preset you will be using the *_Skl hierarchy joints instead of the ones in the bind grp."
+  },
+  {
+   "t": "p",
+   "text": "Just remember to check the maximum influence allowed on the engine of your choose."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/skl.jpg",
+   "alt": "",
+   "bytes": 52876
+  },
+  {
+   "t": "h3",
+   "text": "Skinning Tips"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/AssingClosest.jpg",
+   "alt": "",
+   "bytes": 28437
+  },
+  {
+   "t": "p",
+   "text": "Use Ng Skin Tools and start by clicking the assign from the closest joint. The idea is to paint hard first, then layer and smooth."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/HardSkin.jpg",
+   "alt": "",
+   "bytes": 53254
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/PressS.jpg",
+   "alt": "",
+   "bytes": 87243
+  },
+  {
+   "t": "p",
+   "text": "Press S with the Ng UI open and move the mouse over the desire influence to paint, this allows us to be able to paint the next joint without the need to select it on the main window. #SaveTime"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/RandomizeColors.jpg",
+   "alt": "",
+   "bytes": 56062
+  },
+  {
+   "t": "p",
+   "text": "Use randomized colors when painting near colors like yellow of light ones. is just easier to use the more contrast ones."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/NgSmooth.gif",
+   "alt": "",
+   "bytes": 800773
+  },
+  {
+   "t": "p",
+   "text": "When this kind of crashing happens the easy solution is to go and select the vertex with soft selection and add 0.1 to the desired joint until the volume is restored and then, just again with soft selection, smooth a bit and it’s going to look way better super fast!"
+  },
+  {
+   "t": "h2",
+   "text": "Human IK - Custom Mocap Setup"
+  },
+  {
+   "t": "p",
+   "text": "Requirements:"
+  },
+  {
+   "t": "li",
+   "text": "Perfect T Pose, A Pose is not allowed and if your character is in an A pose just create a group above FK SHoulder controllers and rotate it to be a T pose."
+  },
+  {
+   "t": "li",
+   "text": "FK Mode in Arms and legs. The mocap reads rotations and the Ik is mostly translations."
+  },
+  {
+   "t": "li",
+   "text": "Space switches in Arms, Legs, and Head in world rotation make it sometimes easy but not required. (This is Mutant Default so if you build don’t worry about it)"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/HIK.jpg",
+   "alt": "",
+   "bytes": 14871
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/createMap-1.jpg",
+   "alt": "",
+   "bytes": 20317
+  },
+  {
+   "t": "h3",
+   "text": "Rename the character"
+  },
+  {
+   "t": "p",
+   "text": "ALWAYS! RENAME! YOUR! STUFF!"
+  },
+  {
+   "t": "p",
+   "text": "In this case, I’m going to have 2 definitions so we will need the Mutant and the Mixamo one to be able to differentiate them."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/Rename.jpg",
+   "alt": "",
+   "bytes": 13892
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/newname.jpg",
+   "alt": "",
+   "bytes": 2127
+  },
+  {
+   "t": "h3",
+   "text": "Create Custom Rig Definition"
+  },
+  {
+   "t": "p",
+   "text": "This is pretty simple, just use the *_Skl Joints and go one by one assigning them in the UI, it right-clicks and left-clicks sometimes so just get to use it and notice that some joints are hidden in menus."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/CustomMaping.gif",
+   "alt": "",
+   "bytes": 2346121
+  },
+  {
+   "t": "h3",
+   "text": "Create Custom Rig Mapping"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/mapping.jpg",
+   "alt": "",
+   "bytes": 6472
+  },
+  {
+   "t": "p",
+   "text": "Let’s create a custom rig mapping, this is just telling Human Ik that we have already some custom controls for the joints. Again is super simple, just click ctrl, and click assign. This step and the previews one can be saved for later, so you can just do it once and load."
+  },
+  {
+   "t": "p",
+   "text": "This step is the part where we need everything in FK, including the spine. There are no hands or ball controllers so they need to be animated by hand. If you are having trouble see this video multiple times and grab the correct ctrl."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/ControlCustomMaping.gif",
+   "alt": "",
+   "bytes": 2852276
+  },
+  {
+   "t": "h2",
+   "text": "Downloading Mixamo Animations"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/mixamowalk.jpg",
+   "alt": "",
+   "bytes": 86026
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/donwloadwalk.jpg",
+   "alt": "",
+   "bytes": 17206
+  },
+  {
+   "t": "p",
+   "text": "Just look at what animation you want and download it, i usually use these settings but check with your animation department first."
+  },
+  {
+   "t": "h2",
+   "text": "Create Mixamo HIK Definition"
+  },
+  {
+   "t": "h3",
+   "text": "T Pose Mixamo Skeleton"
+  },
+  {
+   "t": "p",
+   "text": "Just import the FBX and go to frame -1, key all the skeletons to rotation to 0 and you are done!"
+  },
+  {
+   "t": "p",
+   "text": "(I just realized I recorded this gif on the wrong character, I don’t do these tutorials on one sit and I forgot this was not the one hehe, sorry but is the same thing. )"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/TPoseMixamo.gif",
+   "alt": "",
+   "bytes": 348915
+  },
+  {
+   "t": "h3",
+   "text": "Create Mixamo HIK Character"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/mixDefinition.jpg",
+   "alt": "",
+   "bytes": 15561
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/renameAgain.jpg",
+   "alt": "",
+   "bytes": 5242
+  },
+  {
+   "t": "p",
+   "text": "Go to Character None, create a new Custom Rig Mapping and create a new one, rename it and we should have both on the same scene."
+  },
+  {
+   "t": "h3",
+   "text": "Create Custom Rig Definition"
+  },
+  {
+   "t": "p",
+   "text": "Mixamo is pretty simple to setup since names matches pretty cool… Just select Any joint and load the HIK Preset"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/mixamoHIK.gif",
+   "alt": "",
+   "bytes": 204669
+  },
+  {
+   "t": "h2",
+   "text": "Mixamo Mocap > Custom Rig"
+  },
+  {
+   "t": "p",
+   "text": "Select the Custom Rig Character in this case called Mutant, and select the desired source, in this case, Mixamo. And Done! We still need to do a clean-up pass in the anim curves, and in case you need to debug an orientation you can adjust each ctrl rotation at the bottom of the UI."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/ApplyMocap.gif",
+   "alt": "",
+   "bytes": 305435
+  },
+  {
+   "t": "h3",
+   "text": "Debug HIK"
+  },
+  {
+   "t": "p",
+   "text": "If the orient is not working or you need to only apply rotations and not translations. For Mutant Rigs this mostly works on default but I had some issues with other systems where rotations are pretty bad, and trust me is a pain to debug. Select each ctrl and tweak it, have fun!"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/HandRotationFix.gif",
+   "alt": "",
+   "bytes": 1625023
+  },
+  {
+   "t": "h2",
+   "text": "Bake Animation"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/Bake.jpg",
+   "alt": "",
+   "bytes": 19498
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/TimeSlider.jpg",
+   "alt": "",
+   "bytes": 50921
+  },
+  {
+   "t": "p",
+   "text": "Bake the ANimation to the custom Rig, just make sure the time slider is with the correct frames."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/Delete.jpg",
+   "alt": "",
+   "bytes": 10012
+  },
+  {
+   "t": "p",
+   "text": "Now you should be able to delete all the definitions and the rig should be moving correctly. I recommend saving 2 versions, one with and one without the bake so you can drag a drom the .fbx and it will automatically update so it is faster to do multiples"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/EmptyHIK.jpg",
+   "alt": "",
+   "bytes": 17104
+  },
+  {
+   "t": "h2",
+   "text": "Export FBX"
+  },
+  {
+   "t": "p",
+   "text": "YOu can safely delete the mixamo animations, what we need to do now is to bake the skeleton joints, delete the constraints, and delete the rig, then export as fbx."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/BakeAndDelete.gif",
+   "alt": "",
+   "bytes": 1600494
+  },
+  {
+   "t": "p",
+   "text": "File > Export Selection and export the geo with the joints, just remember to include the animation with the correct frame numbers."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/exportfbx.jpg",
+   "alt": "",
+   "bytes": 61815
+  },
+  {
+   "t": "h2",
+   "text": "Import to Unreal"
+  },
+  {
+   "t": "p",
+   "text": "Just drag and drop to the viewport and test everything is working!"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/walking.gif",
+   "alt": "",
+   "bytes": 14447992
+  },
+  {
+   "t": "h2",
+   "text": "Quick Anim Fix"
+  },
+  {
+   "t": "p",
+   "text": "To be honest, I was hurrying to finish this and I didn’t check the anim and the feet are not touching the floor, this should have been fixed when the ctrls were still on but I’ll show you how to fix it pretty fast, and easy."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/rig-with-mocap-packs/FixFootIssue.gif",
+   "alt": "",
+   "bytes": 6182888
+  }
+ ],
+ "qt-designer-basics": [
+  {
+   "t": "h3",
+   "text": "Qt Designer Tutorial"
+  },
+  {
+   "t": "p",
+   "text": "In this tutorial, we are going to be creating a tool that creates cubes with custom names… how exciting!!"
+  },
+  {
+   "t": "p",
+   "text": "While there are various approaches to accomplishing the same task, I would like to share my preferred method – the one I typically employ in production work. It’s important to note that this isn’t the sole option available, and I encourage you to explore different techniques and enhance your skills throughout your journey. This approach has proven effective for me, but there’s always room for learning and improvement."
+  },
+  {
+   "t": "p",
+   "text": "Maya used to be shipped with a standalone version of qt designer but now it doesn’t anymore… I found this one online that seems to work."
+  },
+  {
+   "t": "h3",
+   "text": "Disclaimer"
+  },
+  {
+   "t": "p",
+   "text": "Some times the indentations in the Python code get fucked up by the website so keep that in mind when copy-pasting the code. At the end, you should be able to download the full code."
+  },
+  {
+   "t": "h2",
+   "text": "Initial Setup"
+  },
+  {
+   "t": "p",
+   "text": "Create a folder in your scripts path: C:\\Users\\NAME\\Documents\\maya\\202X\\scripts"
+  },
+  {
+   "t": "p",
+   "text": "And then create a file called __init__.py so we can import that folder into Maya. The file can be empty so don’t worry about it. Just test the import code if you are worried about it."
+  },
+  {
+   "t": "code",
+   "text": "\t\t\t\t\t# Find the scripts folder.\ncmds.internalVar(usd=True)\n# Result: 'C:/Users/Esteban/Documents/maya/2022/scripts/' #"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/init.jpg",
+   "alt": "",
+   "bytes": 46878
+  },
+  {
+   "t": "h2",
+   "text": "Qt Designer Widget"
+  },
+  {
+   "t": "p",
+   "text": "Create a Widget and save it into the same folder. In this tutorial, I’m going to be using the name main_widget but try to be more descriptive with your names in the actual tool you do."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/CreateWidget.jpg",
+   "alt": "",
+   "bytes": 28538
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/MainWidget.jpg",
+   "alt": "",
+   "bytes": 50326
+  },
+  {
+   "t": "p",
+   "text": "First, create a layout by dragging it into the UI, then click the main widget and lay it out in a grid so it frames and scales with the UI."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/01layout.jpg",
+   "alt": "",
+   "bytes": 65827
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/02frame.jpg",
+   "alt": "",
+   "bytes": 32135
+  },
+  {
+   "t": "p",
+   "text": "Then we add the line edit and the button."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/03line.jpg",
+   "alt": "",
+   "bytes": 36731
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/04button.jpg",
+   "alt": "",
+   "bytes": 43592
+  },
+  {
+   "t": "p",
+   "text": "Something pretty boring with complex UI but really important is: naming the widgets. It’s critical since that’s the name we are going to be using to connect to the custom commands. You can also make the buttons a bit bigger since we are getting old and hitting those small tiny little buttons is harder every day."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/05names.jpg",
+   "alt": "",
+   "bytes": 61245
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/06morenames.jpg",
+   "alt": "",
+   "bytes": 55419
+  },
+  {
+   "t": "p",
+   "text": "Resize it like a normal window and you are ready to go to Maya now! Feel free to add, remove, or change this UI at any time… just remember the names."
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/07reshape.jpg",
+   "alt": "",
+   "bytes": 8425
+  },
+  {
+   "t": "h2",
+   "text": "Loading the UI in Maya"
+  },
+  {
+   "t": "p",
+   "text": "This part may be confusing for some beginners, but I’ll do my best to explain it as simply as possible… My goal is that my mother should be able to create her first UI with this tutorial… so if you don’t understand something just feel free to copy-paste the code of each section and ask chat gpt…"
+  },
+  {
+   "t": "p",
+   "text": "Understanding the logic before creating something… I have this preset that I use that I want to explain part by part before adding anything crazy to it."
+  },
+  {
+   "t": "p",
+   "text": "The imports that we need explained by google and chat gpt."
+  },
+  {
+   "t": "p",
+   "text": "PySide 2 is a set of Python bindings for Qt, a popular cross-platform application development framework. Qt is widely used for developing graphical user interfaces (GUIs) and applications that are intended to be run on multiple platforms, such as Windows, Linux, and macOS. PySide 2 allows Python developers to utilize the features and capabilities of the Qt framework while writing their code in Python."
+  },
+  {
+   "t": "p",
+   "text": "Shiboken2 is a Python module that provides tools for working with the C++ library of Qt. It is part of the PySide2 package and is used to create Python bindings for Qt."
+  },
+  {
+   "t": "p",
+   "text": "The os module provides a way of interacting with the operating system, allowing you to perform tasks such as file and directory manipulation, environment variable access, and more."
+  },
+  {
+   "t": "p",
+   "text": "OpenMayaUI allows us to interact with native Maya API. Allowing us to use Maya as the parent for the UI Widget."
+  },
+  {
+   "t": "p",
+   "text": "cmds. is just maya cmds…"
+  },
+  {
+   "t": "code",
+   "text": "\t\t\t\t\tfrom PySide2 import QtUiTools, QtWidgets, QtGui, QtCore\nfrom shiboken2 import wrapInstance\nimport os\n\nimport maya.OpenMayaUI as omui\nfrom maya import cmds"
+  },
+  {
+   "t": "p",
+   "text": "We establish these constants at the beginning of the file so we can point to the UI path and set a title for the UI."
+  },
+  {
+   "t": "p",
+   "text": "FULL_PATH is just your scripts folder + folder name + ui name but in a good way… please don’t make my mistake and hardcode your paths when you are starting working with code…"
+  },
+  {
+   "t": "code",
+   "text": "TITLE = 'Tutorial'\nUI_FILE = 'main_widget.ui'\nFULL_PATH = os.path.join(cmds.internalVar(usd=True), 'ui_tutorial', UI_FILE)"
+  },
+  {
+   "t": "p",
+   "text": "Remember that I mentioned we will use Maya native UI as the parent for our widget? This is the way to get it… We just need to have this function so that when we set a parent for the UI we have one…"
+  },
+  {
+   "t": "code",
+   "text": "\t\t\t\t\tdef maya_main_window():\n     main_window_ptr = omui.MQtUtil.mainWindow()\n     return wrapInstance(int(main_window_ptr), QtWidgets.QWidget)"
+  },
+  {
+   "t": "p",
+   "text": "Using classes may seem hard at the beginning and I think learning them while creating UIs is the simpler way… for now just now a Class is like a function that can hold functions and they all are connected with ‘self’, whatever you see that have self. at the beginning is calling whatever have (self) in the function (class functions are called methods so I’ll continue using the work method for them.)"
+  },
+  {
+   "t": "p",
+   "text": "The class Tutorial_UI has the QtWidgets.QMainWindow as their inheritance. What that means is that it can do whatever the other one can… for now, just now it’s a necessary step for making the UI work."
+  },
+  {
+   "t": "p",
+   "text": "The init will have the parent=maya_main_window() function that we mentioned before"
+  },
+  {
+   "t": "p",
+   "text": "We will set the title"
+  },
+  {
+   "t": "p",
+   "text": "For the ones who don’t understand classes: Whenever you run a class it will run whatever is in the init. So in this case it will run init_ui, create_layout, and create_connections which are functions that need to exist. We can create them empty for now."
+  },
+  {
+   "t": "code",
+   "text": "\t\t\t\t\tclass Tutorial_UI(QtWidgets.QMainWindow)\n        def __init__(self, parent=maya_main_window()):\n            super(Tutorial_UI, self).__init__(parent)\n\n            self.setWindowTitle(TITLE)\n\n            self.init_ui()\n            self.create_layout()\n            self.create_connections()"
+  },
+  {
+   "t": "code",
+   "text": "\t\t\t\t\t def init_ui(self):\n        ''"
+  },
+  {
+   "t": "code",
+   "text": "\t\t\t\t\tdef create_layout(self):\n        ''"
+  },
+  {
+   "t": "code",
+   "text": "\t\t\t\t\tdef create_connections(self):\n        ''"
+  },
+  {
+   "t": "h2",
+   "text": "Loading the UI to Maya!"
+  },
+  {
+   "t": "p",
+   "text": "This is how we load the UI file that we created in Designer into Maya."
+  },
+  {
+   "t": "p",
+   "text": "We need to create a loader object based on QUiLoader, and Then we need to create a Qt File… is something you need to get used to but it can only work with qt objects so you need to create them for whatever you need, in this case, is a file but it also happens with icons or anything external."
+  },
+  {
+   "t": "p",
+   "text": "Then we qt read the file and we create the self.ui widget with the file data."
+  },
+  {
+   "t": "p",
+   "text": "Then we close the file."
+  },
+  {
+   "t": "p",
+   "text": "self.ui is the thing we needed! It will allow us to use anything by just typing self.ui.name_line for example. That is why renaming everything was super important in QT design."
+  },
+  {
+   "t": "p",
+   "text": "we can say self is the main window and self.ui is the designer widget."
+  },
+  {
+   "t": "code",
+   "text": "\t\t\t\t\t def init_ui(self):\n        # Load UI file\n        loader = QtUiTools.QUiLoader()\n        file = QtCore.QFile(FULL_PATH)\n        file.open(QtCore.QFile.ReadOnly)\n        self.ui = loader.load(file, parentWidget=self)\n        file.close()"
+  },
+  {
+   "t": "h2",
+   "text": "Testing the Window..."
+  },
+  {
+   "t": "p",
+   "text": "With the init_ui method created and running we should be able to see the UI in Maya, if you are using the script editor you can just run everything with this code at the end to create the UI."
+  },
+  {
+   "t": "p",
+   "text": "The Ui is a class, so we need to create an object for it. The object is just the same thing but with a custom name instead of self. So object = Class(), then just object.show(), object.close(), etc."
+  },
+  {
+   "t": "code",
+   "text": "\t\t\t\t\tif __name__ == \"__main__\":\n     try:\n       cTutorial_UI.close()\n       cTutorial_UI.deleteLater()\n     except Exception as e:\n         print(\"An error occurred: {}\".format(e))\n\n        cTutorial_UI = Tutorial_UI()\n        cTutorial_UI.show()"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/windowappears.jpg",
+   "alt": "",
+   "bytes": 69674
+  },
+  {
+   "t": "h2",
+   "text": "Creating the layout"
+  },
+  {
+   "t": "p",
+   "text": "For this UI ill probably won’t add anything to the create layout but to give an example we will add a tooltip and a placeholder text."
+  },
+  {
+   "t": "p",
+   "text": "This part will run before creating the connections and I usually use it mostly to add icons and make it more beautiful but feel free to use it for whatever you need!"
+  },
+  {
+   "t": "h3",
+   "text": "Possibilities"
+  },
+  {
+   "t": "p",
+   "text": "To be able to know what you can do just google pyqt + widget name, the first link will be the documentation for that specific widget… there is a lot but everything is pretty explicit and you will understand it fast enough"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/pyqtsearch.jpg",
+   "alt": "",
+   "bytes": 19411
+  },
+  {
+   "t": "p",
+   "text": "Keeping up with technologies you can also use chat gpt and to be fare i don’t really recommend it for beginners but i use it a lot for the stuff i tent to forget like this examples:"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/chatgpt1.jpg",
+   "alt": "",
+   "bytes": 40354
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/chatgpt2.jpg",
+   "alt": "",
+   "bytes": 77690
+  },
+  {
+   "t": "h3",
+   "text": "Tooltip and Placeholder text"
+  },
+  {
+   "t": "p",
+   "text": "We can see that the chat gave us a lot of crap code that we don’t need and thats why I don’t recommend it for beginners. We only need the cirle parts of the code."
+  },
+  {
+   "t": "p",
+   "text": "We will just use self.ui to create the desire result instead of finding the widgets."
+  },
+  {
+   "t": "p",
+   "text": "self.ui.name_line.setPlaceholderText(‘Cube Name’) will work for the line edit and self.ui.create_cube_button.setToolTip(‘Will create a cube’) for the button."
+  },
+  {
+   "t": "code",
+   "text": "\t\t\t\t\tdef create_layout(self):\n        self.ui.name_line.setPlaceholderText('Cube Name')\n        self.ui.create_cube_button.setToolTip('Will create a cube')"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/placeholdertooltip.jpg",
+   "alt": "",
+   "bytes": 6132
+  },
+  {
+   "t": "h2",
+   "text": "Making the create cube function"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/createMethod.jpg",
+   "alt": "",
+   "bytes": 67973
+  },
+  {
+   "t": "p",
+   "text": "We will create a new method on the class, again just like creating a function inside but with self so we can use it as part of the UI."
+  },
+  {
+   "t": "code",
+   "text": "\t\t\t\t\tdef create_cube(self):\n        name_text = self.ui.name_line.text()\n        cube = cmds.polyCube(name=name_text)\n        return cube"
+  },
+  {
+   "t": "p",
+   "text": "Pretty simple… we just need to grab the name and this is the way. we just call the self.ui > name_line > text().. We are just asking for the text on it and that is it!"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/lineEditDocs.jpg",
+   "alt": "",
+   "bytes": 4424
+  },
+  {
+   "t": "h2",
+   "text": "Conecting the button"
+  },
+  {
+   "t": "code",
+   "text": "\t\t\t\t\tdef create_connections(self):\n        self.ui.create_cube_button.clicked.connect(self.create_cube)"
+  },
+  {
+   "t": "p",
+   "text": "Connecting the button is pretty straightforward also."
+  },
+  {
+   "t": "p",
+   "text": "self.ui > create_cube_button > clicked > connect > (self.create_cube)We grab the ui, we find the button, and we tell the button that whenever get clicks it does something, in this case, create the cube."
+  },
+  {
+   "t": "h2",
+   "text": "Done!"
+  },
+  {
+   "t": "img",
+   "src": "assets/img/tut/qt-designer-basics/createCube.gif",
+   "alt": "",
+   "bytes": 169137
+  }
+ ]
+}
