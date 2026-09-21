@@ -65,7 +65,7 @@ CREDITS = [
 ]
 
 STUDIES = [
- dict(year="2026 — NOW", title="Máster en Diseño Web Multidispositivo: UX/UI",
+ dict(year="2026 — 2027", title="Máster en Diseño Web Multidispositivo: UX/UI",
       school="ESDESIGN · Escuela Superior de Diseño de Barcelona",
       url="https://www.esdesignbarcelona.es/",
       note="Interface and experience design. The reason this site exists — riggers ship UIs every day and most of us never studied one.",
