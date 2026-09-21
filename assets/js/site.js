@@ -1,9 +1,7 @@
-
 (function () {
 'use strict';
 var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var saveData = navigator.connection && navigator.connection.saveData;
-
 var reveals = document.querySelectorAll('.reveal');
 if (reduced || !('IntersectionObserver' in window)) {
 Array.prototype.forEach.call(reveals, function (el) { el.classList.add('is-in'); });
@@ -17,7 +15,6 @@ io.unobserve(e.target);
 }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
 Array.prototype.forEach.call(reveals, function (el) { io.observe(el); });
 }
-
 var spies = document.querySelectorAll('[data-spy]');
 var sections = [];
 Array.prototype.forEach.call(spies, function (a) {
@@ -34,7 +31,6 @@ if (sections.length) {
 spy();
 window.addEventListener('scroll', function () { window.requestAnimationFrame(spy); }, { passive: true });
 }
-
 var galleries = document.querySelectorAll('[data-gallery]');
 function embedSrc(id, sound) {
 return 'https://www.youtube-nocookie.com/embed/' + id + '?' + [
@@ -88,6 +84,14 @@ if (inView && !reduced && !saveData) mount(slides[i], false);
 Array.prototype.forEach.call(dots, function (d, i) {
 d.addEventListener('click', function () { select(i); });
 });
+function step(dir) {
+var cur = Array.prototype.indexOf.call(slides, active());
+select((cur + dir + slides.length) % slides.length);
+}
+var prev = gal.querySelector('[data-prev]');
+var next = gal.querySelector('[data-next]');
+if (prev) prev.addEventListener('click', function () { step(-1); });
+if (next) next.addEventListener('click', function () { step(1); });
 if (slides.length > 1) {
 var sx = 0, sy = 0, tracking = false;
 gal.addEventListener('touchstart', function (e) {
@@ -127,7 +131,6 @@ var btn = ev.target.closest ? ev.target.closest('.media__sound') : null;
 if (!btn) return;
 mount(btn.closest('.media'), true);
 });
-
 document.addEventListener('click', function (ev) {
 var btn = ev.target.closest ? ev.target.closest('.wf-gif') : null;
 if (!btn || btn.classList.contains('is-playing')) return;
@@ -143,7 +146,6 @@ btn.classList.add('is-playing');
 };
 full.src = src;
 });
-
 var clips = document.querySelectorAll('video[data-autoplay]');
 if (clips.length && 'IntersectionObserver' in window) {
 var cio = new IntersectionObserver(function (entries) {
@@ -160,7 +162,6 @@ v.pause();
 }, { rootMargin: '200px 0px', threshold: 0.25 });
 Array.prototype.forEach.call(clips, function (v) { cio.observe(v); });
 }
-
 document.addEventListener('click', function (ev) {
 var b = ev.target.closest ? ev.target.closest('[data-mail]') : null;
 if (!b) return;
@@ -175,7 +176,6 @@ b.title = b.getAttribute('data-u') + String.fromCharCode(64) + b.getAttribute('d
 b.addEventListener('mouseenter', show);
 b.addEventListener('focus', show);
 });
-
 var coarse = window.matchMedia('(pointer: coarse)').matches;
 if (reduced || coarse) return;
 var STEP = 26;        // px of travel between bones
