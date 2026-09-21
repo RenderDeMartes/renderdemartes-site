@@ -3,6 +3,7 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/renderdem/public_html/
     - /bin/cp -R index.html 404.html robots.txt sitemap.xml .htaccess $DEPLOYPATH
+    - /bin/cp -R google693ef86f823ca3aa.html $DEPLOYPATH
     - /bin/cp -R assets academic downloads $DEPLOYPATH
     - /bin/cp -R creature-rigging face-rig-study how-to-rig-a-car prop-rig $DEPLOYPATH
     - /bin/cp -R rig-with-mocap-packs qt-designer-basics $DEPLOYPATH
