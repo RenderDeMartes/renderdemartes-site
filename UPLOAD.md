@@ -49,8 +49,8 @@ Do not upload `UPLOAD.md`, `.git/` or `.claude/` — working files.
 
 The five landing pages are **deliberately not in the menu**. They exist to be found in search, they
 cross-link to each other so they are not orphans, and each closes with a contact call to action.
-All five are in `sitemap.xml` — submit that in Google Search Console, or nothing gets crawled for
-weeks.
+All five are in `sitemap.xml`, submitted in Google Search Console on 2026-09-21 (13 URLs, status
+*Correcto*).
 
 The CV shows **Superneat, The Coalition, Stellar Creative Lab, Scanline VFX and Bardel**, plus
 Bluetape Rigging as the freelance band. Everything older points at LinkedIn instead of living here.
@@ -127,8 +127,14 @@ Then open http://localhost:8791.
 pages (session scratchpad). `optimize.py` runs **last** — it rewrites images to WebP, minifies, and
 stamps the cache-busting hashes. Editing the HTML by hand is fine too; it is plain static markup.
 
+## Search Console
+
+URL-prefix property `https://renderdemartes.com/`, verified 2026-09-21 by the HTML file
+`google693ef86f823ca3aa.html` at the site root. **Do not delete that file** — Google rechecks it
+periodically and drops the property if it disappears. It is listed in `.cpanel.yml`, so every
+deploy re-copies it. `mutanttools.com` is a second property using the same per-account token.
+
 ## Still open
 
 - Confirm the UX/UI master's official name and start date (`/academic/` currently says
   "Master in UX/UI Design, ESDESIGN, 2026 — now").
-- Submit `sitemap.xml` in Google Search Console.
