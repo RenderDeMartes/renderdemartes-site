@@ -1,12 +1,29 @@
 ---
+# Task order matters. cPanel's deployment runs these in sequence and a run that
+# does not finish simply stops, leaving the remaining tasks unapplied - silently,
+# with "deployment complete" still reported. That happened on 2026-09-21: the
+# heavy assets copy sat third and everything after it stopped running, so page
+# edits never reached the server while index.html and /academic/ updated fine.
+#
+# So: text first, bulk last. HTML is what changes on almost every deploy and it
+# is tiny. assets/ and downloads/ are ~30 MB and change rarely, and re-copying
+# them is what costs the time.
+#
+# After a deploy, check Last-Modified on a page from the final task, not just the
+# homepage:
+#   curl -sI https://renderdemartes.com/rigging-outsourcing-for-studios/ | grep -i last-modified
 deployment:
   tasks:
     - export DEPLOYPATH=/home/renderdem/public_html/
+    # --- text: small, changes constantly -------------------------------------
     - /bin/cp -R index.html 404.html robots.txt sitemap.xml .htaccess $DEPLOYPATH
     - /bin/cp -R google693ef86f823ca3aa.html $DEPLOYPATH
-    - /bin/cp -R assets academic downloads $DEPLOYPATH
+    - /bin/cp -R academic $DEPLOYPATH
     - /bin/cp -R creature-rigging face-rig-study how-to-rig-a-car prop-rig $DEPLOYPATH
     - /bin/cp -R rig-with-mocap-packs qt-designer-basics $DEPLOYPATH
     - /bin/cp -R hire-a-freelance-character-rigger maya-rigging-services $DEPLOYPATH
     - /bin/cp -R unreal-engine-character-rigging facial-rigging-services $DEPLOYPATH
     - /bin/cp -R rigging-outsourcing-for-studios $DEPLOYPATH
+    # --- bulk: large, changes rarely -----------------------------------------
+    - /bin/cp -R assets $DEPLOYPATH
+    - /bin/cp -R downloads $DEPLOYPATH
