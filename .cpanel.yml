@@ -26,4 +26,5 @@ deployment:
     - /bin/cp -R rigging-outsourcing-for-studios $DEPLOYPATH
     # --- bulk: large, changes rarely -----------------------------------------
     - /bin/cp -R assets $DEPLOYPATH
-    - /bin/cp -R downloads $DEPLOYPATH
+    # downloads/*.zip are git-ignored and live only on the server (uploaded by hand),
+    # so there is nothing to copy; a cp here failed every deploy.
