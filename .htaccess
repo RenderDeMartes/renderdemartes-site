@@ -33,6 +33,11 @@ ErrorDocument 404 /404.html
   RewriteRule ^(blog|hire|workflows|contact)(/.*)?$ / [R=301,L]
   RewriteCond %{HTTP_HOST} ^(www\.)?renderdemartes\.com$ [NC]
   RewriteRule ^cv/?$ / [R=301,L]
+  # old WordPress leftovers Search Console still crawls
+  RewriteRule ^(comments/)?feed(/.*)?$ / [R=301,L]
+  RewriteRule ^page/\d+/?$ / [R=301,L]
+  RewriteRule ^\d+/?$ / [R=301,L]
+  RewriteRule ^\*/?$ / [R=301,L]
 
   # trailing slash on directory URLs, so /cv and /cv/ do not split ranking
   RewriteCond %{REQUEST_FILENAME} !-f
