@@ -252,4 +252,30 @@ if (i > -1) live.splice(i, 1);
 if (b.parentNode) b.parentNode.removeChild(b);
 }, LIFE + 60);
 }
+var heroBg = document.querySelector('[data-yt-bg]');
+if (heroBg && !reduced && !saveData) {
+var bgFrame = null;
+var mountBg = function () {
+var id = heroBg.getAttribute('data-yt-bg');
+bgFrame = document.createElement('iframe');
+bgFrame.src = embedSrc(id, false) + '&enablejsapi=1&origin=' + encodeURIComponent(location.origin);
+bgFrame.title = 'Rigging reel — background';
+bgFrame.tabIndex = -1;
+bgFrame.allow = 'autoplay; encrypted-media';
+bgFrame.addEventListener('load', function () {
+setTimeout(function () { heroBg.classList.add('is-on'); }, 2200);
+});
+heroBg.appendChild(bgFrame);
+};
+if (document.readyState === 'complete') mountBg();
+else window.addEventListener('load', mountBg);
+if ('IntersectionObserver' in window) {
+new IntersectionObserver(function (entries) {
+if (!bgFrame || !bgFrame.contentWindow) return;
+bgFrame.contentWindow.postMessage(JSON.stringify({
+event: 'command', func: entries[0].isIntersecting ? 'playVideo' : 'pauseVideo', args: []
+}), '*');
+}).observe(heroBg);
+}
+}
 })();
