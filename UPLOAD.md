@@ -45,6 +45,7 @@ Do not upload `UPLOAD.md`, `.git/` or `.claude/` — working files.
 | `/rigging-outsourcing-for-studios/` | SEO landing — studios and crews |
 | `/creature-rigging/` · `/face-rig-study/` · `/how-to-rig-a-car/` | Workflow write-ups, original URLs kept |
 | `/prop-rig/` · `/rig-with-mocap-packs/` · `/qt-designer-basics/` | Workflow write-ups |
+| `/ai-rigging-with-mutant-tools/` | Workflow write-up, **written by hand** — the orc rigged by Claude with the Zombinator and Meta Mutant |
 | `/downloads/` | `mutantbot.zip`, `ui_tutorial.zip` — the old upload URLs 301 here |
 
 The five landing pages are **deliberately not in the menu**. They exist to be found in search, they
@@ -104,6 +105,12 @@ working. Text and images were extracted from the WordPress archive automatically
 They carry about 94 MB of GIFs. Anything over 1.5 MB ships as a **first-frame poster with a
 click-to-play button** — the page shows a badge (`GIF · 13.8 MB · CLICK TO PLAY`) and only fetches
 the animation when someone asks for it. Smaller GIFs load inline, lazily.
+
+`/ai-rigging-with-mutant-tools/` is the seventh one and the only one **not** generated: edit
+`ai-rigging-with-mutant-tools/index.html` directly. `tut.py` lists it in `HAND_WRITTEN`, so a
+regeneration keeps it in the numbering, the cards and the sitemap without overwriting it. Its media
+is in `assets/img/tut/ai-rigging-with-mutant-tools/` (already WebP and H.264). A new top-level
+folder only deploys if it has its own line in `.cpanel.yml` — this one does.
 
 ## The WordPress backup
 

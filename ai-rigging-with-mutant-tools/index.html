@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Rigging an Orc in Maya — Zombinator &amp; Meta Mutant | Render de Martes</title>
+<meta name="description" content="A purchased orc model rigged end to end by Claude driving Maya: body from the Mutant Tools Zombinator, MetaHuman face from Meta Mutant, tested on dynamic poses, expressions and a face performance from video.">
+<link rel="canonical" href="https://renderdemartes.com/ai-rigging-with-mutant-tools/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI Rigging an Orc in Maya — Zombinator &amp; Meta Mutant | Render de Martes">
+<meta property="og:description" content="A purchased orc model rigged end to end by Claude driving Maya: body from the Mutant Tools Zombinator, MetaHuman face from Meta Mutant, tested on dynamic poses, expressions and a face performance from video.">
+<meta property="og:url" content="https://renderdemartes.com/ai-rigging-with-mutant-tools/">
+<meta property="og:image" content="https://renderdemartes.com/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Esteban Rodriguez - technical artist, rigging and Python">
+<meta property="og:site_name" content="Render de Martes">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/space-grotesk-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/jetbrains-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css?v=7f36f3b8">
+<link rel="stylesheet" href="/assets/css/site.css?v=8be7aee8">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/", "jobTitle": "Technical Artist — Rigging & Python", "description": "Character rigger and rigging tools developer. Maya, Unreal, Unity. Creator of Mutant Tools.", "address": {"@type": "PostalAddress", "addressLocality": "Vancouver", "addressRegion": "BC", "addressCountry": "CA"}, "sameAs": ["https://www.linkedin.com/in/esteban-rodriguez-488a68147/", "https://www.youtube.com/@renderdemartes6049", "https://mutanttools.com/"], "knowsAbout": ["Character rigging", "Autodesk Maya", "Unreal Engine", "Python", "Facial rigging", "Pipeline tools"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "AI rigging an orc with Mutant Tools", "description": "A purchased orc model rigged end to end by Claude driving Maya: body from the Mutant Tools Zombinator, MetaHuman face from Meta Mutant, tested on dynamic poses, expressions and a face performance from video.", "url": "https://renderdemartes.com/ai-rigging-with-mutant-tools/", "author": {"@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/"}, "step": [{"@type": "HowToStep", "name": "The idea"}, {"@type": "HowToStep", "name": "The model"}, {"@type": "HowToStep", "name": "Wrap the body"}, {"@type": "HowToStep", "name": "Guides, build and skin"}, {"@type": "HowToStep", "name": "Test the body"}, {"@type": "HowToStep", "name": "Meta Mutant: wrap the head"}, {"@type": "HowToStep", "name": "The face on the body rig"}, {"@type": "HowToStep", "name": "Expressions"}, {"@type": "HowToStep", "name": "The face board, control by control"}, {"@type": "HowToStep", "name": "Face from video"}, {"@type": "HowToStep", "name": "Still open"}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="nav__mark" href="/">
+    <img class="nav__logo" src="/assets/img/logo-mark.webp" srcset="/assets/img/logo-mark@2x.webp 2x" width="66" height="96" alt="" decoding="async">
+    <span class="hide-sm">RENDER&nbsp;&nbsp;DE&nbsp;&nbsp;MARTES</span><span class="only-sm">RDM</span>
+  </a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="/">CV</a>
+    <a href="/academic/">ACADEMIC</a>
+    <a href="https://mutanttools.com/" target="_blank" rel="noopener"><span class="hide-sm">MUTANT </span>TOOLS <span aria-hidden="true">↗</span></a>
+  </nav>
+</header>
+<main id="main">
+  <article class="wf">
+    <header class="wf__head">
+      <p class="section__kicker">W O R K F L O W &nbsp; · &nbsp; 07 &nbsp; O F &nbsp; 07</p>
+      <h1 class="wf__h1">AI rigging an orc with Mutant Tools</h1>
+      <p class="wf__lede">A purchased orc with no joints, rigged end to end by Claude driving Maya through scripts. The body comes from the Zombinator, the face from Meta Mutant, and the rig is then tested on dynamic poses, expressions and a face performance taken from a video.</p>
+      <ul class="chips"><li>MAYA</li><li>MUTANT TOOLS</li><li>ZOMBINATOR</li><li>META MUTANT</li><li>CLAUDE</li></ul>
+    </header>
+
+    <div class="wf__body">
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/hero.webp" alt="Four dynamic full-body poses of the orc and four close-ups of his face" width="1400" height="665" decoding="async"><figcaption>Body and face on one rig.</figcaption></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">01</span>The idea</h2>
+      <p class="wf-p">Nobody paints weights or sculpts shapes here. Both halves of the rig are borrowed from a human that is already rigged.</p>
+      <p class="wf-li">Body: the Zombinator base mesh, with its guides and skin weights.</p>
+      <p class="wf-li">Face: a MetaHuman head, with its joints, corrective shapes and control board.</p>
+      <p class="wf-p">In both cases the carrier is a wrap: the human mesh reshaped until it lies on the orc. Guides, weights, joints and shapes all ride on that mesh, so a sloppy wrap gives a sloppy rig. Most of the work is getting the two wraps right, and then proving the result.</p>
+      <p class="wf-p">Claude wrote and ran every step as a Python script in Maya, rendered the result, looked at it and measured it before moving on.</p>
+      <h2 class="wf-h2"><span class="wf-h2__n">02</span>The model</h2>
+      <p class="wf-p">The model is Orc Gralnok, bought on CGTrader: six meshes in an A-pose, no joints and no textures. The import removes the keyed transforms, names the meshes and gives them flat colours.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/model.webp" alt="The orc model from the front, three-quarter, back, and a close-up of the face" width="1400" height="427" loading="lazy" decoding="async"></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">03</span>Wrap the body</h2>
+      <p class="wf-p">TopoTransfer fits the Zombinator base mesh onto the orc. It needs pairs of matching points on both characters, and on a body this far from a human those pairs decide everything.</p>
+      <p class="wf-li">Limbs: from the same spot along a bone on both characters, rays go out to the skin. Each hit is one pair. A ray that leaves the limb and lands on the trunk is dropped.</p>
+      <p class="wf-li">Trunk: nipples, navel, sternal notch and the pec line, picked by eye. The orc’s ribcage is much longer than a human’s, so rings at spine-joint heights put the belly on his pecs.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/body-wrap.webp" alt="Wrapped base mesh with folds under the chest, next to the clean wrap" width="1400" height="374" loading="lazy" decoding="async"><figcaption>Left: rays crossing the trunk. Right: checked rays and anatomical landmarks.</figcaption></figure>
+      <p class="wf-p">Then relax and project. Each vertex slides along the orc’s skin towards the middle of its neighbours and snaps back onto the surface. That spreads the mesh evenly, so the borrowed weights land on the right muscles.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/body-relax.webp" alt="Weight maps on the wrapped mesh before and after relaxing" width="1400" height="350" loading="lazy" decoding="async"><figcaption>The Zombinator’s weights on the wrap, before and after relaxing. After, the arm’s weight climbs the deltoid.</figcaption></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">04</span>Guides, build and skin</h2>
+      <p class="wf-p">The guides come with the wrap. Each limb guide is checked against where it sits in the human mesh, not where it looks tidy: a borrowed skin wants the pivot it was painted for. The elbow had to move 4.5 cm.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/guides.webp" alt="Guides shown as spheres and bones inside the see-through body" width="1400" height="410" loading="lazy" decoding="async"><figcaption>Guides inside the body. The left side is placed; the build mirrors it.</figcaption></figure>
+      <p class="wf-p">The Auto Rigger builds the Human Body Template, and the weights are copied from the wrapped mesh to the orc. Two things the copy cannot do on its own:</p>
+      <h3 class="wf-h3">Shoulders</h3>
+      <p class="wf-p">The top of the deltoid still belonged to the clavicle. A vertex selection around the shoulder joint moves most of that weight to the shoulder and fades out towards the neck. With the arms up, crushed triangles went from 59 to 2.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/shoulder.webp" alt="Shoulder weight map and three arm poses, before and after" width="1400" height="700" loading="lazy" decoding="async"><figcaption>Top: the raw copied skin. Bottom: relaxed wrap plus the deltoid selection.</figcaption></figure>
+      <h3 class="wf-h3">Twists</h3>
+      <p class="wf-p">Limbs use dual quaternion skinning where the twist joints carry them, and the twist weights are an even ramp along the bone. A forearm twisted 85° keeps its full thickness, where linear skinning shrank it to 89.5 %.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/twist.webp" alt="Twist joint weights along the arm before and after" width="1400" height="700" loading="lazy" decoding="async"><figcaption>Twist weights. Before: uneven bands. After: one even ring per joint.</figcaption></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">05</span>Test the body</h2>
+      <p class="wf-p">First a range of motion: 29 single-joint poses, each measured for volume and crushed triangles.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/range-of-motion.webp" alt="Twenty test poses of the body rig" width="1400" height="1120" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">Then eight dynamic poses, the way an animator would push the rig. Each is built on one line of action, and the camera is the view where the silhouette reads best. Planted feet stay on the floor and fists close with the thumb wrapped.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/dynamic-poses.webp" alt="Eight dynamic poses of the orc, each above its black silhouette" width="1400" height="1400" loading="lazy" decoding="async"><figcaption>The eight poses, each above its silhouette.</figcaption></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/hands.webp" alt="Close-ups of a fist, a pointing hand, an open claw hand and the kicking foot" width="1400" height="350" loading="lazy" decoding="async"><figcaption>A fist, a pointing hand, an open claw, the kicking foot.</figcaption></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">06</span>Meta Mutant: wrap the head</h2>
+      <p class="wf-p">Meta Mutant reshapes a MetaHuman head to yours and builds the face rig from it. Same rule as the body: the rig is only as good as that wrap.</p>
+      <p class="wf-p">30 points and six lines along the lips and eyelids are picked on both heads. TopoTransfer runs four passes, then the skin is relaxed and projected onto the orc.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/head-wrap.webp" alt="MetaHuman head with picked points, the orc head with the same points, the head after TopoTransfer and after relax and project" width="1400" height="350" loading="lazy" decoding="async"><figcaption>The picks on the MetaHuman, the same points on the orc, after TopoTransfer, after relax and project.</figcaption></figure>
+      <p class="wf-p">Three places need their own rule:</p>
+      <p class="wf-li">Eyes: the orc’s lid edge is buried inside the eyeball, so the lid margin is walked out to the line where lid and eye really meet.</p>
+      <p class="wf-li">Mouth: he has an underbite, so the inner lips are walked onto his own, upper on upper and lower on lower.</p>
+      <p class="wf-li">Nostrils and ears: they start as a membrane across the opening and then go onto the skin, so nothing is left as a flap.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/head-compare.webp" alt="Eye, mouth, nose and ear close-ups: after TopoTransfer, after relax and project, and the orc itself" width="1400" height="1050" loading="lazy" decoding="async"><figcaption>Top: TopoTransfer alone. Middle: after relax and project. Bottom: the orc.</figcaption></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">07</span>The face on the body rig</h2>
+      <p class="wf-p">Apply builds 843 facial joints, the MetaHuman control board and 739 corrective shapes. Weights and shapes then move onto the body mesh, with no seam at the neck.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/face-board.webp" alt="The orc head with its facial joints, and the MetaHuman face board" width="1400" height="700" loading="lazy" decoding="async"></figure>
+      <p class="wf-p">A human face knows nothing about gums, tusks or an orc’s eyes. Three guards are stored on the rig as measured fixes; no geometry is edited.</p>
+      <p class="wf-li">Teeth guard: gums and teeth that come through the lip are set back.</p>
+      <p class="wf-li">Tusk guard: the lower lip stays in front of the tusk roots, the upper lip behind the tusks.</p>
+      <p class="wf-li">Eye guard: the lids stay on the eyeball in blinks, squints and frowns.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/teeth-guard.webp" alt="Smile and grin before and after the teeth guard" width="1400" height="250" loading="lazy" decoding="async"><figcaption>Teeth guard, before and after.</figcaption></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/eye-guard.webp" alt="Squint and angry eye before and after the eye guard" width="1400" height="350" loading="lazy" decoding="async"><figcaption>Eye guard, before and after.</figcaption></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">08</span>Expressions</h2>
+      <p class="wf-p">A set of expressions keyed on the board controls, eased into each other.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/expressions.webp" alt="Twelve facial expressions of the orc" width="1400" height="1050" loading="lazy" decoding="async"></figure>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/ai-rigging-with-mutant-tools/expressions-loop.poster.webp" width="560" height="560" muted loop playsinline preload="none" data-autoplay aria-label="Loop through the orc’s expressions"><source src="/assets/img/tut/ai-rigging-with-mutant-tools/expressions-loop.mp4" type="video/mp4"></video></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">09</span>The face board, control by control</h2>
+      <p class="wf-p">Every board control is taken to each end of its range and measured against the neutral face. 149 of 156 control ends move something. Each tile is one control at one end.</p>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/board-brow-eye.webp" alt="Brow and eye controls of the face board, one tile per control end" width="1398" height="1165" loading="lazy" decoding="async"><figcaption>Brows and eyes.</figcaption></figure>
+      <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/board-mouth.webp" alt="Mouth controls of the face board, one tile per control end" width="1398" height="2796" loading="lazy" decoding="async"><figcaption>Mouth: corners, lips, cheeks.</figcaption></figure>
+      <p class="wf-li">Worth knowing: the nose wrinkle is the nose control moved up. nose_wrinkleUpper does nothing alone and only adds on top of it.</p>
+      <h2 class="wf-h2"><span class="wf-h2__n">10</span>Face from video</h2>
+      <p class="wf-p">The reference is a video of a man making faces at the camera (Ketut Subiyanto on Pexels). MediaPipe reads 52 face weights per frame, and they map almost one to one onto the board.</p>
+      <p class="wf-p">The capture underplays, so each weight is rescaled to the performer’s own range in the clip.</p>
+      <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/ai-rigging-with-mutant-tools/face-video.poster.webp" width="960" height="480" muted loop playsinline preload="none" data-autoplay aria-label="The reference video on the left and the orc’s face driven by it on the right"><source src="/assets/img/tut/ai-rigging-with-mutant-tools/face-video.mp4" type="video/mp4"></video><figcaption>Reference and orc, frame for frame.</figcaption></figure>
+      <h2 class="wf-h2"><span class="wf-h2__n">11</span>Still open</h2>
+      <p class="wf-li">In the full angry face a speck of the eye shows under the lower lid.</p>
+      <p class="wf-li">The mouth control pushed fully sideways leaves the tusks behind.</p>
+      <p class="wf-li">The ear has a seam where the rim meets the head.</p>
+      <p class="wf-li">Side bends crease at the waist.</p>
+      <p class="wf-li">Not done yet: body mocap, Unreal export and a simulated loincloth.</p>
+      <h3 class="wf-h3">Credits</h3>
+      <p class="wf-li">Model: Orc Gralnok, CGTrader. Rig: Mutant Tools (Zombinator and Meta Mutant) in Maya 2026, MetaHuman DNA under Epic’s licence. Wrap: TopoTransfer. Reference video: Ketut Subiyanto on Pexels.</p>
+    </div>
+
+    <section class="found found--wf">
+      <p class="found__kicker">B U I L T &nbsp; T H I S &nbsp; W A Y &nbsp; F O R &nbsp; Y O U ?</p>
+      <h2 class="found__title">I do this on shows, not just on my own time.</h2>
+      <p class="found__note">Every workflow on this site is the one I use in production. If you want it applied to your characters instead of read about, that is the job.</p>
+      <p class="found__row">
+        <a class="btn" href="https://bluetaperigging.com/" target="_blank" rel="noopener">HIRE BLUETAPE RIGGING <span aria-hidden="true">↗</span></a>
+        <a class="btn btn--ghost" href="/hire-a-freelance-character-rigger/">RIGGING SERVICES →</a>
+      </p>
+    </section>
+
+    <nav class="wf-more" aria-label="More workflows">
+      <p class="section__kicker">M O R E &nbsp; W O R K F L O W S</p>
+      <div class="wf-more__grid"><a class="wf-card" href="/face-rig-study/"><span class="wf-card__title">Face rig study</span><span class="wf-card__note">Layered facial systems, region by region</span><span class="wf-card__go">OPEN →</span></a><a class="wf-card" href="/rig-with-mocap-packs/"><span class="wf-card__title">Rig with mocap packs</span><span class="wf-card__note">Game-ready rig plus HumanIK retargeting</span><span class="wf-card__go">OPEN →</span></a><a class="wf-card" href="/creature-rigging/"><span class="wf-card__title">Creature rigging</span><span class="wf-card__note">Quadruped template, wings, split-geo skinning</span><span class="wf-card__go">OPEN →</span></a></div>
+    </nav>
+  </article>
+</main>
+
+  <a class="outbound" href="https://mutanttools.com/" target="_blank" rel="noopener">
+    <span class="outbound__left">
+      <span class="outbound__title">MUTANT TOOLS</span>
+      <span class="outbound__note">Modular autorigger for Maya — body, face, quadrupeds, props.</span>
+    </span>
+    <span class="outbound__go">MUTANTTOOLS.COM <span aria-hidden="true">↗</span></span>
+  </a>
+
+<footer class="foot" id="contact">
+  <div class="foot__contact">
+    <p class="section__kicker">C O N T A C T</p>
+    <h2 class="foot__title">Need a rigger?</h2>
+    <p class="foot__lead">Freelance work goes through <a href="https://bluetaperigging.com/" target="_blank" rel="noopener">Bluetape Rigging</a>. For anything else, LinkedIn is the fastest way to reach me.</p>
+    <p class="foot__btns">
+      <a class="btn btn--cyan" href="https://www.linkedin.com/in/esteban-rodriguez-488a68147/" target="_blank" rel="noopener">LINKEDIN PROFILE <span aria-hidden="true">↗</span></a>
+      <a class="btn btn--ghost" href="https://bluetaperigging.com/" target="_blank" rel="noopener">BLUETAPE RIGGING <span aria-hidden="true">↗</span></a>
+    </p>
+  </div>
+  <nav class="foot__services" aria-label="Services">
+    <p class="foot__colhead">SERVICES</p>
+    <a href="/hire-a-freelance-character-rigger/">HIRE A FREELANCE RIGGER</a>
+    <a href="/maya-rigging-services/">MAYA RIGGING</a>
+    <a href="/unreal-engine-character-rigging/">UNREAL RIGGING</a>
+    <a href="/facial-rigging-services/">FACIAL RIGGING</a>
+    <a href="/rigging-outsourcing-for-studios/">RIGGING FOR STUDIOS</a>
+  </nav>
+  <nav class="foot__links" aria-label="Elsewhere">
+    <a href="https://www.linkedin.com/in/esteban-rodriguez-488a68147/" target="_blank" rel="noopener">LINKEDIN ↗</a>
+    <a href="https://www.youtube.com/@renderdemartes6049/videos" target="_blank" rel="noopener">YOUTUBE ↗</a>
+    <a href="https://mutanttools.com/" target="_blank" rel="noopener">MUTANTTOOLS.COM ↗</a>
+    <a href="/academic/">ACADEMIC</a>
+    <a href="/creature-rigging/">WORKFLOWS</a>
+  </nav>
+  <p class="foot__fine">© 2026 Esteban Rodriguez · Costa Rica, working remotely worldwide · built with Claude — who has time to build a website while building rigs?</p>
+</footer>
+
+<script src="/assets/js/site.js?v=4e685639" defer></script>
+</body>
+</html>

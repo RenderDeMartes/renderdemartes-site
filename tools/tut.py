@@ -55,10 +55,21 @@ META = {
    desc="Build a Maya tool UI with Qt Designer and PySide: widget setup, loading the .ui in Maya, wiring buttons to Python commands, and keeping the window docked and sane.",
    lede="Build a Maya tool UI that does not look like 2004: a widget in Qt Designer, loaded into Maya with PySide, wired to Python commands you can actually maintain.",
    chips=["QT DESIGNER","PYSIDE","PYTHON","MAYA"]),
+ "ai-rigging-with-mutant-tools": dict(
+   title="AI rigging an orc with Mutant Tools",
+   seo="AI Rigging an Orc in Maya — Zombinator &amp; Meta Mutant | Render de Martes",
+   desc="A purchased orc model rigged end to end by Claude driving Maya: body from the Mutant Tools Zombinator, MetaHuman face from Meta Mutant, tested on dynamic poses, expressions and a face performance from video.",
+   lede="A purchased orc with no joints, rigged end to end by Claude driving Maya through scripts.",
+   chips=["MAYA","MUTANT TOOLS","ZOMBINATOR","META MUTANT","CLAUDE"]),
 }
 
 ORDER = ["creature-rigging", "face-rig-study", "how-to-rig-a-car",
-         "prop-rig", "rig-with-mocap-packs", "qt-designer-basics"]
+         "prop-rig", "rig-with-mocap-packs", "qt-designer-basics",
+         "ai-rigging-with-mutant-tools"]
+
+# Pages written by hand, not from tutorials.json. They keep their place in the
+# numbering, the cards and the sitemap, but build() never overwrites them.
+HAND_WRITTEN = {"ai-rigging-with-mutant-tools"}
 
 CARD_NOTE = {
  "the-king": "Mutant Tools rig, dynamics and mocap, taken into Unreal",
@@ -68,6 +79,7 @@ CARD_NOTE = {
  "prop-rig": "Base, COG, bind, squash and stretch",
  "rig-with-mocap-packs": "Game-ready rig plus HumanIK retargeting",
  "qt-designer-basics": "A Maya tool UI in Qt Designer and PySide",
+ "ai-rigging-with-mutant-tools": "Zombinator body, Meta Mutant face, driven by Claude",
 }
 
 
@@ -127,7 +139,8 @@ def render(slug):
 
 
 def cards(slug):
-    others = [s for s in ORDER if s != slug][:3]
+    others = [s for s in ORDER if s != slug]
+    others = sorted(others, key=lambda s: s not in HAND_WRITTEN)[:3]   # newest first
     return "".join(
         f'<a class="wf-card" href="/{s}/"><span class="wf-card__title">{META[s]["title"].split("—")[0].strip()}</span>'
         f'<span class="wf-card__note">{CARD_NOTE[s]}</span><span class="wf-card__go">OPEN →</span></a>'
@@ -198,6 +211,7 @@ def sitemap():
 
 if __name__ == "__main__":
     for s in ORDER:
-        build(s)
+        if s not in HAND_WRITTEN:
+            build(s)
     sitemap()
     print(f"{len(ORDER)} workflow pages + sitemap")
