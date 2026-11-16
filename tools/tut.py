@@ -57,9 +57,9 @@ META = {
    chips=["QT DESIGNER","PYSIDE","PYTHON","MAYA"]),
  "ai-rigging-with-mutant-tools": dict(
    title="AI rigging an orc with Mutant Tools",
-   seo="AI Rigging an Orc in Maya — Zombinator &amp; Meta Mutant | Render de Martes",
-   desc="A purchased orc model rigged end to end by Claude driving Maya: body from the Mutant Tools Zombinator, MetaHuman face from Meta Mutant, tested on dynamic poses, expressions and a face performance from video.",
-   lede="A purchased orc with no joints, rigged end to end by Claude driving Maya through scripts.",
+   seo="AI Rigging Experiment: an Orc in Maya — Zombinator &amp; Meta Mutant | Render de Martes",
+   desc="An experiment: an orc rigged 100% by AI, with Claude driving Maya from prompts and no human touching the model or the rig. Body from the Mutant Tools Zombinator, face from Meta Mutant. Rough quality, interesting results.",
+   lede="An experiment: a purchased orc with no joints, rigged 100% by AI from prompts.",
    chips=["MAYA","MUTANT TOOLS","ZOMBINATOR","META MUTANT","CLAUDE"]),
 }
 
@@ -79,7 +79,7 @@ CARD_NOTE = {
  "prop-rig": "Base, COG, bind, squash and stretch",
  "rig-with-mocap-packs": "Game-ready rig plus HumanIK retargeting",
  "qt-designer-basics": "A Maya tool UI in Qt Designer and PySide",
- "ai-rigging-with-mutant-tools": "Zombinator body, Meta Mutant face, driven by Claude",
+ "ai-rigging-with-mutant-tools": "An experiment: an orc rigged 100% by AI",
 }
 
 

@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI Rigging an Orc in Maya — Zombinator &amp; Meta Mutant | Render de Martes</title>
-<meta name="description" content="A purchased orc model rigged end to end by Claude driving Maya: body from the Mutant Tools Zombinator, MetaHuman face from Meta Mutant, tested on dynamic poses, expressions and a face performance from video.">
+<title>AI Rigging Experiment: an Orc in Maya — Zombinator &amp; Meta Mutant | Render de Martes</title>
+<meta name="description" content="An experiment: an orc rigged 100% by AI, with Claude driving Maya from prompts and no human touching the model or the rig. Body from the Mutant Tools Zombinator, face from Meta Mutant. Rough quality, interesting results.">
 <link rel="canonical" href="https://renderdemartes.com/ai-rigging-with-mutant-tools/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="AI Rigging an Orc in Maya — Zombinator &amp; Meta Mutant | Render de Martes">
-<meta property="og:description" content="A purchased orc model rigged end to end by Claude driving Maya: body from the Mutant Tools Zombinator, MetaHuman face from Meta Mutant, tested on dynamic poses, expressions and a face performance from video.">
+<meta property="og:title" content="AI Rigging Experiment: an Orc in Maya — Zombinator &amp; Meta Mutant | Render de Martes">
+<meta property="og:description" content="An experiment: an orc rigged 100% by AI, with Claude driving Maya from prompts and no human touching the model or the rig. Body from the Mutant Tools Zombinator, face from Meta Mutant. Rough quality, interesting results.">
 <meta property="og:url" content="https://renderdemartes.com/ai-rigging-with-mutant-tools/">
 <meta property="og:image" content="https://renderdemartes.com/assets/img/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="/assets/css/fonts.css?v=7f36f3b8">
 <link rel="stylesheet" href="/assets/css/site.css?v=8be7aee8">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/", "jobTitle": "Technical Artist — Rigging & Python", "description": "Character rigger and rigging tools developer. Maya, Unreal, Unity. Creator of Mutant Tools.", "address": {"@type": "PostalAddress", "addressLocality": "Vancouver", "addressRegion": "BC", "addressCountry": "CA"}, "sameAs": ["https://www.linkedin.com/in/esteban-rodriguez-488a68147/", "https://www.youtube.com/@renderdemartes6049", "https://mutanttools.com/"], "knowsAbout": ["Character rigging", "Autodesk Maya", "Unreal Engine", "Python", "Facial rigging", "Pipeline tools"]}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "AI rigging an orc with Mutant Tools", "description": "A purchased orc model rigged end to end by Claude driving Maya: body from the Mutant Tools Zombinator, MetaHuman face from Meta Mutant, tested on dynamic poses, expressions and a face performance from video.", "url": "https://renderdemartes.com/ai-rigging-with-mutant-tools/", "author": {"@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/"}, "step": [{"@type": "HowToStep", "name": "The idea"}, {"@type": "HowToStep", "name": "The model"}, {"@type": "HowToStep", "name": "Wrap the body"}, {"@type": "HowToStep", "name": "Guides, build and skin"}, {"@type": "HowToStep", "name": "Test the body"}, {"@type": "HowToStep", "name": "Meta Mutant: wrap the head"}, {"@type": "HowToStep", "name": "The face on the body rig"}, {"@type": "HowToStep", "name": "Expressions"}, {"@type": "HowToStep", "name": "The face board, control by control"}, {"@type": "HowToStep", "name": "Face from video"}, {"@type": "HowToStep", "name": "Still open"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "AI rigging an orc with Mutant Tools", "description": "An experiment: an orc rigged 100% by AI, with Claude driving Maya from prompts and no human touching the model or the rig. Body from the Mutant Tools Zombinator, face from Meta Mutant. Rough quality, interesting results.", "url": "https://renderdemartes.com/ai-rigging-with-mutant-tools/", "author": {"@type": "Person", "name": "Esteban Rodriguez", "url": "https://renderdemartes.com/"}, "step": [{"@type": "HowToStep", "name": "The idea"}, {"@type": "HowToStep", "name": "The model"}, {"@type": "HowToStep", "name": "Wrap the body"}, {"@type": "HowToStep", "name": "Guides, build and skin"}, {"@type": "HowToStep", "name": "Test the body"}, {"@type": "HowToStep", "name": "Meta Mutant: wrap the head"}, {"@type": "HowToStep", "name": "The face on the body rig"}, {"@type": "HowToStep", "name": "Expressions"}, {"@type": "HowToStep", "name": "The face board, control by control"}, {"@type": "HowToStep", "name": "Face from video"}, {"@type": "HowToStep", "name": "What did not work"}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,15 +43,17 @@
 <main id="main">
   <article class="wf">
     <header class="wf__head">
-      <p class="section__kicker">W O R K F L O W &nbsp; · &nbsp; 07 &nbsp; O F &nbsp; 07</p>
+      <p class="section__kicker">E X P E R I M E N T &nbsp; · &nbsp; 07 &nbsp; O F &nbsp; 07</p>
       <h1 class="wf__h1">AI rigging an orc with Mutant Tools</h1>
-      <p class="wf__lede">A purchased orc with no joints, rigged end to end by Claude driving Maya through scripts. The body comes from the Zombinator, the face from Meta Mutant, and the rig is then tested on dynamic poses, expressions and a face performance taken from a video.</p>
+      <p class="wf__lede">An experiment: a purchased orc with no joints, rigged 100% by AI. Claude drove Maya from prompts, and no human touched the model or the rig. The body comes from the Zombinator, the face from Meta Mutant. The quality is low; the idea is the interesting part.</p>
       <ul class="chips"><li>MAYA</li><li>MUTANT TOOLS</li><li>ZOMBINATOR</li><li>META MUTANT</li><li>CLAUDE</li></ul>
     </header>
 
     <div class="wf__body">
       <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/hero.webp" alt="Four dynamic full-body poses of the orc and four close-ups of his face" width="1400" height="665" decoding="async"><figcaption>Body and face on one rig.</figcaption></figure>
       <h2 class="wf-h2"><span class="wf-h2__n">01</span>The idea</h2>
+      <p class="wf-p">This is an experiment, not a production rig. The question: can a rig be built by AI alone? I wrote prompts. Claude did everything else, and no human touched the model or the rig at any point.</p>
+      <p class="wf-p">The honest result: the quality is low. The skinning did not work, and the guides could sit better in several places. As a test, though, the results are interesting, and the idea is a good one.</p>
       <p class="wf-p">Nobody paints weights or sculpts shapes here. Both halves of the rig are borrowed from a human that is already rigged.</p>
       <p class="wf-li">Body: the Zombinator base mesh, with its guides and skin weights.</p>
       <p class="wf-li">Face: a MetaHuman head, with its joints, corrective shapes and control board.</p>
@@ -77,6 +79,7 @@
       <h3 class="wf-h3">Twists</h3>
       <p class="wf-p">Limbs use dual quaternion skinning where the twist joints carry them, and the twist weights are an even ramp along the bone. A forearm twisted 85° keeps its full thickness, where linear skinning shrank it to 89.5 %.</p>
       <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/twist.webp" alt="Twist joint weights along the arm before and after" width="1400" height="700" loading="lazy" decoding="async"><figcaption>Twist weights. Before: uneven bands. After: one even ring per joint.</figcaption></figure>
+      <p class="wf-p">Even with both fixes, the skinning is the weakest part of this rig, and several guides could sit better. More on that at the end.</p>
       <h2 class="wf-h2"><span class="wf-h2__n">05</span>Test the body</h2>
       <p class="wf-p">First a range of motion: 29 single-joint poses, each measured for volume and crushed triangles.</p>
       <figure class="wf-media"><img src="/assets/img/tut/ai-rigging-with-mutant-tools/range-of-motion.webp" alt="Twenty test poses of the body rig" width="1400" height="1120" loading="lazy" decoding="async"></figure>
@@ -114,7 +117,12 @@
       <p class="wf-p">The reference is a video of a man making faces at the camera (Ketut Subiyanto on Pexels). MediaPipe reads 52 face weights per frame, and they map almost one to one onto the board.</p>
       <p class="wf-p">The capture underplays, so each weight is rescaled to the performer’s own range in the clip.</p>
       <figure class="wf-media wf-media--video"><video class="wf-video" poster="/assets/img/tut/ai-rigging-with-mutant-tools/face-video.poster.webp" width="960" height="480" muted loop playsinline preload="none" data-autoplay aria-label="The reference video on the left and the orc’s face driven by it on the right"><source src="/assets/img/tut/ai-rigging-with-mutant-tools/face-video.mp4" type="video/mp4"></video><figcaption>Reference and orc, frame for frame.</figcaption></figure>
-      <h2 class="wf-h2"><span class="wf-h2__n">11</span>Still open</h2>
+      <h2 class="wf-h2"><span class="wf-h2__n">11</span>What did not work</h2>
+      <p class="wf-p">As a production rig, this is not there. Two things stand out:</p>
+      <p class="wf-li">Skinning: the part that clearly did not work. The deformation is not production quality.</p>
+      <p class="wf-li">Guides: the placement could be better in several places.</p>
+      <p class="wf-p">As an experiment in rigging from prompts alone, with no human touching the model or the rig, the results are interesting.</p>
+      <h3 class="wf-h3">Smaller things still open</h3>
       <p class="wf-li">In the full angry face a speck of the eye shows under the lower lid.</p>
       <p class="wf-li">The mouth control pushed fully sideways leaves the tusks behind.</p>
       <p class="wf-li">The ear has a seam where the rim meets the head.</p>
@@ -125,9 +133,9 @@
     </div>
 
     <section class="found found--wf">
-      <p class="found__kicker">B U I L T &nbsp; T H I S &nbsp; W A Y &nbsp; F O R &nbsp; Y O U ?</p>
-      <h2 class="found__title">I do this on shows, not just on my own time.</h2>
-      <p class="found__note">Every workflow on this site is the one I use in production. If you want it applied to your characters instead of read about, that is the job.</p>
+      <p class="found__kicker">N E E D &nbsp; I T &nbsp; P R O D U C T I O N &nbsp; R E A D Y ?</p>
+      <h2 class="found__title">This one is an experiment. Production rigs are my day job.</h2>
+      <p class="found__note">The other workflows on this site are the ones I use in production. If you want them applied to your characters, that is the job.</p>
       <p class="found__row">
         <a class="btn" href="https://bluetaperigging.com/" target="_blank" rel="noopener">HIRE BLUETAPE RIGGING <span aria-hidden="true">↗</span></a>
         <a class="btn btn--ghost" href="/hire-a-freelance-character-rigger/">RIGGING SERVICES →</a>
